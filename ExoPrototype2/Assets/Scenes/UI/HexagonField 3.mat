@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HexagonField 3
-  m_Shader: {fileID: -6465566751694194690, guid: 3f7d709bc8324a549987456c569e970a, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: aaa91b3444784734ba6ba52df04a89e5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -90,7 +90,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Cutoff_Height: 0.09
+    - _Cutoff_Height: 3.14
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -103,7 +103,9 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Gridsize: 12
     - _Hardness: 1
+    - _HexFocus: 26
     - _Metallic: 0
     - _NoiseScale: 50
     - _Noise_Strength: 1
@@ -128,11 +130,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Albedo_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Albedo_1: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _ColColor: {r: 0.9339623, g: 0.17171225, b: 0, a: 0}
     - _Color: {r: 0.30212405, g: 0.49639478, b: 0.6320754, a: 1}
-    - _Edge_Color: {r: 1.509434, g: 0.8781935, b: 0.2800521, a: 0}
+    - _Edge_Color: {r: 1.4980392, g: 0.871564, b: 0.27793798, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fresnel_Color_1: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
