@@ -92,11 +92,11 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dissolve: -0.13
+    - _Dissolve: -1.5
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EdgeWidth: 0.001
-    - _EmissionIntensity: 92.65
+    - _EmissionIntensity: 3
     - _EnvironmentReflections: 1
     - _Fresnel_Color: 2.7
     - _Fresnel_Power: 0.24
@@ -104,7 +104,8 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Hardness: 1
-    - _HexSize: 0.42
+    - _HexSize: 0.4
+    - _HexaSize2: 0.03
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Offset_Amount: 1
@@ -113,8 +114,8 @@ Material:
     - _QueueOffset: 0
     - _Radius: 0.2
     - _ReceiveShadows: 1
-    - _ScrollSpeed: 0.03
-    - _Shield_Gap_Distance: 0.5
+    - _ScrollSpeed: 0.000001
+    - _Shield_Gap_Distance: 0.1
     - _Shield_Offset_Speed: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -128,11 +129,11 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ColColor: {r: 0.9339623, g: 0.17171225, b: 0, a: 0}
-    - _Color: {r: 1.2084962, g: 1.9855791, b: 2.5283017, a: 1}
-    - _EdgeColor: {r: 1.3053278, g: 1.6911143, b: 3.3207548, a: 0}
+    - _ColColor: {r: 3.7358491, g: 0.686849, b: 0, a: 0}
+    - _Color: {r: 0.7530295, g: 1.9761413, b: 2.7844589, a: 1}
+    - _EdgeColor: {r: 1.5842009, g: 0.24320163, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fresnel_Color_1: {r: 0.10323956, g: 0.11082388, b: 0.11320752, a: 0}
+    - _Fresnel_Color_1: {r: 0.19924049, g: 0.59079134, b: 0.6886792, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpherePos: {r: 2.01, g: 3.03, b: 5.37, a: 0}
   m_BuildTextureStacks: []

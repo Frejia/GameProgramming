@@ -49,7 +49,7 @@ public class FieldCollision : MonoBehaviour
             _material.SetVector("_SpherePos", hit.point);
             // Give me code to wait for two seconds
             StartCoroutine(Wait());
-           // _material.SetVector("_HitPosition", hit.point);
+            this.gameObject.GetComponent<Dissolve>().isdissolving = true;
         }
     }
 }
