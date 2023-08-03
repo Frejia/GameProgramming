@@ -4500,7 +4500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1382246053693815683, guid: 3415f7b801e739841bc85ec7522c9dc0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3149724468000173349, guid: 3415f7b801e739841bc85ec7522c9dc0, type: 3}
       propertyPath: m_Layer
@@ -4533,6 +4533,10 @@ PrefabInstance:
     - target: {fileID: 6446736631447973819, guid: 3415f7b801e739841bc85ec7522c9dc0, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687380901755376414, guid: 3415f7b801e739841bc85ec7522c9dc0, type: 3}
+      propertyPath: field of view
+      value: 117
       objectReference: {fileID: 0}
     - target: {fileID: 7614446827059538392, guid: 3415f7b801e739841bc85ec7522c9dc0, type: 3}
       propertyPath: m_Layer
@@ -6259,7 +6263,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -6402,7 +6406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: raceMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: chunkSize
