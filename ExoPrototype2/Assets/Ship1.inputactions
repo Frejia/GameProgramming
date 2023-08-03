@@ -1,0 +1,22 @@
+{
+    "name": "Ship1",
+    "maps": [
+        {
+            "name": "Ship",
+            "id": "0227ffb6-ede4-489e-97b1-02b32d124785",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "832ff2e6-b26d-490e-a0d3-719f6e18e588",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": []
+        }
+    ],
+    "controlSchemes": []
+}
