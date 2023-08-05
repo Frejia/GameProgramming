@@ -65,10 +65,13 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<Health>().GetsHit(_damage);
-        impactEffect.Play();
-        StartCoroutine(WaitForParticleSystem());
-        speed = 0f;
+        if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
+        {
+            other.GetComponent<Health>().GetsHit(_damage);
+            impactEffect.Play();
+            StartCoroutine(WaitForParticleSystem());
+            speed = 0f;
+        }
         /*if (other.gameObject.layer == 7)
             {
                 impactEffect.Play();

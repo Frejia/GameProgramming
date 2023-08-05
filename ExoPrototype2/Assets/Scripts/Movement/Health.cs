@@ -26,7 +26,10 @@ public class Health : MonoBehaviour
         if(currentHealth <= 0)
         {
             Debug.Log("Object is dead");
-            Destroy(gameObject);
+            //Dissolve Shield
+            this.GetComponent<Dissolve>().isdissolving = true;
+            //Destroy Object
+            Destroy(this.transform.parent, 5f);
         }
     }
 }

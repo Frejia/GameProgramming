@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HexagonField 6
+  m_Name: EnemyShield
   m_Shader: {fileID: -6465566751694194690, guid: 1eac93967ed0d2d4c924564acd973231, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -90,6 +90,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _Cutoff_Height: 0.7
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Dissolve: -1.5
@@ -99,7 +100,7 @@ Material:
     - _EmissionIntensity: 3
     - _EnvironmentReflections: 1
     - _Fresnel_Color: 2.7
-    - _Fresnel_Power: 0.24
+    - _Fresnel_Power: 3.57
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -114,9 +115,9 @@ Material:
     - _QueueOffset: 0
     - _Radius: 0.2
     - _ReceiveShadows: 1
-    - _ScrollSpeed: 0.0001
-    - _Shield_Gap_Distance: 0.06
-    - _Shield_Offset_Speed: 0.1
+    - _ScrollSpeed: 0.00001
+    - _Shield_Gap_Distance: 0.1
+    - _Shield_Offset_Speed: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -125,17 +126,22 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _Thickness: 1.33
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ColColor: {r: 3.7358491, g: 0.686849, b: 0, a: 0}
-    - _Color: {r: 2.7844586, g: 1.9907271, b: 0.7580725, a: 1}
-    - _EdgeColor: {r: 1.5842009, g: 0.24320163, b: 0, a: 1}
+    - _ColColor: {r: 3.7358491, g: 0, b: 2.0037165, a: 0}
+    - _Color: {r: 0.69611466, g: 0.18951812, b: 0.21992452, a: 1}
+    - _Color1: {r: 0.764151, g: 0.54253143, b: 0.19223918, a: 0}
+    - _Color2: {r: 0.7924528, g: 0.48994988, b: 0.08721953, a: 0}
+    - _EdgeColor: {r: 0, g: 0.01715312, b: 0.04950628, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fresnel_Color_1: {r: 0.6901961, g: 0.53116906, b: 0.19999997, a: 0}
+    - _Fresnel_Color_1: {r: 2.830189, g: 0, b: 0.027205361, a: 0}
+    - _Offset: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpherePos: {r: 2.01, g: 3.03, b: 5.37, a: 0}
+    - _Tiling: {r: 1.97, g: 1.57, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &9215281719945745478
 MonoBehaviour:
