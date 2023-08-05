@@ -17,7 +17,7 @@ public class EnemyPatternManager : MonoBehaviour
     public float patternDuration;
     public bool isFiring = false;
     
-    private bool playerClose = true;
+    private bool playerClose = false;
 
     private BulletPool pool;
     
@@ -26,7 +26,6 @@ public class EnemyPatternManager : MonoBehaviour
     {
         fireBullets = this.gameObject.GetComponent<PatternManager>();
         pool = BulletPool.Instance;
-        playerClose = true;
         StartFiringPatterns();
         // StartFiringPatterns();
         //Start a Coroutine of StartPattern filling in a bulletPattern

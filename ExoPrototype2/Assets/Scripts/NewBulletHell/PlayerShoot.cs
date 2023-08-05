@@ -63,7 +63,7 @@ public class PlayerShoot : MonoBehaviour
          // Cone Pattern Example
          //patternManager.SetBulletPattern(firePointFront.gameObject, BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 0.6f, false, 10, 10f);
          // Straight Pattern Example
-         patternManager.SetBulletPattern(firePointFront.gameObject, BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 1,1, 0.2f, false, 1, 10f);
+         patternManager.SetBulletPattern(firePointFront.gameObject, BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 1,1, 0.2f, true, 1, 10f);
          // Circle Pattern Example
          //patternManager.SetBulletPattern(firePointBelow.gameObject, BulletPatternEnum.BulletPatternsEnum.Circle, BulletBehaviour.BulletBehaviours.None, 0,360, 0.2f, false, 20, 10f);
          
