@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         noiseGen.Generate();
-        world.InitializeGrid();
+        //world.InitializeGrid();
     }
     
 
