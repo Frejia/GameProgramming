@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpriteDotMatrix 1Buttons
+  m_Name: SpriteDotMatrix 6
   m_Shader: {fileID: -6465566751694194690, guid: 2194b3af4bee7e042a8e033834332280, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -81,7 +81,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 2800000, guid: 5dbc069eb79bd4d43840847264d6d956, type: 3}
+        m_Texture: {fileID: 2800000, guid: f27a3a1a770e306448f4e885bd6ba015, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_a5d34975ce5143d6bd81370e0c7e38d0_Out_0_Texture2D:
@@ -113,8 +113,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dot_Size: 14.67
-    - _Dot_Space: 2.26
+    - _Dot_Size: 10
+    - _Dot_Space: 6
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -136,7 +136,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.9098039, g: 2.4313726, b: 2.854902, a: 1}
+    - _Color: {r: 3.937255, g: 3.937255, b: 3.9843137, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
