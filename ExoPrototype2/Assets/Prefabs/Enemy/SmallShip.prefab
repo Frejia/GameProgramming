@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2988781691130958925}
   - component: {fileID: 3054780770814687416}
   - component: {fileID: 994254208959594653}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: SmallShip
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -151,7 +151,6 @@ MonoBehaviour:
   bulletSpeed: 0
   startAngle: 0
   endAngle: 0
-  user: {fileID: 0}
 --- !u!65 &3054780770814687416
 BoxCollider:
   m_ObjectHideFlags: 0

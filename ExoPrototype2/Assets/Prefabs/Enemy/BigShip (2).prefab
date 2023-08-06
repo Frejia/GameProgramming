@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 1900974988526206876}
   - component: {fileID: 1719164595118060094}
   - component: {fileID: -3045109335756906155}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: BigShip (2)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ Transform:
   - {fileID: 4233015061417138370}
   - {fileID: 6034715875691304424}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8378146179887905749
 MonoBehaviour:
@@ -455,7 +455,6 @@ MonoBehaviour:
   bulletSpeed: 0
   startAngle: 0
   endAngle: 0
-  user: {fileID: 0}
 --- !u!114 &-3045109335756906155
 MonoBehaviour:
   m_ObjectHideFlags: 0
