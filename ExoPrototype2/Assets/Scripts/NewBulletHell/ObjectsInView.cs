@@ -13,6 +13,7 @@ public class ObjectsInView : MonoBehaviour
     
     public delegate void EnemyInScreen(GameObject enemy);
     public static event EnemyInScreen OnEnemyInScreen;
+    public static event EnemyInScreen OnEnemyNotInScreen;
     
     private void Start()
     {
@@ -27,42 +28,29 @@ public class ObjectsInView : MonoBehaviour
         cameraFrustum = GeometryUtility.CalculateFrustumPlanes(camera);
         if (GeometryUtility.TestPlanesAABB(cameraFrustum, bounds))
         {
-            // Enemy is visible
-            Debug.Log("enemy is visible");
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (Vector3.Distance(player.transform.position, this.gameObject.transform.position) < range)
             {
-                Debug.Log("Enemy not enough");
+                Debug.Log(gameObject.name + " is visible");
+               // renderer.material.color = Color.green;
                 OnEnemyInScreen(this.gameObject);
             }
             else
             {
-                Debug.Log("Enemy not close enough");
-                OnEnemyInScreen(null);
+                //renderer.material.color = Color.red;
+                OnEnemyNotInScreen(gameObject);
             }
         }
         else
         {
-            Debug.Log("enemy is not visible");
-            OnEnemyInScreen(null);
+            //renderer.material.color = Color.red;
+            OnEnemyNotInScreen(gameObject);
         }
     }
 
     private void Update()
     {
         OnEnemyVisible();
-        
-        var bounds = collider.bounds;
-        cameraFrustum = GeometryUtility.CalculateFrustumPlanes(camera);
-        if (GeometryUtility.TestPlanesAABB(cameraFrustum, bounds))
-        {
-            renderer.sharedMaterial.color = Color.green;
-            // Enemy is visible
-        }
-        else
-        {
-            renderer.sharedMaterial.color = Color.red;
-        }
     }
 
 }

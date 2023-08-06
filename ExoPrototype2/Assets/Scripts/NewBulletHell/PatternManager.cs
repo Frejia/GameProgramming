@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using BulletHell;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PatternManager : MonoBehaviour
@@ -21,18 +22,26 @@ public class PatternManager : MonoBehaviour
     public float startAngle, endAngle;
 
     private Aim AimInstance;
-    public GameObject user;
 
-    private void Start()
+    void Awake()
     {
-        AimInstance = Aim.Instance;
+        //AimInstance = Aim.Instance;
+        if (this.gameObject.tag == "Enemy")
+        {
+            AimInstance = this.gameObject.AddComponent<EnemyAim>();
+            AimInstance.target = GameObject.FindGameObjectWithTag("Player");
+            AimInstance.user = this.gameObject;
+        }
+        else if (this.gameObject.tag == "Player")
+        {
+            AimInstance = this.gameObject.GetComponent<PlayerAim>();
+            AimInstance.user = this.gameObject;
+        }
     }
 
-    public void SetBulletPattern(GameObject user, BulletPatternEnum.BulletPatternsEnum bulletPattern, BulletHell.BulletBehaviour.BulletBehaviours bulletBehaviour, 
+    public void SetBulletPattern(BulletPatternEnum.BulletPatternsEnum bulletPattern, BulletHell.BulletBehaviour.BulletBehaviours bulletBehaviour, 
         float startAngle, float endAngle, float fireRate, bool isAiming, int bulletsAmount, float bulletSpeed)
     {
-        this.user = user;
-        AimInstance.user = user;
         this.activebulletPattern = bulletPattern;
         this.activebulletBehaviour = bulletBehaviour;
         this.fireRate = fireRate;
@@ -119,8 +128,8 @@ public class PatternManager : MonoBehaviour
 
             // Spawn and set direction for the bullet
             GameObject bul = GetCorrectBullet();
-            bul.transform.position = user.transform.position;
-            bul.transform.rotation = user.transform.rotation;
+            bul.transform.position = this.gameObject.transform.position;
+            bul.transform.rotation = this.gameObject.transform.rotation;
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
@@ -132,7 +141,7 @@ public class PatternManager : MonoBehaviour
     private GameObject GetCorrectBullet()
     {
         GameObject bul = null;
-        if (user.tag == "Player")
+        if (this.gameObject.tag == "Player")
         {
             bul = BulletPool.Instance.GetBulletPlayer();
             Debug.Log("Player Shoots");
@@ -142,7 +151,6 @@ public class PatternManager : MonoBehaviour
             bul = BulletPool.Instance.GetBulletEnemy();
             Debug.Log("Enemy Shoots");
         }
-
         return bul;
     }
     
