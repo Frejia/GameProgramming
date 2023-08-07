@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,30 @@ public class Rotator : MonoBehaviour
     [Header("Rotator Settings")]
     [SerializeField] private float rotationSpeed = 90.0f;
     public bool debug;
+    [SerializeField] private bool isAimPoint = false;
+    [SerializeField] private Transform target;
     
     [SerializeField] private bool isRotating = false;
      private Quaternion startRotation { get; set; }
     private Quaternion endRotation { get; set; }
+
     
+    /* TODO: Rotations-Vektor für links und rechts als Variable speichern
+     * Neutralen Rotationsvektor speichern
+     * Mittels Switch-Case die Rotationen durchführen
+     * Sonderfälle: nicht rotieren wenn:
+     *      Spieler drückt und maximaler Winkel erreicht ist
+     *      Spieler drückt nicht und neutraler Winkel erreicht ist
+     */
     
+    private void Start()
+    {
+        if (isAimPoint)
+        {
+            target = GameObject.FindWithTag("Player").transform;
+        }
+    }
+
     public void StartRotating(Quaternion startRot, Quaternion endRot)
     {
         if (!isRotating)
@@ -25,6 +44,7 @@ public class Rotator : MonoBehaviour
     public void StopRotating()
     {
         endRotation = startRotation;
+        isRotating = false;
     }
     
     private void FixedUpdate()
@@ -34,23 +54,29 @@ public class Rotator : MonoBehaviour
             Quaternion endRotation = Quaternion.Euler(90f, 0f, 0f);
             StartRotating(transform.rotation, endRotation);
         }
-        else
-        {
-            StopRotating();
-        }
         
+
         if (isRotating)
         {
             float step = rotationSpeed * Time.fixedDeltaTime;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, endRotation, step);
             // Check if the rotation has reached the endRotation
-            if (transform.rotation == endRotation)
+            /*if (transform.rotation == endRotation)
             {
                 isRotating = false;
-            } 
+            }*/
         }
     }
+
+    private Vector3 directionToTarget;
     
-    
-    
+    private void Update()
+    {
+        if (isAimPoint)
+        {
+            directionToTarget = target.position - transform.parent.transform.position;
+            endRotation = Quaternion.LookRotation(-directionToTarget);
+            StartRotating(this.transform.rotation, endRotation);
+        }
+    }
 }

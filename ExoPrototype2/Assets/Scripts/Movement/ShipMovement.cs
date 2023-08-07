@@ -46,6 +46,8 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] private TrailRenderer trail;
     [SerializeField] private ParticleSystem boostEffect;
     //[SerializeField] private ParticleSystem dodgeEffect;
+    [SerializeField] private GameObject shipModel;
+    
     
     //References
     private Rigidbody rb;
@@ -61,7 +63,7 @@ public class ShipMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rotator = gameObject.transform.GetChild(0).GetComponent<Rotator>();
 
-        Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = CursorLockMode.Confined;
         currentBoostAmount = maxBoostAmount;
         boostEffect.Stop();
     }
@@ -150,16 +152,16 @@ public class ShipMovement : MonoBehaviour
             else
             {
                 Debug.Log("Strafing Right");
-                endRotation = Quaternion.Euler(0f, 0f, 90f);
+                endRotation = Quaternion.Euler(0f, 0f, -90f);
             }
             
-            rotator.StartRotating(gameObject.transform.GetChild(0).transform.rotation, endRotation);
+            rotator.StartRotating(shipModel.transform.rotation, endRotation);
         }
         else
         {
             rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
             horizontalGlide *= leftRightGlideReduction;
-            //rotator.StopRotating();
+            rotator.StopRotating();
         }
         
     }
