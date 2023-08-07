@@ -18,8 +18,8 @@ MonoBehaviour:
   patternType: 2
   bulletBehaviour: 4
   bulletAmount: 10
-  startAngle: 40
-  endAngle: 90
+  startAngle: -30
+  endAngle: 30
   FireRate: 0.6
   BulletSpeed: 10
   isAiming: 1

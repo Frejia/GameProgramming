@@ -129,7 +129,7 @@ public class PatternManager : MonoBehaviour
             // Spawn and set direction for the bullet
             GameObject bul = GetCorrectBullet();
             bul.transform.position = this.gameObject.transform.position;
-            bul.transform.rotation = this.gameObject.transform.rotation;
+            //bul.transform.rotation = this.gameObject.transform.rotation;
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
