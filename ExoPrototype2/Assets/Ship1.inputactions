@@ -51,30 +51,39 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Boost",
+                    "type": "PassThrough",
+                    "id": "2e6a375a-d8ec-4fc3-8c66-c101b024dde9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Shoot",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "3279e956-ecca-43d0-94e2-4fb31d5c73b8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press,Hold",
                     "initialStateCheck": false
                 },
                 {
                     "name": "ShootSpecial",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "911007e5-27f2-4cda-9319-6e8c113d3279",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
                     "name": "ShootSpecial2",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "222787fe-d783-4b33-980a-0e208c686070",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -225,7 +234,7 @@
                 {
                     "name": "negative",
                     "id": "0cbd68b3-0d95-400d-98ff-925e6d9e9115",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -379,7 +388,7 @@
                 {
                     "name": "",
                     "id": "98400686-39af-4937-b918-44b5e254dc99",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -411,17 +420,6 @@
                 },
                 {
                     "name": "",
-                    "id": "1075e820-0ef0-4942-bf69-ed0886ada744",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ShootSpecial2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ea81ad6f-9172-45f9-9690-92af2c0fe404",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -434,11 +432,33 @@
                 {
                     "name": "",
                     "id": "4abf9cf8-a40a-4ffc-9ba8-1434a9a99084",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ShootSpecial",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37f3c6fa-cc2b-4cac-bd33-f29d91268a7c",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03851cf0-334d-4bf2-9486-d958ea6e404e",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
