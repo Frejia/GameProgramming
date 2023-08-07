@@ -31,7 +31,7 @@ public class Rotator : MonoBehaviour
     {
         if (isRotating)
         {
-            float step = rotationSpeed * Time.deltaTime;
+            float step = rotationSpeed * Time.fixedDeltaTime;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, endRotation, step);
             // Check if the rotation has reached the endRotation
             if (transform.rotation == endRotation)

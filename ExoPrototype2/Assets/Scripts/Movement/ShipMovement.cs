@@ -45,6 +45,9 @@ public class ShipMovement : MonoBehaviour
     [Header("Other Settings")]
     [SerializeField] private TrailRenderer trail;
     [SerializeField] private ParticleSystem boostEffect;
+    //[SerializeField] private ParticleSystem dodgeEffect;
+    
+    //References
     private Rigidbody rb;
     private Rotator rotator;
     

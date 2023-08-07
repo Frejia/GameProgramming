@@ -9,14 +9,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
+    [Header("Shoot Control Settings")] 
+    [SerializeField] private float cooldown1, cooldown2;
+    public bool shooting;
+    public bool shotSpecial;
+    public bool shotSpecial2;
+
+    
     [SerializeField] private Transform firePointFront;
     [SerializeField] private Transform firePointBelow;
     public bool isFiring = false;
     private bool playerClose = true;
 
-    [SerializeField] public PatternManager patternManager;
-    [SerializeField] private float fireRate = 0.2f;
-    
+    private PatternManager patternManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,60 +38,72 @@ public class PlayerShoot : MonoBehaviour
     }
 
      void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("We Shoot");
-            if (!isFiring)
-            {
-                StartCoroutine(StartPattern());
-            }
-        }
-    }
-
-     /*private IEnumerator ReadBulletPatterns()
      {
-         if (Cooldown > 0f)
-         {
-             // Set the isOnCooldown flag to true and start the cooldown timer
-             isOnCooldown = true;
-             isFiring = false;
-             yield return new WaitForSeconds(Cooldown);
-             isOnCooldown = false;
-         }
+         HandleShooting();
      }
-     */
-     
-     
-     private IEnumerator StartPattern()
+
+     private void HandleShooting()
+     {
+         if (shooting)
+         {
+             StartCoroutine(StartPattern(0));
+         }
+
+         if (shotSpecial)
+         {
+             StartCoroutine(StartPattern(1));
+         }
+
+         if (shotSpecial2)
+         {
+             StartCoroutine(StartPattern(2));
+         }
+         
+     }
+
+
+     private IEnumerator StartPattern(int shot)
      {
          isFiring = true;
-         // Cone Pattern Example
-         //patternManager.SetBulletPattern(firePointFront.gameObject, BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 0.6f, false, 10, 10f);
-         // Straight Pattern Example
-         patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 1,1, 0.2f, true, 1, 10f);
-         // Circle Pattern Example
-         //patternManager.SetBulletPattern(firePointBelow.gameObject, BulletPatternEnum.BulletPatternsEnum.Circle, BulletBehaviour.BulletBehaviours.None, 0,360, 0.2f, false, 20, 10f);
+         if (shot == 0)
+         {
+             // Straight Pattern Example
+             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 1,1, 1f, false, 1, 10f);
+             /*GameObject bul = BulletPool.Instance.GetBulletPlayer();
+             bul.transform.position = this.gameObject.transform.position;
+             bul.transform.rotation = this.gameObject.transform.rotation;
+             bul.SetActive(true);
+             bul.GetComponent<Bullet>().SetSpeed(30);
+             bul.GetComponent<Bullet>().SetDirection(Vector3.forward);*/
+             
+         }
+         else if(shot == 1)
+         {
+             // Cone Pattern Example
+             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 2f, false, 10, 10f);
+         }
+         else
+         {
+             // Circle Pattern Example
+             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Circle, BulletBehaviour.BulletBehaviours.None, 0,360, 2f, false, 20, 10f);
+         }
          
-         yield return new WaitForSeconds(0.1f);
+         yield return new WaitForSeconds(0.3f);
          patternManager.SetBulletPatternNone();
          isFiring = false;
      }
      
-    private void Shoot()
+    public void OnShoot(InputAction.CallbackContext context)
     {
-        patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 0.6f, 
-            false, 10, 50f);
-
-        /*Debug.Log("We shoot!");
-        GameObject bul = BulletPool.Instance.GetBulletPlayer();
-        bul.transform.position = firePoint.position;
-        bul.transform.rotation = firePoint.rotation;
-        bul.SetActive(true);
-        bul.GetComponent<Bullet>().SetDirection(new Vector3(1,0,1));
-        bul.GetComponent<Bullet>().SetSpeed(30f);*/
-        
-        
+        shooting = context.performed;
+    }
+    public void OnShootSpecial(InputAction.CallbackContext context)
+    {
+        shotSpecial = context.performed;
+    }
+    public void OnShootSpecial2(InputAction.CallbackContext context)
+    {
+        shotSpecial2 = context.performed;
     }
     
 }
