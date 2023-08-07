@@ -140,19 +140,26 @@ public class ShipMovement : MonoBehaviour
         {
             rb.AddRelativeForce(Vector3.right * strafe1D * upThrust * Time.fixedDeltaTime);
             horizontalGlide = strafe1D + upThrust;
-            Quaternion endRotation = Quaternion.Euler(0f, 90f, 0f);
-
+            Quaternion endRotation;
             //Check if strafing left or right for rotation
-            if (strafe1D < 0f) endRotation = Quaternion.Euler(90f, 0f, 0f);
-            else endRotation = Quaternion.Euler(-90f, 0f, 0f);
+            if (strafe1D < 0f)
+            {
+                Debug.Log("Strafing Left");
+                endRotation = Quaternion.Euler(0f, 0f, 90f);
+            }
+            else
+            {
+                Debug.Log("Strafing Right");
+                endRotation = Quaternion.Euler(0f, 0f, 90f);
+            }
             
-            rotator.StartRotating(transform.rotation, endRotation);
+            rotator.StartRotating(gameObject.transform.GetChild(0).transform.rotation, endRotation);
         }
         else
         {
             rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
             horizontalGlide *= leftRightGlideReduction;
-            rotator.StopRotating();
+            //rotator.StopRotating();
         }
         
     }

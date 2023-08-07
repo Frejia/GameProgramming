@@ -5,13 +5,13 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     [Header("Rotator Settings")]
-    [SerializeField]
-    private bool isRotating = false;
-
-    private Quaternion startRotation { get; set; }
+    [SerializeField] private float rotationSpeed = 90.0f;
+    public bool debug;
+    
+    [SerializeField] private bool isRotating = false;
+     private Quaternion startRotation { get; set; }
     private Quaternion endRotation { get; set; }
-    [SerializeField]
-    private float rotationSpeed = 90.0f;
+    
     
     public void StartRotating(Quaternion startRot, Quaternion endRot)
     {
@@ -29,6 +29,16 @@ public class Rotator : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (debug)
+        {
+            Quaternion endRotation = Quaternion.Euler(90f, 0f, 0f);
+            StartRotating(transform.rotation, endRotation);
+        }
+        else
+        {
+            StopRotating();
+        }
+        
         if (isRotating)
         {
             float step = rotationSpeed * Time.fixedDeltaTime;
