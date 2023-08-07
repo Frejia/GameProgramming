@@ -47,7 +47,7 @@ public class ShootShit : MonoBehaviour
         if (firePoint != null)
         {
             vfx = Instantiate(effectToSpawn, firePoint.transform.position, Quaternion.identity);
-            vfx.transform.localRotation = Quaternion.Euler(this.GetComponent<BallControl>().Getmousepos());
+            vfx.transform.localRotation = Quaternion.Euler(this.GetComponent<ShipControl>().Getmousepos());
         }
         else
         {
