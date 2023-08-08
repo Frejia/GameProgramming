@@ -51,9 +51,14 @@ public class Rotator : MonoBehaviour
     
     private void SpecialTurn()
     {
+        target = GameObject.FindWithTag("Player").transform;
         if (this.gameObject.tag == "Enemy")
         {
-            directionToTarget = target.position - transform.parent.transform.position;
+            directionToTarget = target.position - transform.position;
+            if (isAimPoint)
+            {
+                directionToTarget = target.position - transform.parent.transform.position;
+            }
             endRotation = Quaternion.LookRotation(-directionToTarget);
             StartRotating(this.transform.rotation, endRotation);
         }
