@@ -15,7 +15,7 @@ public class MeshCreator : MonoBehaviour
 
     void Update()
     {
-        if (saveOnStart)
+        if (Input.GetKeyDown(saveKey))
         {
             Debug.Log("Pressed to Save");
             MakePrefab();
@@ -24,6 +24,7 @@ public class MeshCreator : MonoBehaviour
 
     void SaveAsset(int numofmesh)
     {
+        Debug.Log(folderPath);
         // Get How many children are in the selectedGameObject
         int childCount = selectedGameObject.childCount;
         for (int i = 0; i < childCount; i++)
@@ -31,21 +32,28 @@ public class MeshCreator : MonoBehaviour
             var mf = selectedGameObject.transform.GetChild(i).GetComponent<MeshFilter>();
             if (mf)
             {
-                //Create new Mesh Folder
-                    string folderPath = AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder("Assets/Prefabs/Levels/", "Meshes" + numofmesh));
-                    var savePath = folderPath+ "/" + saveName + i + ".asset";
+                var savePath = folderPath + saveName + i + ".asset";
                     Debug.Log("Saved Mesh to:" + savePath);
                     AssetDatabase.CreateAsset(mf.mesh, savePath);
             }
         }
     }
     
+    [SerializeField] public string folderPath;
+    
     public void MakePrefab()
     {
+        //Get Meshy Parent Object
         selectedGameObject = GameObject.Find("Meshys").transform;
         GameObject mesh = selectedGameObject.gameObject;
+        //Generate Random Level Number
         int i = Random.Range(0, 1000);
+        //Create new Mesh Folder
+        AssetDatabase.CreateFolder("Assets/Prefabs/Levels", "Meshes" + i.ToString());
+        folderPath = "Assets/Prefabs/Levels/Meshes" + i.ToString() + "/";
+        //Create Meshes
         SaveAsset(i);
+        
         //If Prefab already exists, do not create it again
         if (AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Levels/" + mesh.name + i + ".prefab", typeof(GameObject)))
         {
