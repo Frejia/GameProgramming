@@ -22,6 +22,9 @@ public class PlayerShoot : MonoBehaviour
     private bool playerClose = true;
 
     private PatternManager patternManager;
+    public delegate void Shoot();
+    public static event Shoot Shot;
+    public static event Shoot ShotSpecial;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +70,7 @@ public class PlayerShoot : MonoBehaviour
          isFiring = true;
          if (shot == 0)
          {
+             Shot();
              // Straight Pattern Example
              patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 1,1, 1f, false, 1, 10f);
              /*GameObject bul = BulletPool.Instance.GetBulletPlayer();
@@ -80,6 +84,7 @@ public class PlayerShoot : MonoBehaviour
          else if(shot == 1)
          {
              // Cone Pattern Example
+             ShotSpecial();
              patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 2f, false, 10, 10f);
          }
          else
