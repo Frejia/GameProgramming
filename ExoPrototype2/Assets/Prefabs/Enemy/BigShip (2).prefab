@@ -455,7 +455,9 @@ GameObject:
   - component: {fileID: 1900974988526206876}
   - component: {fileID: 1719164595118060094}
   - component: {fileID: -3045109335756906155}
-  m_Layer: 10
+  - component: {fileID: -3183830924432631415}
+  - component: {fileID: 7386341772623323122}
+  m_Layer: 7
   m_Name: BigShip (2)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -572,6 +574,7 @@ MonoBehaviour:
   Cooldown: 3
   patternDuration: 3
   isFiring: 0
+  isPlayerClose: 1
 --- !u!65 &1900974988526206876
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -626,6 +629,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 50
+--- !u!114 &-3183830924432631415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094090093050274885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afed438833a5d54b8855a5db72e093f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7386341772623323122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094090093050274885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a0355fa614c2d409b15ce14f2b5e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 90
+  debug: 0
+  isAimPoint: 0
+  target: {fileID: 0}
+  isRotating: 0
 --- !u!1001 &7356172106742783822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -696,7 +728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7706704133163136415, guid: 1b9c9bd520ad54747a98d7222069677a, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

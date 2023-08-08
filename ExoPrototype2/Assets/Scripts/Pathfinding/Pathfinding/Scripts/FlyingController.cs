@@ -13,6 +13,25 @@ public class FlyingController : MonoBehaviour
     {
         _Agent = GetComponent<AStarAgent>();
         StartCoroutine(Coroutine_MoveRandom());
+        
+        // When enemy sees player, leave curve
+        EnemySeesPlayer.CanSee += StopMovement;
+        // When enemy doesnt see player, leave curve
+        EnemySeesPlayer.CantSee += StartMovement;
+    }
+
+    public void StopMovement()
+    {
+        _Agent.StopMoving();
+        Debug.Log("We stop moving");
+        StopCoroutine(Coroutine_MoveRandom());
+    }
+    
+    public void StartMovement()
+    {
+        _Agent.StartMoving();
+        Debug.Log("We start moving");
+        StartCoroutine(Coroutine_MoveRandom());
     }
 
     IEnumerator Coroutine_MoveRandom()
@@ -31,6 +50,8 @@ public class FlyingController : MonoBehaviour
             }
         }
     }
+    
+    //New from Fanny Stop Move Random
 
     IEnumerator Coroutine_Animation()
     {

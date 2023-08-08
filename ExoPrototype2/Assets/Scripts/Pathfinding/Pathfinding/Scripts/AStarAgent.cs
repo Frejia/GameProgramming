@@ -343,10 +343,17 @@ public class AStarAgent : MonoBehaviour
         PathCreator.bezierPath = bezierPath;
     }
 
-    private void StartMoving()
+    //Changed
+    public void StartMoving()
     {
         StopAllCoroutines();
         StartCoroutine(Coroutine_CharacterFollowPath());
+    }
+    
+    //Changed
+    public void StopMoving()
+    {
+        StopCoroutine(Coroutine_CharacterFollowPath());
     }
 
     IEnumerator Coroutine_CharacterFollowPath()

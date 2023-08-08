@@ -23,7 +23,17 @@ public class Rotator : MonoBehaviour
      *      Spieler drückt und maximaler Winkel erreicht ist
      *      Spieler drückt nicht und neutraler Winkel erreicht ist
      */
+
+    private void OnEnable()
+    {
+        EnemySeesPlayer.CanSee += SpecialTurn;
+    }
     
+    private void OnDisable()
+    {
+        EnemySeesPlayer.CanSee -= SpecialTurn;
+    }
+
     private void Start()
     {
         if (isAimPoint)
@@ -41,6 +51,17 @@ public class Rotator : MonoBehaviour
             isRotating = true;
         }
     }
+    
+    private void SpecialTurn()
+    {
+        if (this.gameObject.tag == "Enemy")
+        {
+            directionToTarget = target.position - transform.parent.transform.position;
+            endRotation = Quaternion.LookRotation(-directionToTarget);
+            StartRotating(this.transform.rotation, endRotation);
+        }
+    }
+    
     public void StopRotating()
     {
         endRotation = startRotation;
@@ -74,9 +95,8 @@ public class Rotator : MonoBehaviour
     {
         if (isAimPoint)
         {
-            directionToTarget = target.position - transform.parent.transform.position;
-            endRotation = Quaternion.LookRotation(-directionToTarget);
-            StartRotating(this.transform.rotation, endRotation);
+            SpecialTurn();
         }
     }
+
 }

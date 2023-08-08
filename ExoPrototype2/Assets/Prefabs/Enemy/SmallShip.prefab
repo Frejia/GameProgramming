@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 2988781691130958925}
   - component: {fileID: 3054780770814687416}
   - component: {fileID: 994254208959594653}
-  m_Layer: 10
+  - component: {fileID: 758714511942758157}
+  - component: {fileID: -4275953474817931738}
+  m_Layer: 7
   m_Name: SmallShip
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -39,7 +41,7 @@ Transform:
   - {fileID: 4496347054507433857}
   - {fileID: 4045761713915711694}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8369962702949417315
 MonoBehaviour:
@@ -133,6 +135,7 @@ MonoBehaviour:
   Cooldown: 0
   patternDuration: 0
   isFiring: 0
+  isPlayerClose: 1
 --- !u!114 &2988781691130958925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +190,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 50
+--- !u!114 &758714511942758157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031741032062270357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afed438833a5d54b8855a5db72e093f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4275953474817931738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031741032062270357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a0355fa614c2d409b15ce14f2b5e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 90
+  debug: 0
+  isAimPoint: 0
+  target: {fileID: 0}
+  isRotating: 0
 --- !u!1 &3167310554678085145
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1152354105411914, guid: cdbec52167efb6a48b63cebb3284c246, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4657497382128574, guid: cdbec52167efb6a48b63cebb3284c246, type: 3}
       propertyPath: m_RootOrder

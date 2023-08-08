@@ -16,9 +16,7 @@ public class EnemyPatternManager : MonoBehaviour
     private bool isOnCooldown;
     public float patternDuration;
     public bool isFiring = false;
-    
-    private bool playerClose = false;
-
+    public bool isPlayerClose = false;
     private BulletPool pool;
     
     // Start is called before the first frame update
@@ -26,44 +24,33 @@ public class EnemyPatternManager : MonoBehaviour
     {
         fireBullets = this.gameObject.GetComponent<PatternManager>();
         pool = BulletPool.Instance;
-        StartFiringPatterns();
+        EnemySeesPlayer.CanSee += PlayerClose;
+        EnemySeesPlayer.CantSee += StopPatterns;
+       //StartFiringPatterns();
         // StartFiringPatterns();
         //Start a Coroutine of StartPattern filling in a bulletPattern
     }
     
     private void StartFiringPatterns()
     {
-        if (!isFiring && !isOnCooldown && playerClose)
+        if (!isFiring && !isOnCooldown)
         {
             StartCoroutine(ReadBulletPatterns());
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void PlayerClose()
     {
-        if (other.gameObject.tag == "Player")
+        if (!isPlayerClose)
         {
-            playerClose = true;
-            Debug.Log("Player is Close");
+            isPlayerClose = true;
             StartFiringPatterns();
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerClose = false;
-            isFiring = false;
-            StopCoroutine(ReadBulletPatterns());
         }
     }
 
     private IEnumerator ReadBulletPatterns()
     {
-        while (playerClose)
-        {
-            foreach (BulletPatterns pattern in patterns)
+        foreach (BulletPatterns pattern in patterns)
             {
                 if (pattern.patternType == BulletPatternEnum.BulletPatternsEnum.None)
                 {
@@ -96,10 +83,8 @@ public class EnemyPatternManager : MonoBehaviour
             Debug.Log("End of Patterns reached");
             isFiring = false;
             StopCoroutine(ReadBulletPatterns());
-        }
 
-        isFiring = false;
-       
+            isFiring = false;
     }
 
     private IEnumerator StartPattern(BulletPatterns pattern)
@@ -113,5 +98,12 @@ public class EnemyPatternManager : MonoBehaviour
             pattern.FireRate, pattern.isAiming, pattern.bulletAmount, pattern.BulletSpeed);
         yield return new WaitForSeconds(pattern.patternDuration);
         fireBullets.SetBulletPatternNone();
+    }
+
+    private void StopPatterns()
+    {
+        StopCoroutine(ReadBulletPatterns());
+        isFiring = false;
+        isPlayerClose = false;
     }
 }
