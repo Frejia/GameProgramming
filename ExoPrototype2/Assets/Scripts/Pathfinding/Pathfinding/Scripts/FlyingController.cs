@@ -15,23 +15,24 @@ public class FlyingController : MonoBehaviour
         StartCoroutine(Coroutine_MoveRandom());
         
         // When enemy sees player, leave curve
-       //EnemySeesPlayer.CanSee += StopMovement;
+       EnemySeesPlayer.CanSee += StopMovement;
         // When enemy doesnt see player, leave curve
-      // EnemySeesPlayer.CantSee += StartMovement;
+       //EnemySeesPlayer.CantSee += StartMovement;
     }
 
-    public void StopMovement()
+    public void StopMovement(GameObject enemy)
     {
         _Agent.StopMoving();
         Debug.Log("We stop moving");
-        StopCoroutine(Coroutine_MoveRandom());
+        //Only stop the Coroutine on the Enemy Object
+        StopCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
     }
     
-    public void StartMovement()
+    public void StartMovement(GameObject enemy)
     {
         _Agent.StartMoving();
         Debug.Log("We start moving");
-        StartCoroutine(Coroutine_MoveRandom());
+        StartCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
     }
 
     IEnumerator Coroutine_MoveRandom()

@@ -9,6 +9,7 @@ public class Rotator : MonoBehaviour
     [SerializeField] private float rotationSpeed = 90.0f;
     public bool debug;
     [SerializeField] private bool isAimPoint = false;
+    [SerializeField] private bool isEnemy = false;
     [SerializeField] private Transform target;
     
     [SerializeField] private bool isRotating = false;
@@ -49,10 +50,11 @@ public class Rotator : MonoBehaviour
         }
     }
     
-    private void SpecialTurn()
+    private void SpecialTurn(GameObject enemy)
     {
         target = GameObject.FindWithTag("Player").transform;
-        if (this.gameObject.tag == "Enemy")
+        enemy.GetComponent<Rotator>().isEnemy = true;
+        if (this.gameObject.tag == "Enemy" && isEnemy)
         {
             directionToTarget = target.position - transform.position;
             if (isAimPoint)
@@ -60,8 +62,9 @@ public class Rotator : MonoBehaviour
                 directionToTarget = target.position - transform.parent.transform.position;
             }
             endRotation = Quaternion.LookRotation(-directionToTarget);
-            StartRotating(this.transform.rotation, endRotation);
+            StartRotating(transform.rotation, endRotation);
         }
+        enemy.GetComponent<Rotator>().isEnemy = false;
     }
     
     public void StopRotating()
@@ -97,7 +100,7 @@ public class Rotator : MonoBehaviour
     {
         if (isAimPoint)
         {
-            SpecialTurn();
+            SpecialTurn(this.gameObject);
         }
     }
 

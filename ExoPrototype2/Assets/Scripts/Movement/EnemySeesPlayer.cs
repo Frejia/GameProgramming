@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySeesPlayer : MonoBehaviour
 {
-    public delegate void SeesPlayer();
+    public delegate void SeesPlayer(GameObject enemy);
     public static event SeesPlayer CanSee;
     public static event SeesPlayer CantSee;
 
@@ -16,7 +16,7 @@ public class EnemySeesPlayer : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Enemy sees Player");
-            CanSee();
+            CanSee(this.gameObject);
         }
     }
     
@@ -25,7 +25,7 @@ public class EnemySeesPlayer : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Enemy does not see Player");
-            CantSee();
+            CantSee(this.gameObject);
         }
     }
 }

@@ -39,7 +39,7 @@ public class EnemyPatternManager : MonoBehaviour
         }
     }
 
-    private void PlayerClose()
+    private void PlayerClose(GameObject enemy)
     {
         if (!isPlayerClose)
         {
@@ -100,7 +100,7 @@ public class EnemyPatternManager : MonoBehaviour
         fireBullets.SetBulletPatternNone();
     }
 
-    private void StopPatterns()
+    private void StopPatterns(GameObject enemy)
     {
         StopCoroutine(ReadBulletPatterns());
         isFiring = false;
