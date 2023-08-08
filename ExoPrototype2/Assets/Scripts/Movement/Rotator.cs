@@ -36,10 +36,7 @@ public class Rotator : MonoBehaviour
 
     private void Start()
     {
-        if (isAimPoint)
-        {
-            target = GameObject.FindWithTag("Player").transform;
-        }
+        target = GameObject.FindWithTag("Player").transform;
     }
 
     public void StartRotating(Quaternion startRot, Quaternion endRot)
