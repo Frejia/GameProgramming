@@ -15,6 +15,7 @@ public class EnemySeesPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Enemy sees Player");
             CanSee();
         }
     }
@@ -23,6 +24,7 @@ public class EnemySeesPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Enemy does not see Player");
             CantSee();
         }
     }
