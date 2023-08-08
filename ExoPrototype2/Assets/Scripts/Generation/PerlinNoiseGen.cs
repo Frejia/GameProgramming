@@ -149,7 +149,6 @@ public class PerlinNoiseGen : MonoBehaviour
             meshes.Add(mf.mesh);//keep track of mesh so we can destroy it when it's no longer needed
             if(collider) g.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;//setting colliders takes more time. disabled for testing.
         }
-        meshCreator.GenerateMeshPrefab(blockDataLists);
         #endregion
 
         //Debug.Log("Loaded in " + (Time.realtimeSinceStartup - startTime) + " Seconds.");
@@ -210,25 +209,6 @@ public class PerlinNoiseGen : MonoBehaviour
             }
         }
         Debug.Log("Finished Removing Cubes after " + timePassed + " seconds.");
-    }
-
-    public void MakePrefab()
-    {
-        GameObject mesh = GameObject.Find("Meshys");
-        int i = new Random().Next(0, 100);
-        
-        // Create a prefab at the specified path
-            string prefabPath = "Assets/Prefabs/Levels/" + mesh.name + i + ".prefab";
-            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(mesh, prefabPath);
-
-            if (prefab != null)
-            {
-                Debug.Log("Prefab created at: " + prefabPath);
-            }
-            else
-            {
-                Debug.LogError("Failed to create prefab.");
-            }
     }
 
     public static float Perlin3D(float x, float y, float z)

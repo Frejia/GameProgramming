@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
        }
        
        noiseGen.Generate();
-       world.InitializeGrid();
+      // world.InitializeGrid();
 
     }
     

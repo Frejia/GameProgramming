@@ -1,72 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MeshCreator : MonoBehaviour
 {
-    public Material material; // Set this in the Inspector
-    public bool collider = false; // Set this in the Inspector
+    // https://unitycoder.com/blog/2013/01/26/save-mesh-created-by-script-in-editor-playmode/
+    public KeyCode saveKey = KeyCode.F12;
+    public bool saveOnStart = false;
+    public string saveName = "Meshys";
+    [SerializeField] public Transform selectedGameObject;
 
-    private List<Mesh> meshes = new List<Mesh>();
-
-    // ... Existing code ...
-
-    private void CreatePrefab(Mesh combinedMesh, string prefabName)
+    void Update()
     {
-        GameObject prefab = new GameObject(prefabName);
-        MeshFilter prefabMF = prefab.AddComponent<MeshFilter>();
-        MeshRenderer prefabMR = prefab.AddComponent<MeshRenderer>();
-        prefabMR.material = material;
-        prefabMF.mesh = combinedMesh;
-
-        if (collider)
+        if (saveOnStart)
         {
-            MeshCollider prefabCollider = prefab.AddComponent<MeshCollider>();
-            prefabCollider.sharedMesh = prefabMF.sharedMesh;
+            Debug.Log("Pressed to Save");
+            SaveAsset();
         }
-
-#if UNITY_EDITOR
-        // Save the prefab
-        string prefabPath = "Assets/Prefabs/" + prefabName + ".prefab";
-        UnityEditor.PrefabUtility.SaveAsPrefabAsset(prefab, prefabPath);
-        Debug.Log("Prefab saved: " + prefabPath);
-#endif
-
-        Destroy(prefab);
     }
 
-    public void GenerateMeshPrefab(List<List<CombineInstance>> blockDataLists)
+    void SaveAsset()
     {
-        Transform container = new GameObject("Meshys").transform;
-
-        List<CombineInstance> finalData = new List<CombineInstance>();
-
-        foreach (List<CombineInstance> data in blockDataLists)
+        selectedGameObject = GameObject.Find("Meshys").transform;
+        // Get How many children are in the selectedGameObject
+        int childCount = selectedGameObject.childCount;
+        for (int i = 0; i < childCount; i++)
         {
-            finalData.AddRange(data);
+            var mf = selectedGameObject.transform.GetChild(i).GetComponent<MeshFilter>();
+            if (mf)
+            {
+                var savePath = "Assets/Prefabs/Levels/Meshes/" + saveName + i + ".asset";
+                Debug.Log("Saved Mesh to:" + savePath);
+                AssetDatabase.CreateAsset(mf.mesh, savePath);
+            }
         }
-
-        GameObject g = new GameObject("CombinedMesh");
-        g.transform.parent = container;
-
-        MeshFilter mf = g.AddComponent<MeshFilter>();
-        MeshRenderer mr = g.AddComponent<MeshRenderer>();
-        mr.material = material;
-        mr.transform.localScale = new Vector3(3, 3, 3);
-        mf.mesh.CombineMeshes(finalData.ToArray());
-        mf.gameObject.layer = 3;
-
-        meshes.Add(mf.mesh);
-
-        if (collider)
+        MakePrefab();
+    }
+    
+    public void MakePrefab()
+    {
+        GameObject mesh = selectedGameObject.gameObject;
+        int i = Random.Range(0, 1000);
+        //If Prefab already exists, do not create it again
+        if (AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Levels/" + mesh.name + i + ".prefab", typeof(GameObject)))
         {
-            g.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;
+            Debug.Log("Prefab already exists");
+            return;
         }
+        else
+        {
+            // Create a prefab at the specified path
+            string prefabPath = "Assets/Prefabs/Levels/" + mesh.name + i + ".prefab";
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(mesh, prefabPath);
+            if (prefab != null)
+            {
+                Debug.Log("Prefab created at: " + prefabPath);
+            }
+            else
+            {
+                Debug.LogError("Failed to create prefab.");
+            }
+        }
+        
 
-        CreatePrefab(mf.sharedMesh, "CombinedMeshPrefab");
-
-        Destroy(g);
+       
     }
 }
