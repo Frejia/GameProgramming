@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using PathCreation;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using Random = System.Random;
 
 public class PerlinNoiseGen : MonoBehaviour
 {
@@ -29,6 +31,7 @@ public class PerlinNoiseGen : MonoBehaviour
     private float timePassed = 0f;
 
     public static PerlinNoiseGen Instance { get; private set; }
+    public MeshCreator meshCreator;
 
     private void OnDrawGizmos()
     {
@@ -49,6 +52,7 @@ public class PerlinNoiseGen : MonoBehaviour
         Instance = this;
         // Get the reference to the MarchingCubes script on the same GameObject
         marchingCubes = GetComponent<MarchingCubes>();
+        meshCreator = GetComponent<MeshCreator>();
     }
 
     private List<CombineInstance> blockData;//this will contain the data for the final mesh
@@ -141,8 +145,9 @@ public class PerlinNoiseGen : MonoBehaviour
             mr.material = material;//set material to avoid evil pinkness of missing texture
             mr.transform.localScale = new Vector3(3,3,3);//scale up the mesh so it's visible
             mf.mesh.CombineMeshes(data.ToArray());//set mesh to the combination of all of the blocks in the list
-            mf.GameObject().layer = "Terrain".GetHashCode();//set layer to "Terrain
+            mf.GameObject().layer = 3;//set layer to "Terrain
             meshes.Add(mf.mesh);//keep track of mesh so we can destroy it when it's no longer needed
+            meshCreator.GenerateMeshPrefabs(blockDataLists);
             if(collider) g.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;//setting colliders takes more time. disabled for testing.
         }
 
@@ -151,12 +156,11 @@ public class PerlinNoiseGen : MonoBehaviour
         //Debug.Log("Loaded in " + (Time.realtimeSinceStartup - startTime) + " Seconds.");
         
         Debug.Log("Generated Mesh in " + timePassed + "seconds.");
-
     }
     
     // Update is called once per frame
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.G))
+        /*if (Input.GetKeyDown(KeyCode.G))
         {
             Destroy(GameObject.Find("GeneratedMesh"));//destroy the previously generated mesh.
             foreach (Mesh m in meshes)//meshes still exist even though they aren't in the scene anymore. destroy them so they don't take up memory.
@@ -167,7 +171,7 @@ public class PerlinNoiseGen : MonoBehaviour
 
             // Create the mesh using Marching Cubes
            // CreateMarchingCubesMesh(voxelData);
-        }
+        }*/
         
         timePassed += Time.deltaTime;
         
@@ -208,7 +212,26 @@ public class PerlinNoiseGen : MonoBehaviour
         }
         Debug.Log("Finished Removing Cubes after " + timePassed + " seconds.");
     }
-    
+
+    public void MakePrefab()
+    {
+        GameObject mesh = GameObject.Find("Meshys");
+        int i = new Random().Next(0, 100);
+        
+        // Create a prefab at the specified path
+            string prefabPath = "Assets/Prefabs/Levels/" + mesh.name + i + ".prefab";
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(mesh, prefabPath);
+
+            if (prefab != null)
+            {
+                Debug.Log("Prefab created at: " + prefabPath);
+            }
+            else
+            {
+                Debug.LogError("Failed to create prefab.");
+            }
+    }
+
     public static float Perlin3D(float x, float y, float z)
     {
         float ab = Mathf.PerlinNoise(x, y);
