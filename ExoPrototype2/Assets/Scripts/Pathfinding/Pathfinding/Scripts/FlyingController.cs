@@ -23,7 +23,7 @@ public class FlyingController : MonoBehaviour
         // When enemy sees player, leave curve
        EnemySeesPlayer.CanSee += StopMovement;
         // When enemy doesnt see player, leave curve
-       EnemySeesPlayer.CantSee += StartMovement;
+      // EnemySeesPlayer.CantSee += StartMovement;
     }
 
     public void StopMovement(GameObject enemy)

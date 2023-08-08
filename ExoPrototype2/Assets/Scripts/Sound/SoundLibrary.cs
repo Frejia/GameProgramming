@@ -30,16 +30,18 @@ public class SoundLibrary : MonoBehaviour
 
     private void Start()
     {
-        //Get all MP3 Music Clips from a Folder
-        /*DirectoryInfo dir = new DirectoryInfo("Assets/2D/Audio");
+        
+        // find directory "assets/2d/audio"
+        DirectoryInfo dir = new DirectoryInfo("Assets/2D/Audio");
+        
+        // get all mp3 files in directory
         FileInfo[] info = dir.GetFiles("*.mp3");
         foreach (FileInfo f in info)
         {
-            AudioClip clip = Resources.Load("Assets/2D/Audio/" + f.Name) as AudioClip;
-            MusicClips.Add(clip);
-        }*/
-     //   PlayMusic(0);
+            Debug.Log(f.Name);
+        }
         
+        //TODO: implement Method that displays all audio files in the directory
         
     }
 
