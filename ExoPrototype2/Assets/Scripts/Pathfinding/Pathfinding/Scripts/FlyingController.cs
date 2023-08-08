@@ -1,23 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FlyingController : MonoBehaviour
 {
     AStarAgent _Agent;
+    CharacterMoveAB _ABMove;
     [SerializeField] Transform _MoveToPoint;
     [SerializeField] Animator _Anim;
     [SerializeField] AnimationCurve _SpeedCurve;
     [SerializeField] float _Speed;
+    private bool sawPlayer = false;
+    
     private void Start()
     {
         _Agent = GetComponent<AStarAgent>();
+        _ABMove = GetComponent<CharacterMoveAB>();
         StartCoroutine(Coroutine_MoveRandom());
         
         // When enemy sees player, leave curve
        EnemySeesPlayer.CanSee += StopMovement;
         // When enemy doesnt see player, leave curve
-       //EnemySeesPlayer.CantSee += StartMovement;
+       EnemySeesPlayer.CantSee += StartMovement;
     }
 
     public void StopMovement(GameObject enemy)
@@ -26,13 +32,28 @@ public class FlyingController : MonoBehaviour
         Debug.Log("We stop moving");
         //Only stop the Coroutine on the Enemy Object
         StopCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
+
+        sawPlayer = true;
+        GetComponent<CharacterMoveAB>().pointA = transform;
+        GetComponent<CharacterMoveAB>().pointB = GameObject.FindWithTag("Player").transform;
+        
+        StartCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
     }
-    
+
+    private void Update()
+    {
+        if (sawPlayer)
+        {
+           GetComponent<CharacterMoveAB>().pointB = GameObject.FindWithTag("Player").transform;
+        }
+    }
+
     public void StartMovement(GameObject enemy)
     {
         _Agent.StartMoving();
         Debug.Log("We start moving");
         StartCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
+        StopCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
     }
 
     IEnumerator Coroutine_MoveRandom()

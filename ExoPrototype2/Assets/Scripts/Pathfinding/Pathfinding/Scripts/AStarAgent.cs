@@ -353,7 +353,7 @@ public class AStarAgent : MonoBehaviour
     //Changed
     public void StopMoving()
     {
-        StopCoroutine(Coroutine_CharacterFollowPath());
+        StopAllCoroutines();
     }
 
     IEnumerator Coroutine_CharacterFollowPath()

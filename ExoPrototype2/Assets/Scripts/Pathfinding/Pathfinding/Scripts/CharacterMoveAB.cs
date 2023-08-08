@@ -7,17 +7,17 @@ using UnityEngine;
 public class CharacterMoveAB : MonoBehaviour
 {
     AStarAgent _Agent;
-    [SerializeField] Transform pointA;
-    [SerializeField] Transform pointB;
+    [SerializeField] public Transform pointA { get; set; }
+    [SerializeField] public Transform pointB { get; set; }
 
     private void Start()
     {
         _Agent = GetComponent<AStarAgent>();
-        transform.position = pointA.position;
-        StartCoroutine(Coroutine_MoveAB());
+        //transform.position = pointA.position;
+        //StartCoroutine(Coroutine_MoveAB());
     }
 
-    IEnumerator Coroutine_MoveAB()
+    public IEnumerator Coroutine_MoveAB()
     {
         yield return null;
         while (true)
