@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using PathCreation;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -14,10 +15,10 @@ public class PerlinNoiseGen : MonoBehaviour
     [SerializeField] public bool raceMode = false;
     [SerializeField] public float pathradius = 10f;
     
-    [SerializeField] private int seed = 0;
+    [SerializeField] public int seed = 0;
     [SerializeField] private GameObject blockPrefab;//use a unit cube (1x1x1 like unity's default cube)
-    [SerializeField] private int chunkSize = 50;
-    [SerializeField] private int chunkSizeZ = 50;
+    [SerializeField] public int chunkSize = 50;
+    [SerializeField] public int chunkSizeZ = 50;
     [SerializeField] private float noiseScale = .05f;
     [SerializeField, Range(0, 1)] private float threshold = .5f;
     [SerializeField] private Material material;
@@ -31,7 +32,8 @@ public class PerlinNoiseGen : MonoBehaviour
     private float timePassed = 0f;
 
     public static PerlinNoiseGen Instance { get; private set; }
-    public MeshCreator meshCreator;
+    private MeshCreator meshCreator;
+    private InvalidLevelSafe invalidLevelSafe;
 
     private void OnDrawGizmos()
     {
@@ -40,10 +42,18 @@ public class PerlinNoiseGen : MonoBehaviour
         // Draw Wire Cube in Red
         
     }
-
+    
     
     private void Awake()
     {
+        invalidLevelSafe = GetComponent<InvalidLevelSafe>();
+
+        if (invalidLevelSafe.Equals(chunkSize, chunkSizeZ, seed))
+        {
+            Debug.Log("This Level Gen is not playable");
+            seed += 20;
+        }
+        
         if (Instance != null)
         {
             Destroy(gameObject);

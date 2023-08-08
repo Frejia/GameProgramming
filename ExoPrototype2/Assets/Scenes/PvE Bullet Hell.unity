@@ -1586,11 +1586,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2efedd6fcbd2ffe4c85fb0298afb7f71, type: 2}
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: chunkSize
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: chunkSizeZ
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: waypoints.Array.size
@@ -1628,6 +1628,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6946016429249933038, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1411954300}
     - targetCorrespondingSourceObject: {fileID: 6946016429249933038, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1411954295}
@@ -1887,6 +1890,21 @@ MonoBehaviour:
   saveName: Meshys
   selectedGameObject: {fileID: 0}
   folderPath: 
+--- !u!114 &1411954300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411954290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e4a5dd025d15c468ca0415688b2abe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invalidLevels: []
+  clearInvalidLevels: 0
+  createInvalidLevels: 0
 --- !u!1 &1429252834
 GameObject:
   m_ObjectHideFlags: 0

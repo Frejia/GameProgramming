@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        Debug.Log("Creating World");
 
         int i = 0;
        foreach (var point in waypoints)

@@ -74,8 +74,6 @@ public class MeshCreator : MonoBehaviour
                 Debug.LogError("Failed to create prefab.");
             }
         }
-        
 
-       
     }
 }
