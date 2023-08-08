@@ -149,7 +149,7 @@ public class PerlinNoiseGen : MonoBehaviour
             meshes.Add(mf.mesh);//keep track of mesh so we can destroy it when it's no longer needed
             if(collider) g.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;//setting colliders takes more time. disabled for testing.
         }
-        meshCreator.GenerateMeshPrefabs(blockDataLists);
+        meshCreator.GenerateMeshPrefab(blockDataLists);
         #endregion
 
         //Debug.Log("Loaded in " + (Time.realtimeSinceStartup - startTime) + " Seconds.");

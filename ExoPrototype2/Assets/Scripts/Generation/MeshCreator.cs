@@ -13,17 +13,13 @@ public class MeshCreator : MonoBehaviour
 
     // ... Existing code ...
 
-    public void CreatePrefab(Transform meshContainer, Mesh mesh, string prefabName)
+    private void CreatePrefab(Mesh combinedMesh, string prefabName)
     {
         GameObject prefab = new GameObject(prefabName);
-        prefab.transform.position = meshContainer.position;
-        prefab.transform.rotation = meshContainer.rotation;
-        prefab.transform.localScale = meshContainer.localScale;
-
         MeshFilter prefabMF = prefab.AddComponent<MeshFilter>();
         MeshRenderer prefabMR = prefab.AddComponent<MeshRenderer>();
         prefabMR.material = material;
-        prefabMF.mesh = mesh;
+        prefabMF.mesh = combinedMesh;
 
         if (collider)
         {
@@ -31,46 +27,46 @@ public class MeshCreator : MonoBehaviour
             prefabCollider.sharedMesh = prefabMF.sharedMesh;
         }
 
+#if UNITY_EDITOR
         // Save the prefab
-        string prefabPath = "Assets/Prefabs/Levels" + prefabName + ".prefab";
+        string prefabPath = "Assets/Prefabs/" + prefabName + ".prefab";
         UnityEditor.PrefabUtility.SaveAsPrefabAsset(prefab, prefabPath);
-
-        // Destroy the temporary game object
-        Destroy(prefab);
-
         Debug.Log("Prefab saved: " + prefabPath);
+#endif
+
+        Destroy(prefab);
     }
 
-    public void GenerateMeshPrefabs(List<List<CombineInstance>> blockDataLists)
+    public void GenerateMeshPrefab(List<List<CombineInstance>> blockDataLists)
     {
         Transform container = new GameObject("Meshys").transform;
 
-        for (int i = 0; i < blockDataLists.Count; i++)
+        List<CombineInstance> finalData = new List<CombineInstance>();
+
+        foreach (List<CombineInstance> data in blockDataLists)
         {
-            List<CombineInstance> data = blockDataLists[i];
-            string prefabName = "MeshyPrefab" + i;
-
-            GameObject g = new GameObject("Meshy");
-            g.transform.parent = container;
-
-            MeshFilter mf = g.AddComponent<MeshFilter>();
-            MeshRenderer mr = g.AddComponent<MeshRenderer>();
-            mr.material = material;
-            mr.transform.localScale = new Vector3(3, 3, 3);
-            mf.mesh.CombineMeshes(data.ToArray());
-            mf.gameObject.layer = 3;
-
-            meshes.Add(mf.mesh);
-
-            if (collider)
-            {
-                g.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;
-            }
-            
-            int j = new System.Random().Next(0, 1000);
-            CreatePrefab(g.transform, mf.sharedMesh, prefabName + j.ToString());
-
-            Destroy(g);
+            finalData.AddRange(data);
         }
+
+        GameObject g = new GameObject("CombinedMesh");
+        g.transform.parent = container;
+
+        MeshFilter mf = g.AddComponent<MeshFilter>();
+        MeshRenderer mr = g.AddComponent<MeshRenderer>();
+        mr.material = material;
+        mr.transform.localScale = new Vector3(3, 3, 3);
+        mf.mesh.CombineMeshes(finalData.ToArray());
+        mf.gameObject.layer = 3;
+
+        meshes.Add(mf.mesh);
+
+        if (collider)
+        {
+            g.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;
+        }
+
+        CreatePrefab(mf.sharedMesh, "CombinedMeshPrefab");
+
+        Destroy(g);
     }
 }
