@@ -2,6 +2,7 @@
 using System.Linq;
 using PathCreation.Utility;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 namespace PathCreation {
     /// A bezier path is a path made by stitching together any number of (cubic) bezier curves.
