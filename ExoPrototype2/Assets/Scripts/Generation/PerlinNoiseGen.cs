@@ -147,10 +147,9 @@ public class PerlinNoiseGen : MonoBehaviour
             mf.mesh.CombineMeshes(data.ToArray());//set mesh to the combination of all of the blocks in the list
             mf.GameObject().layer = 3;//set layer to "Terrain
             meshes.Add(mf.mesh);//keep track of mesh so we can destroy it when it's no longer needed
-            meshCreator.GenerateMeshPrefabs(blockDataLists);
             if(collider) g.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;//setting colliders takes more time. disabled for testing.
         }
-
+        meshCreator.GenerateMeshPrefabs(blockDataLists);
         #endregion
 
         //Debug.Log("Loaded in " + (Time.realtimeSinceStartup - startTime) + " Seconds.");
