@@ -3,8 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum RotationDirection
+{
+    Left,
+    Right,
+    Neutral,
+    Other,
+    None
+}
+
 public class Rotator : MonoBehaviour
 {
+    //Rotator Rotation sides
+    private Quaternion leftRotation { get; set; } // Set your left rotation
+    private Quaternion rightRotation { get; set; } // Set your right rotation
+    private Quaternion neutralRotation { get; set; }
+    private Quaternion otherRotation { get; set; }
+    private Quaternion startRotation { get; set; }
+    private Quaternion endRotation { get; set; }
+
+    private RotationDirection currentDirection;
+    
     [Header("Rotator Settings")]
     [SerializeField] private float rotationSpeed = 90.0f;
     public bool debug;
@@ -13,8 +32,8 @@ public class Rotator : MonoBehaviour
     [SerializeField] private Transform target;
     
     [SerializeField] private bool isRotating = false;
-     private Quaternion startRotation { get; set; }
-    private Quaternion endRotation { get; set; }
+     
+    
 
     
     /* TODO: Rotations-Vektor für links und rechts als Variable speichern
@@ -27,18 +46,61 @@ public class Rotator : MonoBehaviour
 
     private void OnEnable()
     {
-        EnemySeesPlayer.CanSee += SpecialTurn;
+        EnemySeesPlayer.CanSee += FaceToTurn;
     }
     
     private void OnDisable()
     {
-        EnemySeesPlayer.CanSee -= SpecialTurn;
+        EnemySeesPlayer.CanSee -= FaceToTurn;
     }
 
     private void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
     }
+
+    private void PerformRotation(RotationDirection direction)
+    {
+        switch (direction)
+        {
+            case RotationDirection.Left:
+                StartRotating(transform.rotation, leftRotation);
+                break;
+            case RotationDirection.Right:
+                StartRotating(transform.rotation, rightRotation);
+                break;
+            case RotationDirection.Neutral:
+                StartRotating(transform.rotation, neutralRotation);
+                break;
+            case RotationDirection.Other:
+                StartRotating(transform.rotation, otherRotation);
+                break;
+            case RotationDirection.None:
+                StopRotating();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SetRotState(RotationDirection rotationDirection)
+    {
+        //First rotate back to neutral
+        if (currentDirection != RotationDirection.None || currentDirection != RotationDirection.Neutral)
+        {
+            StopRotating();
+        }
+        currentDirection = rotationDirection;
+        PerformRotation(currentDirection);
+    }
+
+    public void SetRotations(Quaternion neutralRot, Quaternion leftRot, Quaternion rightRot)
+    {
+        neutralRotation = neutralRot;
+        leftRotation = leftRot;
+        rightRotation = rightRot;
+    }
+    
 
     public void StartRotating(Quaternion startRot, Quaternion endRot)
     {
@@ -50,7 +112,7 @@ public class Rotator : MonoBehaviour
         }
     }
     
-    private void SpecialTurn(GameObject enemy)
+    private void FaceToTurn(GameObject enemy)
     {
         target = GameObject.FindWithTag("Player").transform;
         enemy.GetComponent<Rotator>().isEnemy = true;
@@ -69,7 +131,8 @@ public class Rotator : MonoBehaviour
     
     public void StopRotating()
     {
-        endRotation = startRotation;
+        currentDirection = RotationDirection.Neutral;
+        PerformRotation(currentDirection);
         isRotating = false;
     }
     
@@ -92,6 +155,11 @@ public class Rotator : MonoBehaviour
                 isRotating = false;
             }*/
         }
+
+        if (!isRotating)
+        {
+            StopRotating();
+        }
     }
 
     private Vector3 directionToTarget;
@@ -100,7 +168,7 @@ public class Rotator : MonoBehaviour
     {
         if (isAimPoint)
         {
-            SpecialTurn(this.gameObject);
+            FaceToTurn(this.gameObject);
         }
     }
 
