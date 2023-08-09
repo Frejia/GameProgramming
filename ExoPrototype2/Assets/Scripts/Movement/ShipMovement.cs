@@ -12,9 +12,9 @@ public class ShipMovement : MonoBehaviour
 
     [Header("Ship Movement Settings")] 
     [SerializeField]
-    private float yawTorque = 500f;
+    public float yawTorque = 500f;
     [SerializeField]
-    private float pitchTorque = 1000f;
+    public float pitchTorque = 1000f;
     [SerializeField]
     private float rollTorque = 500f;
     [SerializeField]
@@ -48,6 +48,10 @@ public class ShipMovement : MonoBehaviour
     //[SerializeField] private ParticleSystem dodgeEffect;
     [SerializeField] private GameObject shipModel;
     
+    //Input References
+    private InputActionAsset inputAsset;
+    private InputActionMap player;
+    private InputAction move;
     
     //References
     private Rigidbody rb;
@@ -60,6 +64,10 @@ public class ShipMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //Controls
+        inputAsset = this.GetComponent<PlayerInput>().actions;
+        player = inputAsset.FindActionMap("Player");
+        
         rb = GetComponent<Rigidbody>();
         rotator = gameObject.transform.GetChild(0).GetComponent<Rotator>();
 

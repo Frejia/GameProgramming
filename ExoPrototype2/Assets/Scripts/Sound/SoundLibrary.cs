@@ -36,11 +36,6 @@ public class SoundLibrary : MonoBehaviour
         
         // get all mp3 files in directory
         FileInfo[] info = dir.GetFiles("*.mp3");
-        foreach (FileInfo f in info)
-        {
-            Debug.Log(f.Name);
-        }
-        
         //TODO: implement Method that displays all audio files in the directory
         
     }
