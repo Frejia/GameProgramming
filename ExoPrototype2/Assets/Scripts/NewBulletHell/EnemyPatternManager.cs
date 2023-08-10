@@ -43,14 +43,16 @@ public class EnemyPatternManager : MonoBehaviour
     {
         if (!isPlayerClose)
         {
-            isPlayerClose = true;
-            StartFiringPatterns();
+            enemy.GetComponent<EnemyPatternManager>().isPlayerClose = true;
+            enemy.GetComponent<EnemyPatternManager>().StartFiringPatterns();
         }
     }
 
     private IEnumerator ReadBulletPatterns()
     {
-        foreach (BulletPatterns pattern in patterns)
+        while (isPlayerClose)
+        {
+            foreach (BulletPatterns pattern in patterns)
             {
                 if (pattern.patternType == BulletPatternEnum.BulletPatternsEnum.None)
                 {
@@ -79,8 +81,9 @@ public class EnemyPatternManager : MonoBehaviour
                     isOnCooldown = false;
                 }
             }
+        }
 
-            Debug.Log("End of Patterns reached");
+        Debug.Log("End of Patterns reached");
             isFiring = false;
             StopCoroutine(ReadBulletPatterns());
 
@@ -102,8 +105,9 @@ public class EnemyPatternManager : MonoBehaviour
 
     private void StopPatterns(GameObject enemy)
     {
-        StopCoroutine(ReadBulletPatterns());
-        isFiring = false;
-        isPlayerClose = false;
+        enemy.GetComponent<EnemyPatternManager>().StartFiringPatterns();
+        StopCoroutine(enemy.GetComponent<EnemyPatternManager>().ReadBulletPatterns());
+        enemy.GetComponent<EnemyPatternManager>().isFiring = false;
+        enemy.GetComponent<EnemyPatternManager>().isPlayerClose = false;
     }
 }
