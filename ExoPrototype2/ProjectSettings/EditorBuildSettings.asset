@@ -9,4 +9,4 @@ EditorBuildSettings:
     path: Assets/Scenes/PvE Bullet Hell.unity
     guid: bfeb0c771ddeb3543ad680b859e7ba92
   m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: 486651d3a41504641be34bb674f78070, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: d230d16bc81b2054dacf77926f37017b, type: 2}
