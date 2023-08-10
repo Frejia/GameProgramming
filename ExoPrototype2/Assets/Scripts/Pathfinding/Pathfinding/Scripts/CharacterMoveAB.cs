@@ -7,8 +7,8 @@ using UnityEngine;
 public class CharacterMoveAB : MonoBehaviour
 {
     AStarAgent _Agent;
-    [SerializeField] public Transform pointA { get; set; }
-    [SerializeField] public Transform pointB { get; set; }
+    [SerializeField] public Transform pointA;
+    [SerializeField] public Transform pointB;
 
     private void Start()
     {
@@ -36,9 +36,9 @@ public class CharacterMoveAB : MonoBehaviour
             {
                 yield return null;
             }
-            /*Transform pom = pointA;
+            Transform pom = pointA;
             pointA = pointB;
-            pointB = pom;*/
+            pointB = pom;
             yield return null;
         }
     }

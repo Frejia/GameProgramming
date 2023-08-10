@@ -25,7 +25,7 @@ public class EnemySeesPlayer : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Enemy does not see Player");
-            CantSee(this.gameObject);
+           // CantSee(this.gameObject);
         }
     }
 }
