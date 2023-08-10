@@ -160,7 +160,7 @@ MonoBehaviour:
   TurnSpeed: 3.5
   TotalPath: []
   CornerPoints: []
-  _DebugPath: 0
+  _DebugPath: 1
   _DebugPathColor: {r: 1, g: 0, b: 0, a: 1}
   CurvePath: 1
   PathCreator: {fileID: 0}
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070c6b4c51b64c04bb12947fcdbbf6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MoveToPoint: {fileID: 0}
+  _MoveToPoint: {fileID: 442578011}
   _Anim: {fileID: 0}
   _SpeedCurve:
     serializedVersion: 2

@@ -19,24 +19,27 @@ public class CharacterMoveAB : MonoBehaviour
         //transform.position = pointA.position;
         //StartCoroutine(Coroutine_MoveAB());
         // When enemy sees player, leave curve
-        EnemySeesPlayer.CanSee += StartMoving;
+        EnemySeesPlayer.CanSee += StartMovingToPlayer;
+        EnemySeesPlayer.CantSee += StopMovingToPlayer;
     }
 
-    private void StartMoving(GameObject enemy)
+    private Transform startPoint;
+    
+    private void StartMovingToPlayer(GameObject enemy)
     {
         //_Agent.StopMoving();
         sawPlayer = true;
+        startPoint = transform;
         //GetComponent<CharacterMoveAB>().pointA = transform;
         //GetComponent<CharacterMoveAB>().pointB = GameObject.FindWithTag("Player").transform;
         
         StartCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
     }
-    
-    public void StopMoving(GameObject enemy)
+
+    private void StopMovingToPlayer(GameObject enemy)
     {
         sawPlayer = false;
-        //StopCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
-       _Agent.StartMoving();
+        pointA = startPoint;
     }
 
     private void Update()

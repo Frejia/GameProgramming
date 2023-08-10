@@ -17,8 +17,21 @@ public class FlyingController : MonoBehaviour
     {
         _Agent = GetComponent<AStarAgent>();
         StartCoroutine(Coroutine_MoveRandom());
+        // When enemy sees player, leave curve
+        EnemySeesPlayer.CanSee += StopMoving;
+        //EnemySeesPlayer.CantSee += StartMoving;
     }
 
+    private void StopMoving(GameObject enemy)
+    {
+        StopCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
+    }
+
+    private void StartMoving(GameObject enemy)
+    {
+        StartCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
+    }
+    
     IEnumerator Coroutine_MoveRandom()
     {
         List<Point> freePoints = WorldManager.Instance.GetFreePoints();
