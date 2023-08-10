@@ -24,19 +24,33 @@ public class FlyingController : MonoBehaviour
 
     private void StopMoving(GameObject enemy)
     {
+       // _Agent.StopMoving();
+       //Only stop the Coroutine on the Enemy Object
         StopCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
-    }
 
-    private void StartMoving(GameObject enemy)
+        sawPlayer = true;
+
+        StartCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
+    }
+    
+    public void StartMovement(GameObject enemy)
     {
+       // _Agent.StartMoving();
+       
+        StopCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
         StartCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
+       sawPlayer = false;
     }
     
     IEnumerator Coroutine_MoveRandom()
     {
         List<Point> freePoints = WorldManager.Instance.GetFreePoints();
         Point start = freePoints[Random.Range(0, freePoints.Count)];
-        transform.position = start.WorldPosition;
+        if (!sawPlayer)
+        {
+            transform.position = start.WorldPosition;
+        }
+        
         while (true)
         {
             Point p = freePoints[Random.Range(0, freePoints.Count)];

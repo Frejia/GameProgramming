@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6867069364763975726}
   - component: {fileID: 8369962702949417315}
   - component: {fileID: 418965291192143949}
+  - component: {fileID: 4097569594082339790}
   - component: {fileID: 140413197603650408}
   - component: {fileID: 2988781691130958925}
   - component: {fileID: 3054780770814687416}
@@ -41,7 +42,7 @@ Transform:
   - {fileID: 4496347054507433857}
   - {fileID: 4045761713915711694}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8369962702949417315
 MonoBehaviour:
@@ -114,6 +115,20 @@ MonoBehaviour:
   _PathCreatorPrefab: {fileID: 1904727538994722410, guid: 0a6554f7956ab1f45be8ea4773ed9d08, type: 3}
   _CornerSmooth: 1
   Status: 2
+--- !u!114 &4097569594082339790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031741032062270357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0743eac4743f6ae47af237b9ded816f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointA: {fileID: 0}
+  pointB: {fileID: 0}
 --- !u!114 &140413197603650408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,15 +142,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patterns:
-  - {fileID: 11400000, guid: a7ad596a12ba3c0418d2aff613fe94e5, type: 2}
-  - {fileID: 11400000, guid: 347bc4c9500f740428dd3ebdc50c9056, type: 2}
   - {fileID: 11400000, guid: 7d325cc2975e00d46b45d35f64f8cbf4, type: 2}
+  - {fileID: 11400000, guid: 347bc4c9500f740428dd3ebdc50c9056, type: 2}
   patternDurations: []
   useAlternateDurations: 0
   Cooldown: 0
   patternDuration: 0
   isFiring: 0
-  isPlayerClose: 1
+  isPlayerClose: 0
 --- !u!114 &2988781691130958925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +189,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 30, y: 30, z: 30}
+  m_Size: {x: 25, y: 25, z: 25}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &994254208959594653
 MonoBehaviour:
@@ -214,9 +228,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a0355fa614c2d409b15ce14f2b5e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 90
+  rotationSpeed: 120
   debug: 0
   isAimPoint: 0
+  isEnemy: 0
   target: {fileID: 0}
   isRotating: 0
 --- !u!1 &3167310554678085145
@@ -267,6 +282,7 @@ MonoBehaviour:
   rotationSpeed: 90
   debug: 0
   isAimPoint: 1
+  isEnemy: 0
   target: {fileID: 0}
   isRotating: 0
 --- !u!1 &7633087167720800783

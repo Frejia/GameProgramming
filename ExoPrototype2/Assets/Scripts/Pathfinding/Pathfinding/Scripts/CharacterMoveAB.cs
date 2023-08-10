@@ -10,9 +10,7 @@ public class CharacterMoveAB : MonoBehaviour
     AStarAgent _Agent;
     [SerializeField] public Transform pointA;
     [SerializeField] public Transform pointB;
-    private bool sawPlayer = false;
-    [SerializeField] public bool debug;
-    
+
     private void Start()
     {
         _Agent = GetComponent<AStarAgent>();

@@ -332,6 +332,7 @@ MonoBehaviour:
   rotationSpeed: 90
   debug: 0
   isAimPoint: 1
+  isEnemy: 0
   target: {fileID: 0}
   isRotating: 0
 --- !u!1 &3118574708923772650
@@ -457,6 +458,7 @@ GameObject:
   - component: {fileID: -3045109335756906155}
   - component: {fileID: -3183830924432631415}
   - component: {fileID: 7386341772623323122}
+  - component: {fileID: 7721116811140168482}
   m_Layer: 7
   m_Name: BigShip (2)
   m_TagString: Enemy
@@ -656,8 +658,23 @@ MonoBehaviour:
   rotationSpeed: 90
   debug: 0
   isAimPoint: 0
+  isEnemy: 0
   target: {fileID: 0}
   isRotating: 0
+--- !u!114 &7721116811140168482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094090093050274885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0743eac4743f6ae47af237b9ded816f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointA: {fileID: 0}
+  pointB: {fileID: 0}
 --- !u!1001 &7356172106742783822
 PrefabInstance:
   m_ObjectHideFlags: 0
