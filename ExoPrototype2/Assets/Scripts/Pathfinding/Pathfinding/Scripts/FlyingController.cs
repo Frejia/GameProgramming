@@ -21,14 +21,13 @@ public class FlyingController : MonoBehaviour
         // When enemy sees player, leave curve
        EnemySeesPlayer.CanSee += StopMovement;
         // When enemy doesnt see player, leave curve
-      // EnemySeesPlayer.CantSee += StartMovement;
+       EnemySeesPlayer.CantSee += StartMovement;
     }
 
     public void StopMovement(GameObject enemy)
     {
        // _Agent.StopMoving();
-        Debug.Log("We stop moving");
-        //Only stop the Coroutine on the Enemy Object
+       //Only stop the Coroutine on the Enemy Object
         StopCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
 
         sawPlayer = true;
@@ -38,17 +37,22 @@ public class FlyingController : MonoBehaviour
     
     public void StartMovement(GameObject enemy)
     {
-        _Agent.StartMoving();
-        Debug.Log("We start moving");
-        StartCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
+       // _Agent.StartMoving();
+       
         StopCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
+        StartCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
+       sawPlayer = false;
     }
 
     IEnumerator Coroutine_MoveRandom()
     {
         List<Point> freePoints = WorldManager.Instance.GetFreePoints();
         Point start = freePoints[Random.Range(0, freePoints.Count)];
-        transform.position = start.WorldPosition;
+        if (!sawPlayer)
+        {
+            transform.position = start.WorldPosition;
+        }
+        
         while (true)
         {
             Point p = freePoints[Random.Range(0, freePoints.Count)];
