@@ -16,7 +16,7 @@ public class ShipMovement : MonoBehaviour
     [SerializeField]
     public float pitchTorque = 1000f;
     [SerializeField]
-    private float rollTorque = 500f;
+    public float rollTorque = 500f;
     [SerializeField]
     private float thrust = 100f;
     [SerializeField]
@@ -45,15 +45,6 @@ public class ShipMovement : MonoBehaviour
     [Header("Other Settings")]
     [SerializeField] private TrailRenderer trail;
     [SerializeField] private ParticleSystem boostEffect;
-    //[SerializeField] private ParticleSystem dodgeEffect;
-    [SerializeField] private GameObject shipModel;
-    
-    //Input References
-    private InputActionAsset inputAsset;
-    private InputActionMap player;
-    private InputAction move;
-    
-    //References
     private Rigidbody rb;
     private Rotator rotator;
     
@@ -64,10 +55,6 @@ public class ShipMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //Controls
-        inputAsset = this.GetComponent<PlayerInput>().actions;
-        player = inputAsset.FindActionMap("Player");
-        
         rb = GetComponent<Rigidbody>();
         rotator = gameObject.transform.GetChild(0).GetComponent<Rotator>();
 
@@ -148,26 +135,13 @@ public class ShipMovement : MonoBehaviour
         //Strafing
         if (strafe1D > 0.1f || strafe1D < -0.1f)
         {
-            rb.AddRelativeForce(Vector3.right * strafe1D * upThrust * Time.fixedDeltaTime);
-            horizontalGlide = strafe1D + upThrust;
-            rotator.SetRotations(this.transform.rotation, Quaternion.Euler(0f, 0f, 50f), Quaternion.Euler(0f, 0f, -50f));
-            //Check if strafing left or right for rotation
-            if (strafe1D < 0f)
-            {
-                Debug.Log("Strafing Left");
-                rotator.SetRotState(RotationDirection.Left);
-            }
-            else
-            {
-                Debug.Log("Strafing Right");
-                rotator.SetRotState(RotationDirection.Right);
-            }
+            rb.AddRelativeForce(Vector3.right * strafe1D * strafeThrust * Time.fixedDeltaTime);
+            horizontalGlide = strafe1D + strafeThrust;
         }
         else
         {
             rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
             horizontalGlide *= leftRightGlideReduction;
-            rotator.SetRotState(RotationDirection.Neutral);
         }
         
     }
