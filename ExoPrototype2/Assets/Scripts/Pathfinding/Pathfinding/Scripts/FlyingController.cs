@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class FlyingController : MonoBehaviour
 {
     AStarAgent _Agent;
-    CharacterMoveAB _ABMove;
     [SerializeField] Transform _MoveToPoint;
     [SerializeField] Animator _Anim;
     [SerializeField] AnimationCurve _SpeedCurve;
@@ -17,13 +16,12 @@ public class FlyingController : MonoBehaviour
     private void Start()
     {
         _Agent = GetComponent<AStarAgent>();
-        _ABMove = GetComponent<CharacterMoveAB>();
         StartCoroutine(Coroutine_MoveRandom());
         
         // When enemy sees player, leave curve
        EnemySeesPlayer.CanSee += StopMovement;
         // When enemy doesnt see player, leave curve
-      // EnemySeesPlayer.CantSee += StartMovement;
+       EnemySeesPlayer.CantSee += StartMovement;
     }
 
     public void StopMovement(GameObject enemy)
@@ -37,7 +35,7 @@ public class FlyingController : MonoBehaviour
         GetComponent<CharacterMoveAB>().pointA = transform;
         GetComponent<CharacterMoveAB>().pointB = GameObject.FindWithTag("Player").transform;
         
-        StartCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
+       // StartCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());
     }
 
     private void Update()
