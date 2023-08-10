@@ -71,7 +71,7 @@ public class ShipMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rotator = gameObject.transform.GetChild(0).GetComponent<Rotator>();
 
-        //Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Confined;
         currentBoostAmount = maxBoostAmount;
         boostEffect.Stop();
     }

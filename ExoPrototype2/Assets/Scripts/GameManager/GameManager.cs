@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
            curvePoints.Add(point.transform.position);
        }
        
-       //noiseGen.Generate();
+       noiseGen.Generate();
        world.InitializeGrid();
 
     }
