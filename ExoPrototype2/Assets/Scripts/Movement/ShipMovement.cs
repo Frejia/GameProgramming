@@ -135,13 +135,28 @@ public class ShipMovement : MonoBehaviour
         //Strafing
         if (strafe1D > 0.1f || strafe1D < -0.1f)
         {
+           // rotator.SetRotations(this.transform.rotation, new Quaternion(0f,0f,-50f, 0), new Quaternion(0f,0f,-50f, 0));
             rb.AddRelativeForce(Vector3.right * strafe1D * strafeThrust * Time.fixedDeltaTime);
             horizontalGlide = strafe1D + strafeThrust;
+            //Check if strafe left or right
+            
+            if (strafe1D < 0)
+            {
+                //left
+                //rotator.SetRotState(RotationDirection.Left);
+            }
+            else
+            {
+                //right
+                //rotator.SetRotState(RotationDirection.Right);
+            }
+            
         }
         else
         {
             rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
             horizontalGlide *= leftRightGlideReduction;
+            //rotator.SetRotState(RotationDirection.Neutral);
         }
         
     }
