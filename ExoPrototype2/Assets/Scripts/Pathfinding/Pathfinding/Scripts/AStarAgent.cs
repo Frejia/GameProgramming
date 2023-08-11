@@ -41,7 +41,7 @@ public class AStarAgent : MonoBehaviour
 
     private void Start()
     {
-        SetStationaryPoint();
+      //  SetStationaryPoint();
     }
 
     private void AssignPriority()
