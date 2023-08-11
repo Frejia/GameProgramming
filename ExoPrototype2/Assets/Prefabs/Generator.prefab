@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 8130311632000144823}
   - component: {fileID: 3504717539879821456}
   - component: {fileID: 9006462515524201356}
-  - component: {fileID: 4426141446794911696}
-  - component: {fileID: 7338213649789261094}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -35,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 4306549516320672159}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8130311632000144823
 MonoBehaviour:
@@ -71,8 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   world: {fileID: 8130311632000144823}
   noiseGen: {fileID: 9006462515524201356}
-  waypoints: []
-  curvePoints: []
 --- !u!114 &9006462515524201356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,85 +81,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bff75741f3105a42acd196f2fc9e90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceMode: 0
-  pathradius: 10
   seed: 5
   blockPrefab: {fileID: 972872127806296861, guid: 187a520740ebcae4c8508c9fba2499d9, type: 3}
   chunkSize: 50
-  chunkSizeZ: 50
   noiseScale: 0.06
   threshold: 0.5
   material: {fileID: 2100000, guid: 83889960e2f8d0b4aa561d30b84ea46a, type: 2}
   sphere: 0
   collider: 1
-  interpolatedPoints: []
-  waypoints: []
---- !u!114 &4426141446794911696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946016429249933038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33b54c8f3fa035d46ade1b3e0032f367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab1: {fileID: 6618891251029887762, guid: eec2c9ea88f42bf4db5a09930536664f, type: 3}
-  playerPrefab2: {fileID: 6618891251029887762, guid: c0ac4cff99235024fb4133337a9a34cd, type: 3}
-  startingPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  playerLayers:
-  - serializedVersion: 2
-    m_Bits: 256
-  - serializedVersion: 2
-    m_Bits: 8192
---- !u!114 &7338213649789261094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946016429249933038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotificationBehavior: 3
-  m_MaxPlayerCount: 2
-  m_AllowJoining: 1
-  m_JoinBehavior: 1
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Join
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: a59ce651-b204-419d-9ee1-89ec73e72827
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -5056734938651751873, guid: 4c62221540d573c4eb1f2a01c7d0b00d, type: 3}
-  m_PlayerPrefab: {fileID: 6618891251029887762, guid: c0ac4cff99235024fb4133337a9a34cd, type: 3}
-  m_SplitScreen: 1
-  m_MaintainAspectRatioInSplitScreen: 0
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!1001 &2460571568837965606
 PrefabInstance:
   m_ObjectHideFlags: 0
