@@ -32,7 +32,18 @@ public class Rotator : MonoBehaviour
     [SerializeField] private Transform target;
     
     [SerializeField] private bool isRotating = false;
+     
     
+
+    
+    /* TODO: Rotations-Vektor für links und rechts als Variable speichern
+     * Neutralen Rotationsvektor speichern
+     * Mittels Switch-Case die Rotationen durchführen
+     * Sonderfälle: nicht rotieren wenn:
+     *      Spieler drückt und maximaler Winkel erreicht ist
+     *      Spieler drückt nicht und neutraler Winkel erreicht ist
+     */
+
     private void OnEnable()
     {
         EnemySeesPlayer.CanSee += FaceToTurn;

@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Enemy
   - Bullet
-  - Player2
   layers:
   - Default
   - TransparentFX
@@ -20,8 +19,8 @@ TagManager:
   - Bullet
   - WallVision
   - 
-  - Player1
-  - Player2
+  - 
+  - 
   - 
   - 
   - 
