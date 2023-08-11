@@ -40,7 +40,7 @@ public class SoundLibrary : MonoBehaviour
         FileInfo[] info = dir.GetFiles("*.mp3");
         foreach (FileInfo f in info)
         {
-            Debug.Log(f.Name);
+            // How do I make them into AudioClips???
         }
         PlayMusic(2);
         //TODO: implement Method that displays all audio files in the directory

@@ -157,16 +157,22 @@ public class Rotator : MonoBehaviour
     {
         if (isAimPoint)
         {
-            float distanceToPlayer1 = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
-            float distanceToPlayer2 = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player2").transform.position);
-
-            if (distanceToPlayer1 < distanceToPlayer2)
+            if (GameObject.FindGameObjectWithTag("Player2"))
             {
-                FaceToTurn(this.gameObject, GameObject.FindGameObjectWithTag("Player"));
+                float distanceToPlayer1 = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
+                float distanceToPlayer2 = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player2").transform.position);
+                if (distanceToPlayer1 < distanceToPlayer2)
+                {
+                    FaceToTurn(this.gameObject, GameObject.FindGameObjectWithTag("Player"));
+                }
+                else
+                {
+                    FaceToTurn(this.gameObject, GameObject.FindGameObjectWithTag("Player2"));
+                }
             }
             else
             {
-                FaceToTurn(this.gameObject, GameObject.FindGameObjectWithTag("Player2"));
+                FaceToTurn(this.gameObject, GameObject.FindGameObjectWithTag("Player"));
             }
         }
     }

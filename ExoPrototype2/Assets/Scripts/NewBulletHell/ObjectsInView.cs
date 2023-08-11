@@ -33,18 +33,20 @@ public class ObjectsInView : MonoBehaviour
             {
                 Debug.Log(gameObject.name + " is visible");
                // renderer.material.color = Color.green;
+               if(OnEnemyNotInScreen != null)
                 OnEnemyInScreen(this.gameObject);
             }
             else
             {
                 //renderer.material.color = Color.red;
-                OnEnemyNotInScreen(gameObject);
+                if(OnEnemyNotInScreen != null)
+                OnEnemyNotInScreen(this.gameObject);
             }
         }
         else
         {
             //renderer.material.color = Color.red;
-            OnEnemyNotInScreen(gameObject);
+            OnEnemyNotInScreen(this.gameObject);
         }
     }
 
