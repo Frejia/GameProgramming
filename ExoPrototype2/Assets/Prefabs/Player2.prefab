@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5568847221026081941}
   - component: {fileID: 3188234736131992764}
   - component: {fileID: 5927987800682778676}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Tunnel 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7663740237822656269}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386960306323821992}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: FirepointBelow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6306983506958052179}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: FirepointFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 7824196561223190227}
   - component: {fileID: 8235954063432267176}
   - component: {fileID: 8361660010669685046}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: ShipModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,6 +301,7 @@ MonoBehaviour:
   rotationSpeed: 90
   debug: 0
   isAimPoint: 0
+  isEnemy: 0
   target: {fileID: 0}
   isRotating: 0
 --- !u!1 &3734082931151216291
@@ -315,7 +316,7 @@ GameObject:
   - component: {fileID: 3371125916034360867}
   - component: {fileID: 9060048509960967583}
   - component: {fileID: 7475470983079929545}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +398,7 @@ GameObject:
   - component: {fileID: 1007315778312351904}
   - component: {fileID: 3523475539169446401}
   - component: {fileID: 5328401432715497748}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Tunnel 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5339853948549076405}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: ShipLookTarget
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -512,7 +513,7 @@ GameObject:
   - component: {fileID: 5966615749092774860}
   - component: {fileID: 5210958983074549401}
   - component: {fileID: 237276548544925055}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Tunnel 2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1203378953982238121}
   - component: {fileID: 8778749049554185356}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Virtual Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -670,13 +671,13 @@ GameObject:
   - component: {fileID: 7423957822297307510}
   - component: {fileID: 2737012132468051431}
   - component: {fileID: 1940164731197101937}
-  - component: {fileID: 6824005594536758395}
   - component: {fileID: 9004116030529150478}
   - component: {fileID: 6654847064216521313}
   - component: {fileID: 2517382678478331056}
-  m_Layer: 8
-  m_Name: NewShipMove
-  m_TagString: Player
+  - component: {fileID: 6824005594536758395}
+  m_Layer: 13
+  m_Name: Player2
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -696,6 +697,7 @@ Transform:
   - {fileID: 3358529140782851210}
   - {fileID: 546864289784438181}
   - {fileID: 830888962916935247}
+  - {fileID: 3098189439946958764}
   - {fileID: 1203378953982238121}
   - {fileID: 5339853948549076405}
   - {fileID: 7663740237822656269}
@@ -718,8 +720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ede41471347a7540a4ec16603924d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yawTorque: 10
-  pitchTorque: 10
+  yawTorque: 50
+  pitchTorque: 50
   rollTorque: 100
   thrust: 100
   upThrust: 50
@@ -802,6 +804,53 @@ MonoBehaviour:
   firePointFront: {fileID: 6306983506958052179}
   firePointBelow: {fileID: 1386960306323821992}
   isFiring: 0
+--- !u!114 &9004116030529150478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618891251029887762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614b34d077fd1ef4a97841ded934aa0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activebulletPattern: 0
+  fireRate: 0
+  isAiming: 0
+  bulletsAmount: 0
+  bulDir: {x: 0, y: 0, z: 0}
+  bulletSpeed: 0
+  startAngle: 0
+  endAngle: 0
+--- !u!114 &6654847064216521313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618891251029887762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45f92d5f1c83514898f950f33802953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+--- !u!114 &2517382678478331056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618891251029887762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0790248cce381ca46bb5a81836ec0982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &6824005594536758395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,58 +1020,187 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2e6a375a-d8ec-4fc3-8c66-c101b024dde9
     m_ActionName: Ship/Boost[/Keyboard/shift]
-  m_NeverAutoSwitchControlSchemes: 0
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 774738e9-751d-4f49-a508-41eebf1f32c2
+    m_ActionName: Ship/Join[/Keyboard/enter,/XInputControllerWindows/select]
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Ship
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &9004116030529150478
+  m_Camera: {fileID: 5055405931728112979}
+--- !u!1 &6974394287730145782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3098189439946958764}
+  - component: {fileID: 5055405931728112979}
+  - component: {fileID: 6447561203780370565}
+  - component: {fileID: 1693649303271472807}
+  - component: {fileID: 7841577062152633021}
+  m_Layer: 13
+  m_Name: Player Cam
+  m_TagString: Player2
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3098189439946958764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974394287730145782}
+  m_LocalRotation: {x: 0.13052598, y: -0, z: -0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 2.2440076, z: -4.198324}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6698166929898196515}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &5055405931728112979
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974394287730145782}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 20.78461
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60.000004
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &6447561203780370565
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974394287730145782}
+  m_Enabled: 1
+--- !u!114 &1693649303271472807
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6618891251029887762}
+  m_GameObject: {fileID: 6974394287730145782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614b34d077fd1ef4a97841ded934aa0a, type: 3}
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activebulletPattern: 0
-  fireRate: 0
-  isAiming: 0
-  bulletsAmount: 0
-  bulDir: {x: 0, y: 0, z: 0}
-  bulletSpeed: 0
-  startAngle: 0
-  endAngle: 0
---- !u!114 &6654847064216521313
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
+--- !u!114 &7841577062152633021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6618891251029887762}
+  m_GameObject: {fileID: 6974394287730145782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45f92d5f1c83514898f950f33802953, type: 3}
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
---- !u!114 &2517382678478331056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6618891251029887762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0790248cce381ca46bb5a81836ec0982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7030953307377810474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,7 +1210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1123480313762272079}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Speed (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1067,7 +1245,7 @@ GameObject:
   - component: {fileID: 1529141092589094988}
   - component: {fileID: 8544716446809565258}
   - component: {fileID: 6663121737133912517}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Tunnel 2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,7 +1329,7 @@ GameObject:
   - component: {fileID: 5822890122483942579}
   - component: {fileID: 5298954196183292357}
   - component: {fileID: 1731663569433012665}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1298,7 +1476,7 @@ GameObject:
   - component: {fileID: 7675926925585017776}
   - component: {fileID: 7957076428846592320}
   - component: {fileID: 5773683105253706734}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1403,9 +1581,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a0355fa614c2d409b15ce14f2b5e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 90
+  rotationSpeed: 200
   debug: 0
   isAimPoint: 0
+  isEnemy: 0
   target: {fileID: 0}
   isRotating: 0
 --- !u!1 &8922669506935938958
@@ -1418,7 +1597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8578889316038800731}
   - component: {fileID: 4494029901683043878}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,6 +1778,10 @@ PrefabInstance:
     - target: {fileID: 4414403498479487740, guid: 39c9e67e7c4a4554bb77b06e8b9fc76c, type: 3}
       propertyPath: m_Name
       value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414403498479487740, guid: 39c9e67e7c4a4554bb77b06e8b9fc76c, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8219118691381404313, guid: 39c9e67e7c4a4554bb77b06e8b9fc76c, type: 3}
       propertyPath: looping
