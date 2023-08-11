@@ -1933,15 +1933,19 @@ PrefabInstance:
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: material
       value: 
-      objectReference: {fileID: 2100000, guid: a5445044af56bb44397f7ac6d570f792, type: 2}
+      objectReference: {fileID: 2100000, guid: d0042bf4e5f26cd4d9a3199739a645f5, type: 2}
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: chunkSize
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: chunkSizeZ
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+      propertyPath: blockPrefab
+      value: 
+      objectReference: {fileID: 6132341726960378613, guid: f4b9e88c20508324cbcc07b034e8a479, type: 3}
     - target: {fileID: 9006462515524201356, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: waypoints.Array.size
       value: 7
@@ -2163,7 +2167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1419520441
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3138,6 +3142,10 @@ PrefabInstance:
     - target: {fileID: 4351588005973083303, guid: 7d62ec81e68a80c45847cc6a40f96cfc, type: 3}
       propertyPath: m_Name
       value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351588005973083303, guid: 7d62ec81e68a80c45847cc6a40f96cfc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
