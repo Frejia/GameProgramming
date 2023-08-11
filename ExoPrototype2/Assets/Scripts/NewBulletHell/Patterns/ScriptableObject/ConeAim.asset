@@ -16,7 +16,7 @@ MonoBehaviour:
   patternDuration: 3
   patternName: ConeAim
   patternType: 2
-  bulletBehaviour: 4
+  bulletBehaviour: 0
   bulletAmount: 10
   startAngle: -30
   endAngle: 30

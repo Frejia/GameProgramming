@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baaf3eb4ab1222449a1064990f9a90a6, type: 3}
   m_Name: Spiral
   m_EditorClassIdentifier: 
-  Cooldown: 0
-  patternDuration: 0
-  patternName: 
-  patternType: 0
+  Cooldown: 3
+  patternDuration: 3
+  patternName: Spiral
+  patternType: 5
   bulletBehaviour: 0
-  bulletAmount: 0
-  startAngle: 0
-  endAngle: 0
-  FireRate: 0
-  BulletSpeed: 10
-  isAiming: 0
+  bulletAmount: 10
+  startAngle: -10
+  endAngle: 10
+  FireRate: 0.5
+  BulletSpeed: 20
+  isAiming: 1
   direction: {x: 0, y: 0}

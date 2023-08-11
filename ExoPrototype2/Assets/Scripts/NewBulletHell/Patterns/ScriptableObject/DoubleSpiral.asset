@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cooldown: 0
   patternDuration: 0
-  patternName: 
-  patternType: 0
+  patternName: Double Spiral
+  patternType: 6
   bulletBehaviour: 0
-  bulletAmount: 0
-  startAngle: 0
-  endAngle: 0
-  FireRate: 0
-  BulletSpeed: 10
-  isAiming: 0
+  bulletAmount: 5
+  startAngle: -10
+  endAngle: 10
+  FireRate: 0.2
+  BulletSpeed: 20
+  isAiming: 1
   direction: {x: 0, y: 0}
