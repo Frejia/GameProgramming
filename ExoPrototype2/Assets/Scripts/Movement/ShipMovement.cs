@@ -44,7 +44,7 @@ public class ShipMovement : MonoBehaviour
 
     [Header("Other Settings")]
     [SerializeField] private TrailRenderer trail;
-    //[SerializeField] private ParticleSystem boostEffect;
+    [SerializeField] private ParticleSystem boostEffect;
     private Rigidbody rb;
     private Rotator rotator;
     
@@ -60,7 +60,7 @@ public class ShipMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         currentBoostAmount = maxBoostAmount;
-       // boostEffect.Stop();
+       boostEffect.Stop();
     }
 
     // Update is called once per frame
@@ -104,12 +104,12 @@ public class ShipMovement : MonoBehaviour
             float currentThrust;
             if (boosting)
             {
-               // boostEffect.Play();
+                boostEffect.Play();
                 currentThrust = thrust * boostMultiplier;
             }
             else
             { 
-               // boostEffect.Stop();
+                boostEffect.Stop();
                 currentThrust = thrust;
             }
 
