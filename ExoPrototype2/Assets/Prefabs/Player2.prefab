@@ -8,57 +8,61 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 460298792505860444, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: m_Time
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 806394677995061163, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: m_Time
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1203378953982238121, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.244008
+      value: 2.2440076
       objectReference: {fileID: 0}
     - target: {fileID: 1203378953982238121, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.1983223
+      value: -4.198325
       objectReference: {fileID: 0}
-    - target: {fileID: 3098189439946958764, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.244008
-      objectReference: {fileID: 0}
-    - target: {fileID: 3098189439946958764, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.1983223
-      objectReference: {fileID: 0}
-    - target: {fileID: 3544118986570864159, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: trail
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: musicAudioSource
       value: 
-      objectReference: {fileID: 2473895690411393399}
-    - target: {fileID: 3544118986570864159, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: upThrust
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 3544118986570864159, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: yawTorque
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 3544118986570864159, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: rollTorque
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 3544118986570864159, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: boostEffect
+      objectReference: {fileID: 5508254485628788495}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: playerBulletAudioSource
       value: 
-      objectReference: {fileID: 5103583302442334829}
-    - target: {fileID: 3544118986570864159, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: pitchTorque
-      value: 500
+      objectReference: {fileID: 411115529157636434}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.size
+      value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 3544118986570864159, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: strafeThrust
-      value: 300
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a9aefed0945cdcf4cbb5614799d791ae, type: 3}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ec1c6f0e2e0648a49bb4b915f0b6e82f, type: 3}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 705ca6100f27fc7469c0cc0dc500cdc2, type: 3}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2bc310ed44e33f148ba2ebd2b5bbcdbe, type: 3}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5f2f5e4d84d2b494b9210fc1ed76acf1, type: 3}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: b81b6cd5f4aefdb4d8a5d6ec78d5d1e9, type: 3}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 73814498f40d16b49acc51159b281ffb, type: 3}
+    - target: {fileID: 1731663569433012665, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: EffectaudioClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3885d67e57f90df4f894a6c58ee2ca17, type: 3}
+    - target: {fileID: 5298954196183292357, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: m_Volume
+      value: 0.137
       objectReference: {fileID: 0}
     - target: {fileID: 6618891251029887762, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_Name
@@ -70,15 +74,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6698166929898196515, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.578802
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6698166929898196515, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.476535
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6698166929898196515, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -42.081875
+      value: -8.88
       objectReference: {fileID: 0}
     - target: {fileID: 6698166929898196515, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_LocalRotation.w
@@ -108,34 +112,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6824005594536758395, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
-      value: 9c1ae263-9d91-4a8b-9263-dbc6cab46886
-      objectReference: {fileID: 0}
-    - target: {fileID: 6824005594536758395, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
-      value: Ship/Join[/Keyboard/enter]
-      objectReference: {fileID: 0}
-    - target: {fileID: 6824005594536758395, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnRoll
-      objectReference: {fileID: 0}
-    - target: {fileID: 6974394287730145782, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
---- !u!96 &2473895690411393399 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 806394677995061163, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+--- !u!82 &411115529157636434 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3229498537895530382, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
   m_PrefabInstance: {fileID: 2983046145128693468}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &5103583302442334829 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8049754782355604657, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+--- !u!82 &5508254485628788495 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7283632243034382803, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
   m_PrefabInstance: {fileID: 2983046145128693468}
   m_PrefabAsset: {fileID: 0}

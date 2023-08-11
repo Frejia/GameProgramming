@@ -102,7 +102,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AdditionalPower: 38.36
+    - _AdditionalPower: 41.75
     - _AlphaClip: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
@@ -134,11 +134,11 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NoiseScale: 7.8
+    - _NoiseScale: 3.77
     - _OcclusionStrength: 1
     - _OpaqueCullMode: 2
     - _Parallax: 0.005
-    - _PushOut: 4.34
+    - _PushOut: 57.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RayTracing: 0

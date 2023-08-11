@@ -41,6 +41,9 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] private float boostDepracationRate = 0.1f;
     [SerializeField] private float boostRechargeRate = 0.15f;
     [SerializeField] private float boostMultiplier = 10f;
+    
+    public delegate void Boost(int i);
+    public static event Boost boostInit;
 
     [Header("Other Settings")]
     [SerializeField] private TrailRenderer trail;
@@ -105,6 +108,7 @@ public class ShipMovement : MonoBehaviour
             if (boosting)
             {
                 boostEffect.Play();
+                boostInit(3);
                 currentThrust = thrust * boostMultiplier;
             }
             else
@@ -184,6 +188,7 @@ public class ShipMovement : MonoBehaviour
     }
     public void OnBoost(InputAction.CallbackContext context)
     {
+        
         boosting = context.performed;
     }
     #endregion

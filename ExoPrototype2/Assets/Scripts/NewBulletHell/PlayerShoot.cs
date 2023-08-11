@@ -22,9 +22,8 @@ public class PlayerShoot : MonoBehaviour
     private bool playerClose = true;
 
     private PatternManager patternManager;
-    public delegate void Shoot();
+    public delegate void Shoot(int i);
     public static event Shoot Shot;
-    public static event Shoot ShotSpecial;
 
     // Start is called before the first frame update
     void Start()
@@ -70,9 +69,10 @@ public class PlayerShoot : MonoBehaviour
          isFiring = true;
          if (shot == 0)
          {
-             Shot();
+             Shot(0);
              // Straight Pattern Example
-             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 1,1, 1f, false, 1, 10f);
+             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, false, 1, 10f);
+
              /*GameObject bul = BulletPool.Instance.GetBulletPlayer();
              bul.transform.position = this.gameObject.transform.position;
              bul.transform.rotation = this.gameObject.transform.rotation;
@@ -84,13 +84,14 @@ public class PlayerShoot : MonoBehaviour
          else if(shot == 1)
          {
              // Cone Pattern Example
-             ShotSpecial();
-             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 2f, false, 10, 10f);
+             Shot(1);
+             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 2f, true, 10, 10f);
          }
          else
          {
              // Circle Pattern Example
-             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Circle, BulletBehaviour.BulletBehaviours.None, 0,360, 2f, false, 20, 10f);
+             Shot(2);
+             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Circle, BulletBehaviour.BulletBehaviours.None, 0,360, 2f, true, 20, 10f);
          }
          
          yield return new WaitForSeconds(0.3f);

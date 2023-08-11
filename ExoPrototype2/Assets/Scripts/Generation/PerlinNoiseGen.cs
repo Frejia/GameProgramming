@@ -153,7 +153,7 @@ public class PerlinNoiseGen : MonoBehaviour
             MeshFilter mf = g.AddComponent<MeshFilter>();//add mesh component
             MeshRenderer mr = g.AddComponent<MeshRenderer>();//add mesh renderer component
             mr.material = material;//set material to avoid evil pinkness of missing texture
-            mr.transform.localScale = new Vector3(3,3,3);//scale up the mesh so it's visible
+            mr.transform.localScale = new Vector3(5,5,5);//scale up the mesh so it's visible
             mf.mesh.CombineMeshes(data.ToArray());//set mesh to the combination of all of the blocks in the list
             mf.GameObject().layer = 3;//set layer to "Terrain
             meshes.Add(mf.mesh);//keep track of mesh so we can destroy it when it's no longer needed

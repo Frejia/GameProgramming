@@ -70,15 +70,15 @@ public class PatternManager : MonoBehaviour
                 break;
             case BulletPatternEnum.BulletPatternsEnum.Circle:
                 //Can Aim
-                Invoke("ConeCircle", 0f);
+                InvokeRepeating("ConeCircle", 0f, fireRate);
                 break;
             case BulletPatternEnum.BulletPatternsEnum.Cone:
                 //Can Aim
-                Invoke("ConeCircle", 0f);
+                InvokeRepeating("ConeCircle", 0f, fireRate);
                 break;
             case BulletPatternEnum.BulletPatternsEnum.Straight:
                 //Can Aim
-                InvokeRepeating("ConeCircle", 0f, fireRate);
+                InvokeRepeating("Straight", 0f, fireRate);
                 break;
             case BulletPatternEnum.BulletPatternsEnum.Spiral:
                 //Cannot Aim
@@ -101,6 +101,28 @@ public class PatternManager : MonoBehaviour
         }
     }
 
+    private void Straight()
+    {
+        Vector3 bulDir = AimInstance.Aiming();
+        
+        float angle = (float)Math.Atan2(bulDir.y - transform.position.y,
+            bulDir.x - transform.position.x);
+        for (int i = 0; i <= bulletsAmount; i++)
+        {
+            float bulDirX = transform.position.x + Mathf.Cos(angle) * 10;
+            float bulDirY = transform.position.y + Mathf.Sin(angle) * 10;
+            Vector3 bulMoveVector = new Vector3(bulDirX, bulDirY, 0f);
+             bulDir = (bulMoveVector - transform.position).normalized;
+            GameObject bul = GetCorrectBullet();
+            bul.transform.position = transform.position;
+            bul.SetActive(true);
+            bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+            bul.GetComponent<Bullet>().SetDirection(bulDir);
+            bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
+
+        }
+    }
+    
     private void ConeCircle()
     {
         Debug.Log("Cone Pattern");
@@ -178,7 +200,7 @@ public class PatternManager : MonoBehaviour
                 Vector3 position = rotation * new Vector3(xPosition, yPosition, 0f) + transform.position;
                 ;
 
-                GameObject bul = BulletPool.Instance.GetBulletEnemy();
+                GameObject bul = GetCorrectBullet();
                 bul.transform.position = position;
                 bul.transform.rotation = transform.rotation;
                 bul.SetActive(true);
@@ -208,7 +230,7 @@ public class PatternManager : MonoBehaviour
                 Vector3 bulMoveVector = new Vector3(bulDirX, bulDirZ, 0f);
                 bulDir = (bulMoveVector - transform.position).normalized;
 
-                GameObject bul = BulletPool.Instance.GetBulletEnemy();
+                GameObject bul = GetCorrectBullet();
                 bul.transform.position = transform.position;
                 bul.SetActive(true);
                 bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
@@ -231,7 +253,7 @@ public class PatternManager : MonoBehaviour
         Vector3 bulMoveVector = new Vector3(bulDirX, bulDir.y, bulDirZ);
         bulDir = (bulMoveVector - transform.position).normalized;
 
-        GameObject bul = BulletPool.Instance.GetBulletEnemy();
+        GameObject bul = GetCorrectBullet();
         bul.transform.position = transform.position;
         bul.transform.rotation = transform.rotation;
         bul.SetActive(true);
@@ -254,7 +276,7 @@ public class PatternManager : MonoBehaviour
             Vector3 bulMoveVector = new Vector3(bulDirX, bulDir.y, bulDirZ);
             bulDir = (bulMoveVector - transform.position).normalized;
 
-            GameObject bul = BulletPool.Instance.GetBulletEnemy();
+            GameObject bul = GetCorrectBullet();
             bul.transform.position = transform.position;
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
@@ -289,7 +311,7 @@ public class PatternManager : MonoBehaviour
             bulDir = new Vector3(rotatedX, bulDir.y, rotatedZ);
 
             // Spawn and set direction for the bullet
-            GameObject bul = BulletPool.Instance.GetBulletEnemy();
+            GameObject bul = GetCorrectBullet();
             bul.transform.position = transform.position;
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
