@@ -17,10 +17,10 @@ MonoBehaviour:
   patternName: Pyramid
   patternType: 7
   bulletBehaviour: 0
-  bulletAmount: 10
-  startAngle: -10
+  bulletAmount: 20
+  startAngle: 20
   endAngle: 10
-  FireRate: 0.5
+  FireRate: 0.1
   BulletSpeed: 20
   isAiming: 1
   direction: {x: 0, y: 0}

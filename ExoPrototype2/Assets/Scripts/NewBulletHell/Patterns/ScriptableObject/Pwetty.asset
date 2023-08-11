@@ -17,10 +17,10 @@ MonoBehaviour:
   patternName: Pwetty
   patternType: 8
   bulletBehaviour: 0
-  bulletAmount: 20
+  bulletAmount: 2
   startAngle: -10
-  endAngle: 10
-  FireRate: 0.2
-  BulletSpeed: 20
+  endAngle: 360
+  FireRate: 0.4
+  BulletSpeed: 10
   isAiming: 1
   direction: {x: 0, y: 0}

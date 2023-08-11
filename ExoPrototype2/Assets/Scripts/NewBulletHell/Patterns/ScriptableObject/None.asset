@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baaf3eb4ab1222449a1064990f9a90a6, type: 3}
   m_Name: None
   m_EditorClassIdentifier: 
-  Cooldown: 0
-  patternDuration: 0
+  Cooldown: 3
+  patternDuration: 3
   patternName: 
   patternType: 0
   bulletBehaviour: 0
