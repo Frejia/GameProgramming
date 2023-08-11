@@ -32,26 +32,15 @@ public class Rotator : MonoBehaviour
     [SerializeField] private Transform target;
     
     [SerializeField] private bool isRotating = false;
-     
-    
-
-    
-    /* TODO: Rotations-Vektor für links und rechts als Variable speichern
-     * Neutralen Rotationsvektor speichern
-     * Mittels Switch-Case die Rotationen durchführen
-     * Sonderfälle: nicht rotieren wenn:
-     *      Spieler drückt und maximaler Winkel erreicht ist
-     *      Spieler drückt nicht und neutraler Winkel erreicht ist
-     */
 
     private void OnEnable()
     {
-        EnemySeesPlayer.CanSee += FaceToTurn;
+        EnemySeesPlayer.GoFindPlayer += FaceToTurn;
     }
     
     private void OnDisable()
     {
-        EnemySeesPlayer.CanSee -= FaceToTurn;
+        EnemySeesPlayer.GoFindPlayer -= FaceToTurn;
     }
 
     private void Start()
@@ -112,9 +101,9 @@ public class Rotator : MonoBehaviour
         }
     }
     
-    private void FaceToTurn(GameObject enemy)
+    private void FaceToTurn(GameObject enemy, GameObject player)
     {
-        target = GameObject.FindWithTag("Player").transform;
+        target = player.transform;
         enemy.GetComponent<Rotator>().isEnemy = true;
         if (this.gameObject.tag == "Enemy" && isEnemy)
         {
@@ -168,7 +157,17 @@ public class Rotator : MonoBehaviour
     {
         if (isAimPoint)
         {
-            FaceToTurn(this.gameObject);
+            float distanceToPlayer1 = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
+            float distanceToPlayer2 = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player2").transform.position);
+
+            if (distanceToPlayer1 < distanceToPlayer2)
+            {
+                FaceToTurn(this.gameObject, GameObject.FindGameObjectWithTag("Player"));
+            }
+            else
+            {
+                FaceToTurn(this.gameObject, GameObject.FindGameObjectWithTag("Player2"));
+            }
         }
     }
 

@@ -16,12 +16,17 @@ public class CharacterMoveAB : MonoBehaviour
         _Agent = GetComponent<AStarAgent>();
         //transform.position = pointA.position;
         //StartCoroutine(Coroutine_MoveAB());
+        EnemySeesPlayer.GoFindPlayer += UpdatePlayer;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         pointA = player.transform;
         pointB = player.transform.GetChild(player.transform.childCount - 1);
     }
 
-    private Transform startPoint;
+    private void UpdatePlayer(GameObject enemy, GameObject player)
+    {
+        enemy.GetComponent<CharacterMoveAB>().pointA = player.transform;
+        enemy.GetComponent<CharacterMoveAB>().pointB = player.transform.GetChild(player.transform.childCount - 1);
+    }
 
     public IEnumerator Coroutine_MoveAB()
     {
