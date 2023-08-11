@@ -12,9 +12,8 @@ public class ShipMovement : MonoBehaviour
 
     [Header("Ship Movement Settings")] 
     [SerializeField]
-    private float yawTorque = 500f;
-    [SerializeField]
-    private float pitchTorque = 1000f;
+    public float yawTorque = 500f;
+    [SerializeField] public float pitchTorque = 1000f;
     [SerializeField]
     public float rollTorque = 500f;
     [SerializeField]
