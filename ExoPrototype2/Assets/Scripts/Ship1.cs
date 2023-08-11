@@ -110,7 +110,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Join"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""9c1ae263-9d91-4a8b-9263-dbc6cab46886"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
