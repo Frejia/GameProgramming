@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4779713994684063579}
   - component: {fileID: 4137602914672492537}
-  - component: {fileID: 3150771778408655254}
   - component: {fileID: 5219574315121875628}
   - component: {fileID: 475794696104855197}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player2 Cam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -66,7 +65,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60.000004
   orthographic: 0
@@ -86,14 +85,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3150771778408655254
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4587892527063637910}
-  m_Enabled: 1
 --- !u!114 &5219574315121875628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +108,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -276,6 +267,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 4700564430129391693, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.2440076
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700564430129391693, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.198325
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715841091623997002, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: m_Name
+      value: ShipLookTarget2
+      objectReference: {fileID: 0}
     - target: {fileID: 4715841091623997002, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -356,6 +359,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 4137602914672492537}
+    - target: {fileID: 6874969679822756695, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6974394287730145782, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_Name
       value: Player2Cam
@@ -388,6 +395,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 8778749049554185356, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: m_Lens.NearClipPlane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8834903559024330105, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -395,6 +406,10 @@ PrefabInstance:
     - target: {fileID: 8922669506935938958, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9060048509960967583, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: IgnoreTag
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9067694005033486924, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_Layer
@@ -407,6 +422,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6974394287730145782, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+    - {fileID: 3289877267383696995, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6698166929898196515, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       insertIndex: 3

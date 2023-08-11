@@ -133,24 +133,15 @@ GameObject:
   m_Component:
   - component: {fileID: 85497560}
   - component: {fileID: 85497559}
-  - component: {fileID: 85497558}
   - component: {fileID: 85497562}
   - component: {fileID: 85497561}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player1 Cam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &85497558
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85497557}
-  m_Enabled: 1
 --- !u!20 &85497559
 Camera:
   m_ObjectHideFlags: 0
@@ -274,7 +265,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -636,15 +627,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6824005594536758395, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard
+      objectReference: {fileID: 0}
     - target: {fileID: 6974394287730145782, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6974394287730145782, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6698166929898196515, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
-      insertIndex: 4
+      insertIndex: 3
       addedObject: {fileID: 85497560}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
