@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Bullet : MonoBehaviour
 {
@@ -17,10 +18,12 @@ public class Bullet : MonoBehaviour
     [SerializeField, Range(10, 20)] private int _damage = 10;
 
     [SerializeField] public bool _isEnemyBullet = false;
+    
+    private GameObject attacker;
 
-    public int GetDamage()
+    public void SetUser(GameObject user)
     {
-        return _damage;
+        attacker = user;
     }
 
     private void Awake()
@@ -49,11 +52,13 @@ public class Bullet : MonoBehaviour
     
     private void Destroy()
     {
+        attacker = null;
         gameObject.SetActive(false);
     }
     
     private void OnDisable()
     {
+        attacker = null;
         CancelInvoke();
     }
 
@@ -67,7 +72,8 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
         {
-            other.GetComponent<Health>().GetsHit(_damage);
+            other.GetComponent<Health>().GetsHit(_damage, attacker);
+            
             impactEffect.Play();
             StartCoroutine(WaitForParticleSystem());
             speed = 0f;

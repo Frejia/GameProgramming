@@ -118,8 +118,9 @@ public class PatternManager : MonoBehaviour
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
+            bul.GetComponent<Bullet>().SetUser(this.gameObject);
             bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
-
+        
         }
     }
     
@@ -155,6 +156,7 @@ public class PatternManager : MonoBehaviour
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
+            bul.GetComponent<Bullet>().SetUser(this.gameObject);
             bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
             
             angle += angleStep;
@@ -205,6 +207,7 @@ public class PatternManager : MonoBehaviour
                 bul.transform.rotation = transform.rotation;
                 bul.SetActive(true);
                 bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+                bul.GetComponent<Bullet>().SetUser(this.gameObject);
                 bul.GetComponent<Bullet>().SetDirection((position - transform.position).normalized);
                 bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
 
@@ -234,6 +237,7 @@ public class PatternManager : MonoBehaviour
                 bul.transform.position = transform.position;
                 bul.SetActive(true);
                 bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+                bul.GetComponent<Bullet>().SetUser(this.gameObject);
                 bul.GetComponent<Bullet>().SetDirection(bulDir);
                 bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
                 angle = (float)(angle - Mathf.PI / 2f);
@@ -258,6 +262,7 @@ public class PatternManager : MonoBehaviour
         bul.transform.rotation = transform.rotation;
         bul.SetActive(true);
         bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+        bul.GetComponent<Bullet>().SetUser(this.gameObject);
         bul.GetComponent<Bullet>().SetDirection(bulDir);
 
         angle1 += 10f;
@@ -280,6 +285,7 @@ public class PatternManager : MonoBehaviour
             bul.transform.position = transform.position;
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+            bul.GetComponent<Bullet>().SetUser(this.gameObject);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
         }
 
@@ -316,6 +322,7 @@ public class PatternManager : MonoBehaviour
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+            bul.GetComponent<Bullet>().SetUser(this.gameObject);
             bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(BulletHell.BulletBehaviour.BulletBehaviours.SineCurve, bulDir);
 
             angle += angleStep;

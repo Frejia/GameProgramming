@@ -6032,7 +6032,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7342424952241428825}
+  - {fileID: 8710097249138998354}
   - {fileID: 4041868288596461015}
   - {fileID: 5851301234240338395}
   - {fileID: 6018968295471181603}
@@ -6043,7 +6043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 180, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4277547292958236825
@@ -9112,7 +9112,7 @@ RectTransform:
   - {fileID: 5228870615057437492}
   - {fileID: 2026061224771861986}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9164,7 +9164,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &762138651070240855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9736,7 +9736,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 316463cfa60ec3642859be8fcf05a18f, type: 3}
---- !u!224 &7342424952241428825 stripped
+--- !u!224 &8710097249138998354 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4924071526143039006, guid: 316463cfa60ec3642859be8fcf05a18f, type: 3}
   m_PrefabInstance: {fileID: 4374591428854442572}

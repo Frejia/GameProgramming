@@ -8,13 +8,19 @@ public class Health : MonoBehaviour
     [SerializeField] public int maxHealth = 100;
     [SerializeField] public float currentHealth;
 
+    [SerializeField] private GameObject attacker;
+    
+    public delegate void Hit(GameObject enemy, GameObject attacker);
+    public static event Hit EnemyGotHit;
+    
     private void Start()
     {
         currentHealth = maxHealth;
     }
 
-    public void GetsHit(int damage)
+    public void GetsHit(int damage, GameObject attacker)
     {
+        this.attacker = attacker;
         Debug.Log(gameObject.name + "Took damage");
         currentHealth -= damage;
         Debug.Log(currentHealth);
@@ -30,9 +36,11 @@ public class Health : MonoBehaviour
             if (this.gameObject.tag == "Enemy")
             {
                 this.GetComponent<Dissolve>().isdissolving = true;
+                EnemyGotHit(this.transform.parent.gameObject, attacker);
+                //Destroy Object
+                Destroy(this.transform.parent, 5f);
             }
-            //Destroy Object
-            Destroy(this.transform.parent, 5f);
+           
         }
     }
 }

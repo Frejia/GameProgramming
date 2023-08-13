@@ -116,6 +116,15 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""48f9ebc6-41d2-4b6f-90df-7dfaf030b8fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -514,6 +523,28 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                     ""action"": ""Join"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e463983d-566c-4569-8515-17cd33b9c608"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""452ad6a3-f820-4f00-b80c-9f0ed59f99c6"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -560,6 +591,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
         m_Ship_ShootSpecial = m_Ship.FindAction("ShootSpecial", throwIfNotFound: true);
         m_Ship_ShootSpecial2 = m_Ship.FindAction("ShootSpecial2", throwIfNotFound: true);
         m_Ship_Join = m_Ship.FindAction("Join", throwIfNotFound: true);
+        m_Ship_Pause = m_Ship.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -631,6 +663,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
     private readonly InputAction m_Ship_ShootSpecial;
     private readonly InputAction m_Ship_ShootSpecial2;
     private readonly InputAction m_Ship_Join;
+    private readonly InputAction m_Ship_Pause;
     public struct ShipActions
     {
         private @Ship1 m_Wrapper;
@@ -645,6 +678,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
         public InputAction @ShootSpecial => m_Wrapper.m_Ship_ShootSpecial;
         public InputAction @ShootSpecial2 => m_Wrapper.m_Ship_ShootSpecial2;
         public InputAction @Join => m_Wrapper.m_Ship_Join;
+        public InputAction @Pause => m_Wrapper.m_Ship_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Ship; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -684,6 +718,9 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
             @Join.started += instance.OnJoin;
             @Join.performed += instance.OnJoin;
             @Join.canceled += instance.OnJoin;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IShipActions instance)
@@ -718,6 +755,9 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
             @Join.started -= instance.OnJoin;
             @Join.performed -= instance.OnJoin;
             @Join.canceled -= instance.OnJoin;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IShipActions instance)
@@ -765,5 +805,6 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
         void OnShootSpecial(InputAction.CallbackContext context);
         void OnShootSpecial2(InputAction.CallbackContext context);
         void OnJoin(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

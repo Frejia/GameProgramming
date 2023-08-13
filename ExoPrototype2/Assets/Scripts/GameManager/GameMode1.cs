@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class GameMode1 : MonoBehaviour
@@ -10,6 +12,9 @@ public class GameMode1 : MonoBehaviour
     public int points1;
     public int points2;
     
+    [SerializeField] private TextMeshProUGUI points1Text;
+    [SerializeField] private TextMeshProUGUI points2Text;
+
     //true if win, false if lose
     public bool win;
 
@@ -37,8 +42,52 @@ public class GameMode1 : MonoBehaviour
      */
     private void Start()
     {
+        Health.EnemyGotHit += CountPoints;
         perlin = GetComponent<PerlinNoiseGen>();
         InitRace();
+        points1 = 0;
+        points2 = 0;
+        points1Text.text = points1.ToString();
+        points2Text.text = points2.ToString();
+    }
+    
+    // -------- POINTS ---------------
+    private void CountPoints(GameObject enemy, GameObject player)
+    {
+        int points = 0;
+        
+        if (enemy.name.Equals("BigShip"))
+        {
+            points = 4;
+        }
+        else
+        {
+            points = 2;
+        }
+
+        if (player.tag == "Player")
+        {
+            points1 += points;
+        }
+        else
+        {
+            points2 += points;
+        }
+        
+        points1Text.text = points1.ToString();
+        points2Text.text = points2.ToString();
+    }
+
+    private void WinCheck()
+    {
+        if (points1 > points2)
+        {
+            Debug.Log("Player 1 Won");
+        }
+        else
+        {
+            Debug.Log("Player 2 Won");
+        }
     }
 
     // -------- RACE MODE ------------
@@ -54,6 +103,17 @@ public class GameMode1 : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(dir, Vector3.up);
             
         Instantiate(portal, perlin.waypoints[randomPoint].transform.position * 5, rotation);
+    }
+
+    private void StartRace()
+    {
+       
+    }
+
+    private void ReachGoal()
+    {
+        
+        
     }
     
 }

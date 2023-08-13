@@ -31,7 +31,7 @@ public class ShipMovement : MonoBehaviour
     [SerializeField, Range(0.001f, 0.999f)]
     private float leftRightGlideReduction = 0.111f;
 
-    private float glide= 0f, horizontalGlide = 0f, verticalGlide = 0f;
+    private float glide = 0f, horizontalGlide = 0f, verticalGlide = 0f;
 
     [Header("Dash Settings")] [SerializeField]
     public bool boosting = false;
