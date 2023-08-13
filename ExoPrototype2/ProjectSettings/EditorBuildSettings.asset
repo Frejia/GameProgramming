@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/MainMenu.unity
+    guid: 1ca7c29f9f815e041b2c3dd968c011bf
+  - enabled: 1
     path: Assets/Scenes/FinalGameScenes/PvE Bullet Hell.unity
     guid: bfeb0c771ddeb3543ad680b859e7ba92
+  - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/PvP Race.unity
+    guid: 6dade78c8396f434f8a1dfa598348fb9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d230d16bc81b2054dacf77926f37017b, type: 2}

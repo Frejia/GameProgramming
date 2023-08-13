@@ -2895,6 +2895,10 @@ MonoBehaviour:
   points2: 0
   points1Text: {fileID: 537316981}
   points2Text: {fileID: 790307549}
+  GenManager: {fileID: 0}
+  world: {fileID: 0}
+  noiseGen: {fileID: 0}
+  debug: 0
   win: 0
   goal: {fileID: 0}
   start: {fileID: 0}
@@ -4166,7 +4170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2054823823
 Transform:
   m_ObjectHideFlags: 0

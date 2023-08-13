@@ -121,9 +121,8 @@ public class GameMode1 : MonoBehaviour
     
     private void Generate()
     {
-     for (int i = 0; i < perlin.waypoints.Count - 1; i++){
-                
-                //Get Direction to previous point
+             for (int i = 0; i < perlin.waypoints.Count - 1; i++){
+                 //Get Direction to previous point
                 Vector3 dir = (perlin.waypoints[i].transform.position - perlin.waypoints[i+1].transform.position).normalized;
                 Quaternion rotation = Quaternion.LookRotation(dir, Vector3.up);
                 

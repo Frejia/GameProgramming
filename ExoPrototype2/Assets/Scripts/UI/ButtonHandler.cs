@@ -20,4 +20,9 @@ public class ButtonHandler : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
+    
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

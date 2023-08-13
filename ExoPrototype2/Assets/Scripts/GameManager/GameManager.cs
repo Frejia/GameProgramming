@@ -43,6 +43,18 @@ public class GameManager : MonoBehaviour
         newGame = true;
     }
 
+    public void SetShooter()
+    {
+        this.gameState = GameState.Shooter;
+        SwitchGameState();
+    }
+    
+    public void SetRacer()
+    {
+        this.gameState = GameState.Race;
+        SwitchGameState();
+    }
+    
     public void SetPause()
     {
         this.gameState = GameState.Paused;
@@ -58,6 +70,7 @@ public class GameManager : MonoBehaviour
           case GameState.Shooter:
               if (newGame)
               {
+                  SceneManager.LoadScene(1);
                   GetComponent<GameMode1>().InitShooter();
                   ShowCanvas(inGameUI);
                   newGame = false;
@@ -71,6 +84,7 @@ public class GameManager : MonoBehaviour
           case GameState.Race:
               if (newGame)
               {
+                  SceneManager.LoadScene(2);
                   GetComponent<GameMode1>().InitRace();
                   ShowCanvas(inGameUI);
                   newGame = false;
@@ -103,10 +117,11 @@ public class GameManager : MonoBehaviour
   }
 
   // Method for UI Buttons
-  private void AllowSecondPlayer(bool allow)
+  public void AllowSecondPlayer()
   {
-      allowSecondPlayer = allow;
-      
+      //Toggle second player
+      allowSecondPlayer = !allowSecondPlayer;
+
       if (!allowSecondPlayer)
       {
           PlayerInputManager.instance.DisableJoining();
