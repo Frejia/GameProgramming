@@ -27,7 +27,10 @@ public class Health : MonoBehaviour
         {
             Debug.Log("Object is dead");
             //Dissolve Shield
-            this.GetComponent<Dissolve>().isdissolving = true;
+            if (this.gameObject.tag == "Enemy")
+            {
+                this.GetComponent<Dissolve>().isdissolving = true;
+            }
             //Destroy Object
             Destroy(this.transform.parent, 5f);
         }

@@ -11,28 +11,34 @@ using Random = System.Random;
 
 public class PerlinNoiseGen : MonoBehaviour
 {
-
-    [SerializeField] public bool raceMode = false;
-    [SerializeField] public float pathradius = 10f;
+    public static PerlinNoiseGen Instance { get; private set; }
     
+    [Header("PerlinNoise Settings")]
     [SerializeField] public int seed = 0;
-    [SerializeField] private GameObject blockPrefab;//use a unit cube (1x1x1 like unity's default cube)
-    [SerializeField] public int chunkSize = 50;
-    [SerializeField] public int chunkSizeZ = 50;
     [SerializeField] private float noiseScale = .05f;
     [SerializeField, Range(0, 1)] private float threshold = .5f;
+    
+    [Header("Generator Settings")]
+    [SerializeField] private GameObject blockPrefab;//use a unit cube (1x1x1 like unity's default cube)
     [SerializeField] private Material material;
+    
+    [SerializeField] public int chunkSize = 50;
+    [SerializeField] public int chunkSizeZ = 50;
+    
     [SerializeField] private bool sphere = false;
+    [SerializeField] private bool meshSmoothing;
     [SerializeField] private bool collider = false;
-    private List<Mesh> meshes = new List<Mesh>();//used to avoid memory issues
-    [SerializeField] private List<Vector3> interpolatedPoints = new List<Vector3>();
-    // The reference to the MarchingCubes script
-    private MarchingCubes marchingCubes;
+    
+    [Header("RaceMode")]
+    public bool withCurve;
+    [SerializeField] public bool raceMode = false;
+    [SerializeField] public float pathradius = 10f;
     [SerializeField] public List<GameObject> waypoints;
+    private List<Vector3> interpolatedPoints = new List<Vector3>();
+    
+    // Other Variables
+    private List<Mesh> meshes = new List<Mesh>();//used to avoid memory issues
     private float timePassed = 0f;
-
-    public static PerlinNoiseGen Instance { get; private set; }
-    private MeshCreator meshCreator;
     private InvalidLevelSafe invalidLevelSafe;
 
     private void OnDrawGizmos()
@@ -40,9 +46,7 @@ public class PerlinNoiseGen : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(chunkSize, chunkSize, chunkSizeZ));
         // Draw Wire Cube in Red
-        
     }
-    
     
     private void Awake()
     {
@@ -60,9 +64,6 @@ public class PerlinNoiseGen : MonoBehaviour
             return;
         }
         Instance = this;
-        // Get the reference to the MarchingCubes script on the same GameObject
-        marchingCubes = GetComponent<MarchingCubes>();
-        meshCreator = GetComponent<MeshCreator>();
     }
 
     private List<CombineInstance> blockData;//this will contain the data for the final mesh
@@ -77,17 +78,13 @@ public class PerlinNoiseGen : MonoBehaviour
 
         blockData = new List<CombineInstance>();//this will contain the data for the final mesh
         MeshFilter blockMesh = Instantiate(blockPrefab, transform.position, Quaternion.identity).GetComponent<MeshFilter>();//create a unit cube and store the mesh from it
-        
-        // Convert the block data to a 3D float array for MarchingCubes
-        float[,,] noiseMap = new float[chunkSize, chunkSize, chunkSizeZ];
-        
+
         //go through each block position
         for (int x = 0; x < chunkSize; x++) {
             for (int y = 0; y < chunkSize; y++) {
                 for (int z = 0; z < chunkSizeZ; z++) {
 
                     float noiseValue = Perlin3D((x + seed) * noiseScale, (y + seed) * noiseScale, (z + seed) * noiseScale);//get value of the noise at given x, y, and z.
-                    noiseMap[x, y, z] = noiseValue;
                     if (noiseValue >= threshold) {//is noise value above the threshold for placing a block?
 
                         //ignore this block if it's a sphere and it's outside of the radius (ex: in the corner of the chunk, outside of the sphere)
@@ -109,12 +106,26 @@ public class PerlinNoiseGen : MonoBehaviour
         }
         if (raceMode)
         {
-            Debug.Log("Gen Race Mode");
-            GenerateBezierPoints(waypoints[0].transform.position, waypoints[waypoints.Count-1].transform.position, 10);
-            /*foreach (GameObject points in waypoints)
+
+            if (withCurve)
             {
-                interpolatedPoints.Add(points.transform.position);
-            }*/
+                for (int i = 0; i < waypoints.Count - 1; i++)
+                {
+                    foreach (GameObject point in waypoints)
+                    {
+                        interpolatedPoints.Add(point.transform.position);
+                    }
+                    GenerateBezierPoints(waypoints[i].transform.position, waypoints[i+1].transform.position, 4);
+                }
+            }
+            else
+            {
+                foreach (GameObject point in waypoints)
+                {
+                    interpolatedPoints.Add(point.transform.position);
+                }
+            }
+            
             RemoveCubesWithinRadius(interpolatedPoints, pathradius);
         }
         
@@ -156,6 +167,11 @@ public class PerlinNoiseGen : MonoBehaviour
             mr.transform.localScale = new Vector3(5,5,5);//scale up the mesh so it's visible
             mf.mesh.CombineMeshes(data.ToArray());//set mesh to the combination of all of the blocks in the list
             mf.GameObject().layer = 3;//set layer to "Terrain
+            if (meshSmoothing)
+            {
+                mf.AddComponent<MeshSmoothing>();
+                mf.GetComponent<MeshSmoothing>().ApplyPerlin_Hard(mf.gameObject);
+            }
             meshes.Add(mf.mesh);//keep track of mesh so we can destroy it when it's no longer needed
             if(collider) g.AddComponent<MeshCollider>().sharedMesh = mf.sharedMesh;//setting colliders takes more time. disabled for testing.
         }
@@ -168,18 +184,6 @@ public class PerlinNoiseGen : MonoBehaviour
     
     // Update is called once per frame
     private void Update() {
-        /*if (Input.GetKeyDown(KeyCode.G))
-        {
-            Destroy(GameObject.Find("GeneratedMesh"));//destroy the previously generated mesh.
-            foreach (Mesh m in meshes)//meshes still exist even though they aren't in the scene anymore. destroy them so they don't take up memory.
-                Destroy(m);
-            
-            // Generate the voxel data using Perlin noise
-           // float[,,] voxelData = GenerateVoxelData();
-
-            // Create the mesh using Marching Cubes
-           // CreateMarchingCubesMesh(voxelData);
-        }*/
         
         timePassed += Time.deltaTime;
         
@@ -221,7 +225,7 @@ public class PerlinNoiseGen : MonoBehaviour
         Debug.Log("Finished Removing Cubes after " + timePassed + " seconds.");
     }
 
-    public static float Perlin3D(float x, float y, float z)
+    public float Perlin3D(float x, float y, float z)
     {
         float ab = Mathf.PerlinNoise(x, y);
         float bc = Mathf.PerlinNoise(y, z);
@@ -230,6 +234,20 @@ public class PerlinNoiseGen : MonoBehaviour
         float ba = Mathf.PerlinNoise(y, x);
         float cb = Mathf.PerlinNoise(z, y);
         float ca = Mathf.PerlinNoise(z, x);
+        
+        float abc = ab + bc + ac + ba + cb + ca;
+        return abc / 6f;
+    }
+    
+    public static float Perlin(Vector3 coordinates)
+    {
+        float ab = Mathf.PerlinNoise(coordinates.x, coordinates.y);
+        float bc = Mathf.PerlinNoise(coordinates.y, coordinates.z);
+        float ac = Mathf.PerlinNoise(coordinates.x, coordinates.z);
+        
+        float ba = Mathf.PerlinNoise(coordinates.y, coordinates.x);
+        float cb = Mathf.PerlinNoise(coordinates.z, coordinates.y);
+        float ca = Mathf.PerlinNoise(coordinates.z, coordinates.x);
         
         float abc = ab + bc + ac + ba + cb + ca;
         return abc / 6f;
