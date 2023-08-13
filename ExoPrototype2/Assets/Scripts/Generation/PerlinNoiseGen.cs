@@ -33,7 +33,7 @@ public class PerlinNoiseGen : MonoBehaviour
     
     [Header("RaceMode")]
     [SerializeField] public bool raceMode = false;
-    [SerializeField] private bool withCurve;
+    [SerializeField] public bool withCurve;
     [SerializeField] private int segments;
     [SerializeField] private float pathradius = 10f;
     [SerializeField] public List<GameObject> waypoints; 

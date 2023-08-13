@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -17,7 +18,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     private GameState gameState;
     [SerializeField] private bool allowSecondPlayer;
-
+    private bool newGame = false;
+    
     private GameObject player1;
     private GameObject player2;
     
@@ -26,11 +28,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas loseCanvas;
     [SerializeField] private Canvas pauseCanvas;
 
-    [SerializeField] WorldManager world;
-    [SerializeField] PerlinNoiseGen noiseGen;
-
-    public bool debug;
-    
     // Start is called before the first frame update
     void Awake()
     {
@@ -39,13 +36,11 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        if (!debug)
-        {
-            StartCoroutine(noiseGen.Generate());
-            if(noiseGen.isDone)world.InitializeGrid();
-        }
-
         PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
+        GameMode1.Player1Win += SetWin;
+        GameMode1.Player2Win += SetWin;
+
+        newGame = true;
     }
 
     public void SetPause()
@@ -61,26 +56,45 @@ public class GameManager : MonoBehaviour
       switch (gameState)
       {
           case GameState.Shooter:
-              DisableCanvas(pauseCanvas);
-              ContinueGame();
-              ShowCanvas(inGameUI);
+              if (newGame)
+              {
+                  GetComponent<GameMode1>().InitShooter();
+                  ShowCanvas(inGameUI);
+                  newGame = false;
+              }
+              else
+              {
+                  DisableCanvas(pauseCanvas);
+                  ContinueGame();
+              }
               break;
           case GameState.Race:
-              DisableCanvas(pauseCanvas);
-              ContinueGame();
-              ShowCanvas(inGameUI);
+              if (newGame)
+              {
+                  GetComponent<GameMode1>().InitRace();
+                  ShowCanvas(inGameUI);
+                  newGame = false;
+              }
+              else
+              {
+                  DisableCanvas(pauseCanvas);
+                  ContinueGame();
+              }
               break;
           case GameState.Win:
+              newGame = true;
               DisableCanvas(inGameUI);
               PauseGame();
               ShowCanvas(winCanvas);
               break;
           case GameState.Lose:
+              newGame = true;
               DisableCanvas(inGameUI);
               PauseGame();
               ShowCanvas(loseCanvas);
               break;
           case GameState.Paused:
+              newGame = false;
               DisableCanvas(inGameUI);
               PauseGame();
               ShowCanvas(pauseCanvas);
@@ -150,5 +164,16 @@ public class GameManager : MonoBehaviour
             player2.transform.GetChild(0).gameObject.SetActive(true);
         }
   }
+
+  public void GoToMainMenu()
+  {
+      SceneManager.LoadScene(0);
+  }
+  
+    public void SetWin()
+    {
+        this.gameState = GameState.Win;
+        SwitchGameState();
+    }
   
 }

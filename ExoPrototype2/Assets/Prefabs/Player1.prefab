@@ -459,7 +459,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3289877267383696995}
   m_LocalRotation: {x: 0.13052598, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 2.244007, z: -4.1983337}
+  m_LocalPosition: {x: -10.501856, y: 43.74842, z: -337.32162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -902,7 +902,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5456602678674220542}
   m_LocalRotation: {x: 0.13052598, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 2.244007, z: -4.1983337}
+  m_LocalPosition: {x: 0, y: 2.2440076, z: -4.198324}
   m_LocalScale: {x: 1, y: 2.5292764, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1030,10 +1030,10 @@ Transform:
   - {fileID: 8578889316038800731}
   - {fileID: 6306983506958052179}
   - {fileID: 1386960306323821992}
-  - {fileID: 1361192016943457268}
   - {fileID: 5168052227892906249}
+  - {fileID: 1361192016943457268}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3544118986570864159
 MonoBehaviour:
@@ -1177,6 +1177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  attacker: {fileID: 0}
 --- !u!114 &6824005594536758395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,6 +1351,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9c1ae263-9d91-4a8b-9263-dbc6cab46886
     m_ActionName: Ship/Join[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 48f9ebc6-41d2-4b6f-90df-7dfaf030b8fb
+    m_ActionName: Ship/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Ship
