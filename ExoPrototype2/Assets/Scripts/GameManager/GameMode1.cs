@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameMode1 : MonoBehaviour
 {
@@ -11,8 +13,9 @@ public class GameMode1 : MonoBehaviour
     //true if win, false if lose
     public bool win;
 
-    [SerializeField] public Transform goal, start;
-    [SerializeField] public List<GameObject> waypoints;
+    [SerializeField] private Transform goal, start;
+    [SerializeField] private List<GameObject> waypoints;
+    [SerializeField] private GameObject portal;
     
     //--- Game Modes
     /*
@@ -32,14 +35,24 @@ public class GameMode1 : MonoBehaviour
      There is a start and goal and the players have to race one another there
      
      */
-    
-    
+    private void Start()
+    {
+        InitRace();
+    }
+
     // -------- RACE MODE ------------
     private void InitRace()
     {
         // Get Start and End Point, place a goal/Start there
-        
-        //Get random points on Curve 
+        start = this.GetComponent<PerlinNoiseGen>().waypoints[0].transform;
+        goal = this.GetComponent<PerlinNoiseGen>().waypoints[waypoints.Count-1].transform;
+        //Get random points from the ones that are left
+        int randomPoint = Random.Range(1, waypoints.Count - 2);
+        //Get Direction to previous point
+        Vector3 dir = (waypoints[randomPoint].transform.position - waypoints[randomPoint - 1].transform.position).normalized;
+        Quaternion rotation = Quaternion.LookRotation(dir, Vector3.up);
+            
+        Instantiate(portal, waypoints[randomPoint].transform.position, rotation);
     }
     
 }

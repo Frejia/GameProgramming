@@ -34,7 +34,7 @@ public class PerlinNoiseGen : MonoBehaviour
     [SerializeField] public bool raceMode = false;
     [SerializeField] public float pathradius = 10f;
     [SerializeField] public List<GameObject> waypoints;
-    private List<Vector3> interpolatedPoints = new List<Vector3>();
+    [SerializeField] private List<Vector3> interpolatedPoints = new List<Vector3>();
     
     // Other Variables
     private List<Mesh> meshes = new List<Mesh>();//used to avoid memory issues
@@ -44,8 +44,13 @@ public class PerlinNoiseGen : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector3(chunkSize, chunkSize, chunkSizeZ));
-        // Draw Wire Cube in Red
+        Gizmos.DrawWireCube(new Vector3(48.4290009f,53.2000008f,49.9000015f), new Vector3(chunkSize, chunkSize, chunkSizeZ));
+       
+        for (int i = 0; i < waypoints.Count - 1; i++)
+        {
+            Gizmos.DrawLine(waypoints[i].transform.position, waypoints[i+1].transform.position);
+            Gizmos.DrawLine(waypoints[i].transform.position * 5, waypoints[i+1].transform.position * 5);
+        }
     }
     
     private void Awake()
@@ -71,7 +76,7 @@ public class PerlinNoiseGen : MonoBehaviour
     private List<List<CombineInstance>> blockDataLists;
     
     // Start is called before the first frame update
-    public void Generate() {
+    public IEnumerator Generate() {
         float startTime = Time.realtimeSinceStartup;
 
         #region Create Mesh Data
@@ -104,18 +109,17 @@ public class PerlinNoiseGen : MonoBehaviour
                 }
             }
         }
+        // RACE MODE --------------
         if (raceMode)
         {
-
+            //NOTE: Normal Generation takes ~15 Seconds, RaceTrack Generation up to 1:30 Minutes (Without enemies, and 
+            
+            // If curve is true, then generate the Bezier points, if not, just use the given points
             if (withCurve)
             {
                 for (int i = 0; i < waypoints.Count - 1; i++)
                 {
-                    foreach (GameObject point in waypoints)
-                    {
-                        interpolatedPoints.Add(point.transform.position);
-                    }
-                    GenerateBezierPoints(waypoints[i].transform.position, waypoints[i+1].transform.position, 4);
+                    GenerateLinearPoints(waypoints[i].transform.position, waypoints[i+1].transform.position, 4);
                 }
             }
             else
@@ -125,7 +129,7 @@ public class PerlinNoiseGen : MonoBehaviour
                     interpolatedPoints.Add(point.transform.position);
                 }
             }
-            
+
             RemoveCubesWithinRadius(interpolatedPoints, pathradius);
         }
         
@@ -164,9 +168,12 @@ public class PerlinNoiseGen : MonoBehaviour
             MeshFilter mf = g.AddComponent<MeshFilter>();//add mesh component
             MeshRenderer mr = g.AddComponent<MeshRenderer>();//add mesh renderer component
             mr.material = material;//set material to avoid evil pinkness of missing texture
-            mr.transform.localScale = new Vector3(5,5,5);//scale up the mesh so it's visible
+           
+            mr.transform.localScale = new Vector3(5,5,5);// Fanny: scale up the mesh so it's visible
             mf.mesh.CombineMeshes(data.ToArray());//set mesh to the combination of all of the blocks in the list
             mf.GameObject().layer = 3;//set layer to "Terrain
+            
+            //Fanny: Use the Mesh Smoothing Script for adding additional noise to the meshes
             if (meshSmoothing)
             {
                 mf.AddComponent<MeshSmoothing>();
@@ -177,8 +184,7 @@ public class PerlinNoiseGen : MonoBehaviour
         }
         #endregion
 
-        //Debug.Log("Loaded in " + (Time.realtimeSinceStartup - startTime) + " Seconds.");
-        
+        yield return null;
         Debug.Log("Generated Mesh in " + timePassed + "seconds.");
     }
     
@@ -190,7 +196,7 @@ public class PerlinNoiseGen : MonoBehaviour
     }
 
     // Method to generate points along a Bezier curve between start, control, and end points.
-    private void GenerateBezierPoints(Vector3 startPoint, Vector3 endPoint, int segments)
+    private void GenerateLinearPoints(Vector3 startPoint, Vector3 endPoint, int segments)
     {
         Debug.Log("Generate Bezier Points");
         //interpolatedPoints = new List<Vector3>();

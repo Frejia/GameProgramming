@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         int i = 0;
        foreach (var point in waypoints)
        {
-           curvePoints.Add(point.transform.position);
+           curvePoints.Add(point.transform.localToWorldMatrix.GetPosition());
        }
        
        noiseGen.Generate();
