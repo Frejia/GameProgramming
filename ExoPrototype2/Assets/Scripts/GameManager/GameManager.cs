@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] WorldManager world;
     [SerializeField] PerlinNoiseGen noiseGen;
-    [SerializeField] public List<GameObject> waypoints;
-    [SerializeField] public List<Vector3> curvePoints;
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,15 +17,8 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        int i = 0;
-       foreach (var point in waypoints)
-       {
-           curvePoints.Add(point.transform.localToWorldMatrix.GetPosition());
-       }
-       
-       noiseGen.Generate();
-      world.InitializeGrid();
-
+        StartCoroutine(noiseGen.Generate());
+      if(noiseGen.isDone)world.InitializeGrid();
     }
     
     

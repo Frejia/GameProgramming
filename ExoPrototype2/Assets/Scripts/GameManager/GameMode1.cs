@@ -13,8 +13,8 @@ public class GameMode1 : MonoBehaviour
     //true if win, false if lose
     public bool win;
 
+    private PerlinNoiseGen perlin;
     [SerializeField] private Transform goal, start;
-    [SerializeField] private List<GameObject> waypoints;
     [SerializeField] private GameObject portal;
     
     //--- Game Modes
@@ -37,6 +37,7 @@ public class GameMode1 : MonoBehaviour
      */
     private void Start()
     {
+        perlin = GetComponent<PerlinNoiseGen>();
         InitRace();
     }
 
@@ -44,15 +45,15 @@ public class GameMode1 : MonoBehaviour
     private void InitRace()
     {
         // Get Start and End Point, place a goal/Start there
-        start = this.GetComponent<PerlinNoiseGen>().waypoints[0].transform;
-        goal = this.GetComponent<PerlinNoiseGen>().waypoints[waypoints.Count-1].transform;
+        start = perlin.waypoints[0].transform;
+        goal = perlin.waypoints[perlin.waypoints.Count-1].transform;
         //Get random points from the ones that are left
-        int randomPoint = Random.Range(1, waypoints.Count - 2);
+        int randomPoint = Random.Range(1, perlin.waypoints.Count - 2);
         //Get Direction to previous point
-        Vector3 dir = (waypoints[randomPoint].transform.position - waypoints[randomPoint - 1].transform.position).normalized;
+        Vector3 dir = (perlin.waypoints[randomPoint].transform.position - perlin.waypoints[randomPoint - 1].transform.position).normalized;
         Quaternion rotation = Quaternion.LookRotation(dir, Vector3.up);
             
-        Instantiate(portal, waypoints[randomPoint].transform.position, rotation);
+        Instantiate(portal, perlin.waypoints[randomPoint].transform.position * 5, rotation);
     }
     
 }

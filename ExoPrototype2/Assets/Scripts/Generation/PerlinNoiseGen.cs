@@ -7,14 +7,16 @@ using PathCreation;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = System.Random;
 
 public class PerlinNoiseGen : MonoBehaviour
 {
     public static PerlinNoiseGen Instance { get; private set; }
+    public bool isDone { get; private set; }
     
     [Header("PerlinNoise Settings")]
-    [SerializeField] public int seed = 0;
+    [SerializeField] public int offset = 0;
     [SerializeField] private float noiseScale = .05f;
     [SerializeField, Range(0, 1)] private float threshold = .5f;
     
@@ -30,21 +32,28 @@ public class PerlinNoiseGen : MonoBehaviour
     [SerializeField] private bool collider = false;
     
     [Header("RaceMode")]
-    public bool withCurve;
     [SerializeField] public bool raceMode = false;
-    [SerializeField] public float pathradius = 10f;
-    [SerializeField] public List<GameObject> waypoints;
-    [SerializeField] private List<Vector3> interpolatedPoints = new List<Vector3>();
+    [SerializeField] private bool withCurve;
+    [SerializeField] private int segments;
+    [SerializeField] private float pathradius = 10f;
+    [SerializeField] public List<GameObject> waypoints; 
+    private List<Vector3> interpolatedPoints = new List<Vector3>();
     
     // Other Variables
-    private List<Mesh> meshes = new List<Mesh>();//used to avoid memory issues
-    private float timePassed = 0f;
-    private InvalidLevelSafe invalidLevelSafe;
-
+    private List<Mesh> meshes = new List<Mesh>(); //used to avoid memory issues
+    private float timePassed = 0f; // measuring how long generation time is
+    private InvalidLevelSafe invalidLevelSafe; // Get marked Invalid Levels
+    private List<CombineInstance> blockData;//this will contain the data for the final mesh
+    private List<List<CombineInstance>> blockDataLists;
+    
+    /// <summary>
+    /// Shows bounds of Grids and Lines, for Debugging and Editor Mode
+    /// </summary>
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(new Vector3(48.4290009f,53.2000008f,49.9000015f), new Vector3(chunkSize, chunkSize, chunkSizeZ));
+        Gizmos.DrawWireCube(new Vector3(214f,229f,438.75f), new Vector3(chunkSize * 5, chunkSize * 5, chunkSizeZ * 5));
        
         for (int i = 0; i < waypoints.Count - 1; i++)
         {
@@ -53,14 +62,15 @@ public class PerlinNoiseGen : MonoBehaviour
         }
     }
     
+    
     private void Awake()
     {
+        // Check if there are Invalid Levels and compare if currently generated values is one of the invalid ones.
         invalidLevelSafe = GetComponent<InvalidLevelSafe>();
-
-        if (invalidLevelSafe.Equals(chunkSize, chunkSizeZ, seed))
+        if (invalidLevelSafe.Equals(chunkSize, chunkSizeZ, offset))
         {
             Debug.Log("This Level Gen is not playable");
-            seed += 20;
+            offset += 20;
         }
         
         if (Instance != null)
@@ -71,14 +81,18 @@ public class PerlinNoiseGen : MonoBehaviour
         Instance = this;
     }
 
-    private List<CombineInstance> blockData;//this will contain the data for the final mesh
 
-    private List<List<CombineInstance>> blockDataLists;
     
-    // Start is called before the first frame update
-    public IEnumerator Generate() {
+    /// <summary>
+    /// Generates the terrain mesh based on Perlin noise and settings.
+    /// Used for entire Level Generation
+    /// </summary>
+    public IEnumerator Generate()
+    {
+        isDone = false;
         float startTime = Time.realtimeSinceStartup;
 
+        // Uses Perlin Noise Data to generate Grid and values within chunk 
         #region Create Mesh Data
 
         blockData = new List<CombineInstance>();//this will contain the data for the final mesh
@@ -89,7 +103,7 @@ public class PerlinNoiseGen : MonoBehaviour
             for (int y = 0; y < chunkSize; y++) {
                 for (int z = 0; z < chunkSizeZ; z++) {
 
-                    float noiseValue = Perlin3D((x + seed) * noiseScale, (y + seed) * noiseScale, (z + seed) * noiseScale);//get value of the noise at given x, y, and z.
+                    float noiseValue = Perlin3D((x + offset) * noiseScale, (y + offset) * noiseScale, (z + offset) * noiseScale);//get value of the noise at given x, y, and z.
                     if (noiseValue >= threshold) {//is noise value above the threshold for placing a block?
 
                         //ignore this block if it's a sphere and it's outside of the radius (ex: in the corner of the chunk, outside of the sphere)
@@ -109,7 +123,7 @@ public class PerlinNoiseGen : MonoBehaviour
                 }
             }
         }
-        // RACE MODE --------------
+        // Fanny: RACE MODE --- Get Points around which blocks are deleted before making the final mesh
         if (raceMode)
         {
             //NOTE: Normal Generation takes ~15 Seconds, RaceTrack Generation up to 1:30 Minutes (Without enemies, and 
@@ -119,7 +133,7 @@ public class PerlinNoiseGen : MonoBehaviour
             {
                 for (int i = 0; i < waypoints.Count - 1; i++)
                 {
-                    GenerateLinearPoints(waypoints[i].transform.position, waypoints[i+1].transform.position, 4);
+                    GenerateLinearPoints(waypoints[i].transform.position, waypoints[i+1].transform.position, segments);
                 }
             }
             else
@@ -129,14 +143,15 @@ public class PerlinNoiseGen : MonoBehaviour
                     interpolatedPoints.Add(point.transform.position);
                 }
             }
-
+            
+            //Remove Cubes
             RemoveCubesWithinRadius(interpolatedPoints, pathradius);
         }
         
         Destroy(blockMesh.gameObject);//original unit cube is no longer needed. we copied all the data we need to the block list.
 
         #endregion
-
+        
         #region Separate Mesh Data
 
         //divide meshes into groups of 65536 vertices. Meshes can only have 65536 vertices so we need to divide them up into multiple block lists.
@@ -157,9 +172,8 @@ public class PerlinNoiseGen : MonoBehaviour
 
         #endregion
 
+        //Create final Meshes
         #region Create Mesh
-
-        //the creation of the final mesh from the data.
 
         Transform container = new GameObject("Meshys").transform;//create container object
         foreach (List<CombineInstance> data in blockDataLists) {//for each list (of block data) in the list (of other lists)
@@ -184,8 +198,9 @@ public class PerlinNoiseGen : MonoBehaviour
         }
         #endregion
 
-        yield return null;
+        isDone = true;
         Debug.Log("Generated Mesh in " + timePassed + "seconds.");
+        yield return new WaitForSeconds(0.1f);
     }
     
     // Update is called once per frame
@@ -195,25 +210,28 @@ public class PerlinNoiseGen : MonoBehaviour
         
     }
 
-    // Method to generate points along a Bezier curve between start, control, and end points.
+    /// <summary>
+    /// Generates numbers of Interpolated Points in segments between given points to "make a curve" 
+    /// Used for Racing Mode and Portal Placement
+    /// </summary>
     private void GenerateLinearPoints(Vector3 startPoint, Vector3 endPoint, int segments)
     {
-        Debug.Log("Generate Bezier Points");
-        //interpolatedPoints = new List<Vector3>();
         for (int i = 0; i <= segments; i++)
         {
             float t = (float)i / segments;
             Vector3 point = Vector3.Lerp(startPoint, endPoint, t);
-            //var point = Mathf.Pow(1 - t, 2) * startPoint + 2 * t * (1 - t) * controlPoint + Mathf.Pow(t, 2) * endPoint;
             interpolatedPoints.Add(point);
         }
-        
-        Debug.Log("GenerateBezPoints Finished after " + timePassed + " seconds.");
     }
 
+    /// <summary>
+    /// Removes cubes that are within a specified radius from given points.
+    /// Used for Racing Mode and Portal Placement
+    /// </summary>
     private void RemoveCubesWithinRadius(List<Vector3> points, float radius)
     {
-        Debug.Log("Start Removing Cubes");
+        // Go through all block data and get the position of it. If the cube is within the radius of the point --> Delete it
+        // NOTE: THIS COULD BE OPTIMIZED
         for (int i = blockData.Count - 1; i >= 0; i--)
         {
             Vector3 cubePosition = blockData[i].transform.MultiplyPoint(Vector3.zero); // Get the position of the cube in world space.
@@ -231,6 +249,10 @@ public class PerlinNoiseGen : MonoBehaviour
         Debug.Log("Finished Removing Cubes after " + timePassed + " seconds.");
     }
 
+    /// <summary>
+    /// Calculates 3D Perlin noise at the given coordinates, uses Unity's build in Noise.
+    /// used in Generation Method
+    /// </summary>
     public float Perlin3D(float x, float y, float z)
     {
         float ab = Mathf.PerlinNoise(x, y);
@@ -245,6 +267,11 @@ public class PerlinNoiseGen : MonoBehaviour
         return abc / 6f;
     }
     
+    /// <summary>
+    /// Calculates 3D Perlin noise at the given coordinates.
+    /// used in Legacy Marching Cubes
+    /// </summary>
+    /// <param name="coordinates">3D coordinates.</param>
     public static float Perlin(Vector3 coordinates)
     {
         float ab = Mathf.PerlinNoise(coordinates.x, coordinates.y);

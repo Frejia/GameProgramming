@@ -33,8 +33,7 @@ public class MeshCreator : MonoBehaviour
             if (mf)
             {
                 var savePath = folderPath + saveName + i + ".asset";
-                    Debug.Log("Saved Mesh to:" + savePath);
-                    AssetDatabase.CreateAsset(mf.mesh, savePath);
+                AssetDatabase.CreateAsset(mf.mesh, savePath);
             }
         }
     }

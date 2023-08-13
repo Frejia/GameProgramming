@@ -61,7 +61,7 @@ public class InvalidLevelSafe : MonoBehaviour
         ScriptableInvalidLevel invalidLevel = ScriptableObject.CreateInstance<ScriptableInvalidLevel>();
         invalidLevel.chunkSize = GetComponent<PerlinNoiseGen>().chunkSize;
         invalidLevel.chunkSizeZ = GetComponent<PerlinNoiseGen>().chunkSizeZ;
-        invalidLevel.seed = GetComponent<PerlinNoiseGen>().seed;
+        invalidLevel.seed = GetComponent<PerlinNoiseGen>().offset;
         //safe Scriptable Object to Assets Folder
 
         string path = "Assets/Prefabs/Levels/InvalidLevels/level.asset"; // Set your desired path
@@ -69,7 +69,7 @@ public class InvalidLevelSafe : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         
-        invalidLevels.Add(new InvalidLevelSafe(GetComponent<PerlinNoiseGen>().chunkSize, GetComponent<PerlinNoiseGen>().chunkSizeZ, GetComponent<PerlinNoiseGen>().seed));
+        invalidLevels.Add(new InvalidLevelSafe(GetComponent<PerlinNoiseGen>().chunkSize, GetComponent<PerlinNoiseGen>().chunkSizeZ, GetComponent<PerlinNoiseGen>().offset));
    }
    
    //Check if Data equals an Invalid Level
