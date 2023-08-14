@@ -4043,6 +4043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2028954113}
+  - component: {fileID: 2028954115}
   - component: {fileID: 2028954112}
   - component: {fileID: 2028954111}
   - component: {fileID: 2028954114}
@@ -4052,7 +4053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2028954111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4132,6 +4133,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afb2e0f404e30e349b19c2b2414e4445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2028954115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028954110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1204016bb0e4b5f4aa6ff016c5ada963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2046763193
@@ -4300,6 +4313,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1759193081140711249, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+      propertyPath: invalidLevel
+      value: 
+      objectReference: {fileID: 11400000, guid: c529cbe0e2b76c541b0233512375a2c4, type: 2}
     - target: {fileID: 2234848712776417728, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -4408,6 +4425,10 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[6]
       value: 
       objectReference: {fileID: 2143177607}
+    - target: {fileID: 3573703774740779980, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+      propertyPath: savedLevels
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fac936ad589b744096c8b10d25f2fdb, type: 2}
     - target: {fileID: 3747248719942591997, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -4869,13 +4890,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points1: 0
   points2: 0
+  win: 0
   points1Text: {fileID: 0}
   points2Text: {fileID: 0}
-  GenManager: {fileID: 2028954110}
   world: {fileID: 2028954112}
   noiseGen: {fileID: 2028954111}
   debug: 1
-  win: 0
   goal: {fileID: 0}
   start: {fileID: 0}
   portal: {fileID: 3438763212639888650, guid: 7c1d978638d1c524ea310d5445dffecd, type: 3}

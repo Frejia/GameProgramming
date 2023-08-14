@@ -2868,6 +2868,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6946016429249933038, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1294760868}
+    - targetCorrespondingSourceObject: {fileID: 6946016429249933038, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1798190497}
   m_SourcePrefab: {fileID: 100100000, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
 --- !u!4 &1294760866 stripped
 Transform:
@@ -2893,13 +2896,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points1: 0
   points2: 0
+  win: 0
   points1Text: {fileID: 537316981}
   points2Text: {fileID: 790307549}
-  GenManager: {fileID: 0}
   world: {fileID: 0}
   noiseGen: {fileID: 0}
   debug: 0
-  win: 0
   goal: {fileID: 0}
   start: {fileID: 0}
   portal: {fileID: 3438763212639888650, guid: 7c1d978638d1c524ea310d5445dffecd, type: 3}
@@ -3664,6 +3666,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e58c72e6465a9944a6ca0546f673be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1798190497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294760867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1204016bb0e4b5f4aa6ff016c5ada963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1820937824

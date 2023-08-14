@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using TreeEditor;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
@@ -8,8 +10,76 @@ using Random = UnityEngine.Random;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// Creates a prefab from the procedurally generated Mesh
+///
+/// Originally created for UnityEditor Level Save Processes, changed later to work within Runtime Builds
+/// </summary>
 public class MeshCreator : MonoBehaviour
 {
+    
+    [SerializeField] private ScriptableInvalidLevel savedLevels;
+    private PerlinNoiseGen perlin;
+    
+    public void EditLevelSave()
+    {
+        perlin = PerlinNoiseGen.Instance;
+        
+        // Create a new Instance of the Scriptable Object
+        //ScriptableInvalidLevel invalidLevel = ScriptableObject.CreateInstance<ScriptableInvalidLevel>();
+
+        // Set the values of the Scriptable Object
+        savedLevels.chunkSize.Add(perlin.chunkSize);
+        savedLevels.chunkSizeZ.Add(perlin.chunkSizeZ);
+        savedLevels.offset.Add(perlin.offset);
+        savedLevels.raceMode.Add(perlin.raceMode);
+        savedLevels.withCurve.Add(perlin.withCurve);
+        savedLevels.sphere.Add(perlin.sphere);
+        savedLevels.meshSmoothing.Add(perlin.meshSmoothing);
+        List<GameObject> points = new List<GameObject>();
+        foreach(GameObject point in perlin.waypoints)
+        {
+            points.Add(point);
+            
+            
+        }
+        savedLevels.wayPoints.Add(points);
+        
+        string filePath = Path.Combine(Application.persistentDataPath, "SavedLevel.asset");
+        SaveScriptableObject(savedLevels, filePath);
+    }
+
+    private void SaveScriptableObject(ScriptableInvalidLevel level, string filePath)
+    {
+        string json = JsonUtility.ToJson(level);
+        File.WriteAllText(filePath, json);
+    }
+    
+    public void LoadSavedLevel(int levelIndex)
+    {
+        perlin = PerlinNoiseGen.Instance;
+        
+        string filePath = Path.Combine(Application.persistentDataPath, "SavedLevel.asset");
+        if (File.Exists(filePath))
+        {
+            // Access Data
+            string json = File.ReadAllText(filePath);
+            savedLevels = JsonUtility.FromJson<ScriptableInvalidLevel>(json);
+
+            // Set the values of the PerlinNoiseGen
+            perlin.PerlinSetter(savedLevels.chunkSize[levelIndex],savedLevels.chunkSizeZ[levelIndex], savedLevels.offset[levelIndex], savedLevels.raceMode[levelIndex],
+                savedLevels.withCurve[levelIndex], savedLevels.sphere[levelIndex], savedLevels.meshSmoothing[levelIndex], savedLevels.wayPoints[levelIndex]);
+            
+        }
+        else
+        {
+            Debug.LogWarning("Saved data file not found.");
+        }
+    }
+    
+    
+    #region Unity Editor Save Process
+    #if UNITY_EDITOR
     // https://unitycoder.com/blog/2013/01/26/save-mesh-created-by-script-in-editor-playmode/
     public KeyCode saveKey = KeyCode.F12;
     public bool saveOnStart = false;
@@ -81,4 +151,6 @@ public class MeshCreator : MonoBehaviour
         }
 
     }
+    #endif
+    #endregion
 }

@@ -51,17 +51,52 @@ public class PatternManager : MonoBehaviour
         
         this.startAngle = startAngle;
         this.endAngle = endAngle;
-        
-        PatternSwitch();
+
+        if (this.gameObject.tag == "Enemy")
+        {
+            PatternSwitchInvoke();
+        }
+        else
+        {
+            PatternSwitchRepeating();
+        }
     }
     
     public void SetBulletPatternNone()
     {
         CancelInvoke("ConeCircle");
+        CancelInvoke("Straight");
+        CancelInvoke("SpiralFire");
+        CancelInvoke("DoubleSpiralFire");
+        CancelInvoke("Pyramid");
+        CancelInvoke("PwettyPattern");
+        CancelInvoke("WayAllRange");
         activebulletPattern = BulletPatternEnum.BulletPatternsEnum.None;
     }
+    
+    public void PatternSwitchInvoke()
+    {
+        switch (activebulletPattern)
+        {
+            case BulletPatternEnum.BulletPatternsEnum.None:
+                //Cooldown
+                break;
+            case BulletPatternEnum.BulletPatternsEnum.Circle:
+                //Can Aim
+                Invoke("ConeCircle", 0f);
+                break;
+            case BulletPatternEnum.BulletPatternsEnum.Cone:
+                //Can Aim
+                Invoke("ConeCircle", 0f);
+                break;
+            case BulletPatternEnum.BulletPatternsEnum.Straight:
+                //Can Aim
+                Invoke("Straight", 0f);
+                break;
+        }
+    }
 
-    public void PatternSwitch()
+    public void PatternSwitchRepeating()
     {
         switch (activebulletPattern)
         {
@@ -78,6 +113,7 @@ public class PatternManager : MonoBehaviour
                 break;
             case BulletPatternEnum.BulletPatternsEnum.Straight:
                 //Can Aim
+               
                 InvokeRepeating("Straight", 0f, fireRate);
                 break;
             case BulletPatternEnum.BulletPatternsEnum.Spiral:

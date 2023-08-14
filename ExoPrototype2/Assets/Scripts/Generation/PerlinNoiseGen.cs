@@ -38,8 +38,8 @@ public class PerlinNoiseGen : MonoBehaviour
     [SerializeField] public int chunkSize = 50;
     [SerializeField] public int chunkSizeZ = 50;
     
-    [SerializeField] private bool sphere = false;
-    [SerializeField] private bool meshSmoothing;
+    [SerializeField] public bool sphere = false;
+    [SerializeField] public bool meshSmoothing;
     [SerializeField] private bool collider = false;
     
     [Header("RaceMode")]
@@ -77,12 +77,8 @@ public class PerlinNoiseGen : MonoBehaviour
     private void Awake()
     {
         // Check if there are Invalid Levels and compare if currently generated values is one of the invalid ones.
-        /*invalidLevelSafe = GetComponent<InvalidLevelSafe>();
-        if (invalidLevelSafe.Equals(chunkSize, chunkSizeZ, offset))
-        {
-            Debug.Log("This Level Gen is not playable");
-            offset += 20;
-        }*/
+        invalidLevelSafe = GetComponent<InvalidLevelSafe>();
+        invalidLevelSafe.LoadAndCompareCustomData();
         
         if (Instance != null)
         {
@@ -91,7 +87,28 @@ public class PerlinNoiseGen : MonoBehaviour
         }
         Instance = this;
     }
-    
+
+    /// <summary>
+    /// For loading Saved Levels and generating Random Level Values
+    /// </summary>
+    public void PerlinSetter(int chunkSize, int chunkSizeZ, int offset, bool raceMode, 
+        bool withCurve, bool sphere, bool meshSmoothing, List<GameObject> wayPoints)
+    {
+        this.chunkSize = chunkSize;
+        this.chunkSizeZ = chunkSizeZ;
+        this.offset = offset;
+        this.raceMode = raceMode;
+        this.withCurve = withCurve;
+        this.sphere = sphere;
+        this.meshSmoothing = meshSmoothing;
+        foreach(GameObject point in wayPoints)
+        {
+            this.waypoints.Add(point);
+        }
+        Debug.Log("Setted Saved Level Stats");
+        invalidLevelSafe.LoadAndCompareCustomData();
+    }
+
     /// <summary>
     /// Generates the terrain mesh based on Perlin noise and settings.
     /// Used for entire Level Generation
