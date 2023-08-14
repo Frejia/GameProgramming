@@ -21,8 +21,8 @@ public class GameModeManager : MonoBehaviour
     public bool win;
     
     [Header("InGameUI References")]
-    [SerializeField] private TextMeshProUGUI points1Text;
-    [SerializeField] private TextMeshProUGUI points2Text;
+    public TextMeshProUGUI points1Text;
+    public TextMeshProUGUI points2Text;
 
     [Header("WorldGen References")]
     [SerializeField] WorldManager world;
@@ -35,10 +35,12 @@ public class GameModeManager : MonoBehaviour
     public static event Win Player2Win;
 
     // ------- RACER MODE ---------
+    public int pointsToWin;
     [SerializeField] private Transform goal, start;
     [SerializeField] private List<Transform> checkPoints;
     [SerializeField] private GameObject portal;
     [SerializeField] private GameObject goalParticles;
+
 
     /// <summary>
     /// ------- GAME MODES ---------
@@ -56,7 +58,7 @@ public class GameModeManager : MonoBehaviour
     {
         Instance = this;
         world = WorldManager.Instance;
-        noiseGen = PerlinNoiseGen.Instance;
+        //noiseGen = PerlinNoiseGen.Instance;
     }
 
     private void Start()
@@ -167,26 +169,25 @@ public class GameModeManager : MonoBehaviour
     {
         Debug.Log("init Racer!");
         PlayerInputManager.instance.EnableJoining();
-        PlayerInputManager.instance.JoinPlayer();
+        //PlayerInputManager.instance.JoinPlayer();
         GenerateRace();
 
         for(int i = 1; i < noiseGen.waypoints.Count - 2; i++)
         {
             // Do not add Start and Finish to Checkpoints
             checkPoints.Add(noiseGen.waypoints[i].transform);
+            Vector3 dir = (noiseGen.waypoints[i].transform.position - noiseGen.waypoints[i - 1].transform.position).normalized;
+            Quaternion rotation = Quaternion.LookRotation(dir, Vector3.up);
+            Instantiate(portal, noiseGen.waypoints[i].transform.position * 5, rotation);
         }
         
         // Get Start and End Point, place a goal/Start there
         start = noiseGen.waypoints[0].transform;
         goal = noiseGen.waypoints[noiseGen.waypoints.Count-1].transform;
-        //Get random points from the ones that are left
-        int randomPoint = Random.Range(1, noiseGen.waypoints.Count - 2);
-        //Get Direction to previous point
-        Vector3 dir = (noiseGen.waypoints[randomPoint].transform.position - noiseGen.waypoints[randomPoint - 1].transform.position).normalized;
-        Quaternion rotation = Quaternion.LookRotation(dir, Vector3.up);
-            
-        Instantiate(portal, noiseGen.waypoints[randomPoint].transform.position * 5, rotation);
-        
+        Vector3 dir2 = (noiseGen.waypoints[noiseGen.waypoints.Count-1].transform.position - noiseGen.waypoints[noiseGen.waypoints.Count - 2].transform.position).normalized;
+        Quaternion rotation2 = Quaternion.LookRotation(dir2, Vector3.up);
+        Instantiate(goalParticles, goal.position, rotation2);
+
         // Spawn players at Start of Race
         GameManager.Instance.player1.transform.position = start.position;
     }
@@ -196,7 +197,7 @@ public class GameModeManager : MonoBehaviour
     {
         noiseGen.raceMode = true;
         noiseGen.withCurve = true;
-       noiseGen.Generate();
+        noiseGen.Generate();
         //if(noiseGen.isDone)world.InitializeGrid();
     }
 
@@ -227,5 +228,5 @@ public class GameModeManager : MonoBehaviour
             Player2Win();
         }
     }
-    
+
 }

@@ -47,8 +47,6 @@ public class GameManager : MonoBehaviour
         }
         newGame = true;
 
-        PerlinNoiseGen.Instance.Generate();
-        
         // Event Subscriptions
 //        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
         GameModeManager.Player1Win += SetWin;
