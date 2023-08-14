@@ -4,6 +4,9 @@ using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MeshCreator : MonoBehaviour
 {
@@ -33,7 +36,10 @@ public class MeshCreator : MonoBehaviour
             if (mf)
             {
                 var savePath = folderPath + saveName + i + ".asset";
+                #if UNITY_EDITOR
                 AssetDatabase.CreateAsset(mf.mesh, savePath);
+                #endif
+               
             }
         }
     }
