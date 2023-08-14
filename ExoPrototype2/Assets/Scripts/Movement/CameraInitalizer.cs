@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine; 
 
+/// <summary>
+/// CameraInitalizer handles the Cinemachine Cameras when using a second player,
+/// handles the correct layering of the players as well as the correct culling mask
+/// this solves the Problem was that the camera would not render the correct player when using a second player
+///
+/// Used on Player Prefab
+/// </summary>
 public class CameraInitalizer : MonoBehaviour
 {
+    [Header("Camera References")]
     [SerializeField]
     private Camera cam;
     [SerializeField]
     private GameObject virtualPlayerCam;
     
-    // Start is called before the first frame update
+    // Is called when second player spawns scene
     void Start()
     {
         ShipMovement[] characterMovements = FindObjectsOfType<ShipMovement>();

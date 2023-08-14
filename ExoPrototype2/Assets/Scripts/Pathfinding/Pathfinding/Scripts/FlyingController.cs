@@ -15,6 +15,8 @@ public class FlyingController : MonoBehaviour
     
     private void Start()
     {
+        _MoveToPoint = GameObject.Find("MovePoint").transform;
+        
         _Agent = GetComponent<AStarAgent>();
         StartCoroutine(Coroutine_MoveRandom());
         // When enemy sees player, leave curve

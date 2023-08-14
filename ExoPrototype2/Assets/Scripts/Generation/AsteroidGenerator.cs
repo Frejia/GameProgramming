@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// AsteroidGenerator, originially from the PathFinding project, but modified and commented by Fanny
+/// avoids area of Procedurally spawned level to spawn asteroids around it, asteroids are Meshes applied with Perlin Noise 
+/// </summary>
 public class AsteroidGenerator : MonoBehaviour
 {
+    [Header("Asteroid Spawning")]
     public float spawnRange;
     public float amountToSpawn;
     private Vector3 spawnPoint;
@@ -11,9 +16,9 @@ public class AsteroidGenerator : MonoBehaviour
     public float startSafeRange;
     private List<GameObject> objectsToPlace = new List<GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
+    private void SpawnAsteroids()
     {
+        // Pick a Spawn Point for each asteroid
         for (int i = 0; i < amountToSpawn; i++)
         {
             PickSpawnPoint();
@@ -23,20 +28,16 @@ public class AsteroidGenerator : MonoBehaviour
             {
                 PickSpawnPoint();
             }
-
+            
             objectsToPlace.Add(Instantiate(asteroid, spawnPoint, Quaternion.Euler(Random.Range(0f,360f), Random.Range(0f, 360f), Random.Range(0f, 360f))));
+            objectsToPlace[i].GetComponent<MeshSmoothing>().ApplyPerlin_Hard(objectsToPlace[i]);
             objectsToPlace[i].transform.parent = this.transform;
         }
 
         asteroid.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // Generate random Spawn Point
     public void PickSpawnPoint()
     {
         spawnPoint = new Vector3(

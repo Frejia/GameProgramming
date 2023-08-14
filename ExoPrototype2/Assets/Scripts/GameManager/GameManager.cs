@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// The different states and gamemodes to handle the game logic
+/// </summary>
 public enum GameState
 {
     Shooter,
@@ -13,36 +17,54 @@ public enum GameState
     Paused
 }
 
+/// <summary>
+/// The GameManager handles the game states and the UI
+/// Works together with the GameModeManager
+/// </summary>
+
 public class GameManager : MonoBehaviour
 {
+   //Game Manager Vairables
     public static GameManager Instance { get; private set; }
     private GameState gameState;
-    [SerializeField] private bool allowSecondPlayer;
-    private bool newGame = false;
+    private bool newGame = false; // Needed to determine whether to load scene or continue ongoing game
     
+    private bool allowSecondPlayer; // Allow Multiplayer or not
     private GameObject player1;
     private GameObject player2;
     
+    [Header("UI Variables")]
     [SerializeField] private Canvas inGameUI;
     [SerializeField] private Canvas winCanvas;
     [SerializeField] private Canvas loseCanvas;
     [SerializeField] private Canvas pauseCanvas;
-
-    // Start is called before the first frame update
+    
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-
-        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
-        GameMode1.Player1Win += SetWin;
-        GameMode1.Player2Win += SetWin;
-
         newGame = true;
+        
+        // Event Subscriptions
+        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
+        GameModeManager.Player1Win += SetWin;
+        GameModeManager.Player2Win += SetWin;
     }
 
+    private void Start()
+    {
+        // Get All References when going to new Scene from Main Menu Scene
+        inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
+        winCanvas = GameObject.Find("WinCanvas").GetComponent<Canvas>();
+        loseCanvas = GameObject.Find("LoseCanvas").GetComponent<Canvas>();
+        pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
+
+        player1 = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    // ------ Game State Setters ------ necessary for Event Delegates
     public void SetShooter()
     {
         this.gameState = GameState.Shooter;
@@ -61,7 +83,19 @@ public class GameManager : MonoBehaviour
         SwitchGameState();
     }
     
-    // Switch Game State
+    public void SetLose()
+    {
+        this.gameState = GameState.Lose;
+        SwitchGameState();
+    }
+    
+    public void SetWin()
+    {
+        this.gameState = GameState.Win;
+        SwitchGameState();
+    }
+    
+    // GameState Switch
   private void SwitchGameState()
   {
 
@@ -71,8 +105,8 @@ public class GameManager : MonoBehaviour
               if (newGame)
               {
                   SceneManager.LoadScene(1);
-                  GetComponent<GameMode1>().InitShooter();
-                  ShowCanvas(inGameUI);
+                  GetComponent<GameModeManager>().InitShooter();
+                 // ShowCanvas(inGameUI);
                   newGame = false;
               }
               else
@@ -85,7 +119,7 @@ public class GameManager : MonoBehaviour
               if (newGame)
               {
                   SceneManager.LoadScene(2);
-                  GetComponent<GameMode1>().InitRace();
+                  GetComponent<GameModeManager>().InitRace();
                   ShowCanvas(inGameUI);
                   newGame = false;
               }
@@ -115,8 +149,43 @@ public class GameManager : MonoBehaviour
               break;
       }
   }
+  
+    // ------ GameState Methods ------
+  private void PauseGame()
+  {
+      // Pause game
+      Time.timeScale = 0;
+      PlayerInputManager.instance.StopAllCoroutines();
+      player1.GetComponent<PlayerInput>().StopAllCoroutines();
+      player1.GetComponent<ShipMovement>().enabled = false;
+      player1.GetComponent<PlayerShoot>().enabled = false;
+      player1.transform.GetChild(0).gameObject.SetActive(false);
+      if (player2 != null)
+      {
+          player2.GetComponent<PlayerInput>().StopAllCoroutines();
+          player2.GetComponent<ShipMovement>().enabled = false;
+          player2.GetComponent<PlayerShoot>().enabled = false;
+          player2.transform.GetChild(0).gameObject.SetActive(false);
+      }
+  }
 
-  // Method for UI Buttons
+  public void ContinueGame()
+  {
+      Time.timeScale = 1;
+      player1.GetComponent<ShipMovement>().enabled = true;
+      player1.GetComponent<PlayerShoot>().enabled = true;
+      player1.transform.GetChild(0).gameObject.SetActive(true);
+        
+      if (player2 != null)
+      {
+          player2.GetComponent<ShipMovement>().enabled = true;
+          player2.GetComponent<PlayerShoot>().enabled = true;
+          player2.transform.GetChild(0).gameObject.SetActive(true);
+      }
+  }
+
+  // ------ Multiplayer ------
+  // Toggle Multiplayer
   public void AllowSecondPlayer()
   {
       //Toggle second player
@@ -132,11 +201,14 @@ public class GameManager : MonoBehaviour
       }
   }
 
+  // Get Instantiated Second Player
   private void GetSecondPlayer(PlayerInput obj)
   {
       player2 = obj.gameObject;
   }
 
+  // ------ UI ------
+  // Canvas Handling Methods
   private void ShowCanvas(Canvas canvas)
   {
       canvas.gameObject.SetActive(true);
@@ -147,48 +219,9 @@ public class GameManager : MonoBehaviour
       canvas.gameObject.SetActive(false);
   }
 
-  private void PauseGame()
-  {
-      // Pause game
-        Time.timeScale = 0;
-        PlayerInputManager.instance.StopAllCoroutines();
-        player1.GetComponent<PlayerInput>().StopAllCoroutines();
-        player1.GetComponent<ShipMovement>().enabled = false;
-        player1.GetComponent<PlayerShoot>().enabled = false;
-        player1.transform.GetChild(0).gameObject.SetActive(false);
-        if (player2 != null)
-        {
-            player2.GetComponent<PlayerInput>().StopAllCoroutines();
-            player2.GetComponent<ShipMovement>().enabled = false;
-            player2.GetComponent<PlayerShoot>().enabled = false;
-            player2.transform.GetChild(0).gameObject.SetActive(false);
-        }
-  }
-
-  public void ContinueGame()
-  {
-        Time.timeScale = 1;
-        player1.GetComponent<ShipMovement>().enabled = true;
-        player1.GetComponent<PlayerShoot>().enabled = true;
-        player1.transform.GetChild(0).gameObject.SetActive(true);
-        
-        if (player2 != null)
-        {
-            player2.GetComponent<ShipMovement>().enabled = true;
-            player2.GetComponent<PlayerShoot>().enabled = true;
-            player2.transform.GetChild(0).gameObject.SetActive(true);
-        }
-  }
-
   public void GoToMainMenu()
   {
       SceneManager.LoadScene(0);
   }
-  
-    public void SetWin()
-    {
-        this.gameState = GameState.Win;
-        SwitchGameState();
-    }
-  
+
 }

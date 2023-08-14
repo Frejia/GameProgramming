@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scriptable Object Bullet Pattern with Settings for different variations and settings
+/// </summary>
 [CreateAssetMenu(fileName = "new Bulletpattern", menuName = "Bulletpattern")]
 public class BulletPatterns : ScriptableObject
 {

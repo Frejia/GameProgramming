@@ -7,15 +7,93 @@ using UnityEngine;
 
 public class InvalidLevelSafe : MonoBehaviour
 {
-   /*[SerializeField] private List<InvalidLevelSafe> invalidLevels;
+     public static InvalidLevelSafe Instance;
+
+     [SerializeField] private List<InvalidLevelSafe> invalidLevels;
    private string ScriptableObjectspath = "Assets/Prefabs/Levels/InvalidLevels";
    private int chunkSize, chunkSizeZ, seed;
 
    public bool clearInvalidLevels;
    public bool createInvalidLevels;
+   
+   [SerializeField] private ScriptableInvalidLevel invalidLevel; // Reference to the Scriptable Object template
 
    private void Awake()
    {
+            Instance = this;
+   }
+
+   public void EditInvalidLevelSave()
+   {
+        // Create a new Instance of the Scriptable Object
+        //ScriptableInvalidLevel invalidLevel = ScriptableObject.CreateInstance<ScriptableInvalidLevel>();
+
+        // Set the values of the Scriptable Object
+        invalidLevel.chunkSize.Add(GetComponent<PerlinNoiseGen>().chunkSize);
+        invalidLevel.chunkSizeZ.Add(GetComponent<PerlinNoiseGen>().chunkSizeZ);
+        invalidLevel.offset.Add(GetComponent<PerlinNoiseGen>().offset);
+
+        string filePath = Path.Combine(Application.persistentDataPath, "InvalidLevel.asset");
+        SaveScriptableObject(invalidLevel, filePath);
+   }
+
+   private void SaveScriptableObject(ScriptableInvalidLevel level, string filePath)
+   {
+        string json = JsonUtility.ToJson(level);
+        File.WriteAllText(filePath, json);
+   }
+   
+   // Compare the values from the Scriptable Object and the Current PerlinNoiseGenerator
+   public bool LoadAndCompareCustomData()
+   {
+        bool invalid = false;
+        
+        string filePath = Path.Combine(Application.persistentDataPath, "InvalidLevel.asset");
+        if (File.Exists(filePath))
+        {
+             string json = File.ReadAllText(filePath);
+             ScriptableInvalidLevel loadedLevel = JsonUtility.FromJson<ScriptableInvalidLevel>(json);
+
+             // Compare the values from the loaded Scriptable Object
+             for (int i = 0; i < loadedLevel.chunkSize.Count; i++)
+             {
+                  int loadedChunkSize = loadedLevel.chunkSize[i];
+                  int loadedChunkSizeZ = loadedLevel.chunkSizeZ[i];
+                  int loadedOffset = loadedLevel.offset[i];
+
+                  int currentChunkSize = GetComponent<PerlinNoiseGen>().chunkSize;
+                  int currentChunkSizeZ = GetComponent<PerlinNoiseGen>().chunkSizeZ;
+                  int currentOffset = GetComponent<PerlinNoiseGen>().offset;
+
+                  if (loadedChunkSize == currentChunkSize && loadedChunkSizeZ == currentChunkSizeZ && loadedOffset == currentOffset)
+                  {
+                       invalid = true;
+                       return invalid;
+                  }
+                  else
+                  {
+                       invalid = false;
+                  }
+             }
+        }
+        else
+        {
+             invalid = false;
+             return invalid;
+        }
+
+        return invalid;
+   }
+   
+   
+   /// <summary>
+   /// ----- LEGACY: Loads the Scriptable Objects from the folder and read the Invalid Levels --> Only worked in Unity Editor
+   /// </summary>
+#if UNITY_EDITOR
+   // Former Awake Method
+   private void GetInvalidLevels()
+   {
+       
        // int assetCount = CountAssetsInFolder(ScriptableObjectspath);
         //Debug.Log("Number of assets in folder: " + assetCount);
         
@@ -24,7 +102,7 @@ public class InvalidLevelSafe : MonoBehaviour
         Debug.Log(loadedObjects.Length);
         foreach (var guid in loadedObjects)
         {
-             InvalidLevelSafe invalidLevelSafe = new InvalidLevelSafe(guid.chunkSize, guid.chunkSizeZ, guid.seed);
+             InvalidLevelSafe invalidLevelSafe = new InvalidLevelSafe(guid.chunkSizeI, guid.chunkSizeZI, guid.offsetI);
              invalidLevels.Add(invalidLevelSafe);
         }
    }
@@ -42,7 +120,6 @@ public class InvalidLevelSafe : MonoBehaviour
                   count++;
              }
         }
-
         return count;
    }
    
@@ -59,9 +136,9 @@ public class InvalidLevelSafe : MonoBehaviour
    {
         //Create new Scriptable Object of ScriptableInvalidLevel
         ScriptableInvalidLevel invalidLevel = ScriptableObject.CreateInstance<ScriptableInvalidLevel>();
-        invalidLevel.chunkSize = GetComponent<PerlinNoiseGen>().chunkSize;
-        invalidLevel.chunkSizeZ = GetComponent<PerlinNoiseGen>().chunkSizeZ;
-        invalidLevel.seed = GetComponent<PerlinNoiseGen>().offset;
+        invalidLevel.chunkSizeI = GetComponent<PerlinNoiseGen>().chunkSize;
+        invalidLevel.chunkSizeZI = GetComponent<PerlinNoiseGen>().chunkSizeZ;
+        invalidLevel.offsetI = GetComponent<PerlinNoiseGen>().offset;
         //safe Scriptable Object to Assets Folder
 
         string path = "Assets/Prefabs/Levels/InvalidLevels/level.asset"; // Set your desired path
@@ -98,6 +175,6 @@ public class InvalidLevelSafe : MonoBehaviour
          {
               CreateInvalidLevelObj();
          }
-    }*/
-    
+    }
+#endif
 }

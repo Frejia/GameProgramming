@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// uses Aim abstract class, but overrides the target to be closest Enemy with the EnemyLockOn and RemoveFromTargets methods
+/// </summary>
 public class PlayerAim : Aim
 {
-    [SerializeField] private List<GameObject> targets;
+    private List<GameObject> targets;
     
     void OnEnable()
     {
         ObjectsInView.OnEnemyInScreen += EnemyLockOn;
         ObjectsInView.OnEnemyNotInScreen += RemoveFromTargets;
     }
-
+    
     private void OnDisable()
     {
         ObjectsInView.OnEnemyInScreen -= EnemyLockOn;
         ObjectsInView.OnEnemyNotInScreen -= RemoveFromTargets;
     }
 
+    // Get Nearest Enemy if there are more than one in the proximity
     private GameObject GetNearestEnemy()
     {
         GameObject nearestObject = null;
@@ -37,6 +41,7 @@ public class PlayerAim : Aim
        return nearestObject;
     }
 
+    // Create list of which Enemies are currently in proximity and set the correct target
     private void EnemyLockOn(GameObject enemy)
     {
         // If that gameobject is not already in the list, add it
@@ -55,6 +60,7 @@ public class PlayerAim : Aim
             }
     }
 
+    // When enemy leaves player proximity, then remove it from the list and update the target
     private void RemoveFromTargets(GameObject enemy)
     {
         // Remove the enemy from the list if it exists in the list

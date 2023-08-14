@@ -3,8 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the Enemy seeing the player and all related Event delegates
+///
+/// Used for EnemyPatternManager and Enemy Movement
+/// Applied to every Enemy in the game
+/// </summary>
 public class EnemySeesPlayer : MonoBehaviour
 {
+   
+    // ------ EVENT DELEGATES ------
     public delegate void SeesPlayer(GameObject enemy);
     public delegate void FindPlayer(GameObject enemy, GameObject player);
     public static event SeesPlayer CanSee;

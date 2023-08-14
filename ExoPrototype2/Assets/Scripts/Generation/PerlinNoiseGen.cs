@@ -10,6 +10,17 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = System.Random;
 
+/// <summary>
+/// PerlinNoiseGen handles full Perlin Noise Terrain Generation for Level Generation
+/// used with Game Mode Manager, needs to run and be done before the Pathfinding is initialized
+/// Resource Video: https://youtu.be/TZFv493D7jo
+/// Changed aspects by Fanny: Sphere Settings, Commenting and code refactoring,
+/// Additional Gizmo and Race Mode (including PointGen and RemoveCubesWithinRadius),
+/// MeshSmoothing, Collider, Waypoints, Prism instead of Cube Prefab, Save Mesh, Invalid Levels
+///
+/// Legacy: Repeated Attempts at trying to make this into Marching Cubes --> failed and not in final version
+/// Reason for using this and not other Marching Cubes: see paper, section "problems"
+/// </summary>
 public class PerlinNoiseGen : MonoBehaviour
 {
     public static PerlinNoiseGen Instance { get; private set; }
@@ -27,8 +38,8 @@ public class PerlinNoiseGen : MonoBehaviour
     [SerializeField] public int chunkSize = 50;
     [SerializeField] public int chunkSizeZ = 50;
     
-    [SerializeField] private bool sphere = false;
-    [SerializeField] private bool meshSmoothing;
+    [SerializeField] public bool sphere = false;
+    [SerializeField] public bool meshSmoothing;
     [SerializeField] private bool collider = false;
     
     [Header("RaceMode")]
@@ -66,12 +77,8 @@ public class PerlinNoiseGen : MonoBehaviour
     private void Awake()
     {
         // Check if there are Invalid Levels and compare if currently generated values is one of the invalid ones.
-        /*invalidLevelSafe = GetComponent<InvalidLevelSafe>();
-        if (invalidLevelSafe.Equals(chunkSize, chunkSizeZ, offset))
-        {
-            Debug.Log("This Level Gen is not playable");
-            offset += 20;
-        }*/
+        invalidLevelSafe = GetComponent<InvalidLevelSafe>();
+        invalidLevelSafe.LoadAndCompareCustomData();
         
         if (Instance != null)
         {
@@ -81,8 +88,27 @@ public class PerlinNoiseGen : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// For loading Saved Levels and generating Random Level Values
+    /// </summary>
+    public void PerlinSetter(int chunkSize, int chunkSizeZ, int offset, bool raceMode, 
+        bool withCurve, bool sphere, bool meshSmoothing, List<GameObject> wayPoints)
+    {
+        this.chunkSize = chunkSize;
+        this.chunkSizeZ = chunkSizeZ;
+        this.offset = offset;
+        this.raceMode = raceMode;
+        this.withCurve = withCurve;
+        this.sphere = sphere;
+        this.meshSmoothing = meshSmoothing;
+        foreach(GameObject point in wayPoints)
+        {
+            this.waypoints.Add(point);
+        }
+        Debug.Log("Setted Saved Level Stats");
+        invalidLevelSafe.LoadAndCompareCustomData();
+    }
 
-    
     /// <summary>
     /// Generates the terrain mesh based on Perlin noise and settings.
     /// Used for entire Level Generation

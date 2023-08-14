@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles Health Stats of Enemies and Players
+///
+/// When the Object gets hit, it will take damage and check if it is dead
+/// Sends to GameManager whether player is dead or an enemy is dead to count points
+/// </summary>
 public class Health : MonoBehaviour
 {
     [SerializeField] public int maxHealth = 100;
@@ -39,6 +45,11 @@ public class Health : MonoBehaviour
                 EnemyGotHit(this.transform.parent.gameObject, attacker);
                 //Destroy Object
                 Destroy(this.transform.parent, 5f);
+            }
+            
+            if (this.gameObject.tag == "Player")
+            {
+               GameManager.Instance.SetLose();
             }
            
         }

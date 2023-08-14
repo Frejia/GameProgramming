@@ -2,20 +2,21 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+/// <summary>
+/// Mesh Smoothing --> applies perlin noise to the mesh in a bit of a Marching Cubes Style
+/// </summary>
 public class MeshSmoothing : MonoBehaviour
 {
+    [Header("Noise Settings")]
     public  float noiseScale = 0.5f;
     public float noiseStrength = 1f;
 
+    // Mesh variables
     private MeshFilter meshFilter;
     private MeshRenderer _meshRenderer;
     private Mesh originalMesh;
     Vector3[] vertPositions;
     
-    public float scaleX = 1f;
-    public float scaleY = 1f;
-    
-    private GameObject visage;
     private Mesh mesh;
     private Vector3[] originalVertices;
     
@@ -43,6 +44,7 @@ public class MeshSmoothing : MonoBehaviour
 
     }
 
+    // Apply Perlin normal noise to the mesh
     void ApplyPerlin()
     {
         Vector3[] vertices = originalMesh.vertices;
@@ -63,6 +65,7 @@ public class MeshSmoothing : MonoBehaviour
         originalMesh.RecalculateNormals();
     }
     
+    // Apply Perlin with a threshold value to the mesh, to make it look more sharp
     public void ApplyPerlin_Hard(GameObject meshObj)
     {
         meshFilter = meshObj.GetComponent<MeshFilter>();
@@ -70,6 +73,7 @@ public class MeshSmoothing : MonoBehaviour
         originalVertices = originalMesh.vertices;
         Vector3[] vertices = originalMesh.vertices;
 
+        // Go over all vertexes of the mesh and apply a Perlin noise offset
         for (int i = 0; i < vertices.Length; i++)
         {
             Vector3 originalVertex = originalVertices[i];
@@ -103,7 +107,8 @@ public class MeshSmoothing : MonoBehaviour
                 vertices[i] = originalVertex + offset * noiseStrength;
             }
         }
-
+        
+        // Apply the new vertices to the mesh
         originalMesh.vertices = vertices;
         originalMesh.RecalculateNormals();
     }

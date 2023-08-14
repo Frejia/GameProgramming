@@ -3,72 +3,74 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
-public class GameMode1 : MonoBehaviour
+/// <summary>
+/// Handles the different Game Mode Instantiations and the Win Conditions
+/// </summary>
+public class GameModeManager : MonoBehaviour
 {
-    //Player Points
+    // ------- SHOOTER MODE ---------
     public int points1;
     public int points2;
+    //true if win, false if lose
+    public bool win;
     
+    [Header("InGameUI References")]
     [SerializeField] private TextMeshProUGUI points1Text;
     [SerializeField] private TextMeshProUGUI points2Text;
 
-    [SerializeField] private GameObject GenManager;
+    [Header("WorldGen References")]
+    private PerlinNoiseGen perlin;
     [SerializeField] WorldManager world;
     [SerializeField] PerlinNoiseGen noiseGen;
     public bool debug;
     
-    //true if win, false if lose
-    public bool win;
-
+    // Events
     public delegate void Win();
     public static event Win Player1Win;
     public static event Win Player2Win;
 
-    private PerlinNoiseGen perlin;
+    // ------- RACER MODE ---------
     [SerializeField] private Transform goal, start;
     [SerializeField] private GameObject portal;
     
-    //--- Game Modes
-    /*
-     Player vs AI
-     Player can fly through a level and fight enemies like in a bullet hell shooter
-     
-     Player vs Player
-     Players can fight one another in bullet hell style
-     
-     Player vs Player Hide and Seek
-     In a more elaborate map, players can hide and seek one another
-     
-     Player vs AI Hide and Seek
-     Players can hide from AI
-     
-     Player vs Player race
-     There is a start and goal and the players have to race one another there
-     
-     */
+    /// <summary>
+    /// ------- GAME MODES ---------
+    ///Player vs AI Shooter
+    ///Player can fly through a level and fight enemies like in a bullet hell shooter
+    ///
+    ///Player vs Player Shooter
+    /// Players can fight one another in bullet hell style
+    ///
+    ///Player vs Player Racer
+    /// There is a start and goal and the players have to race one another there, Enemies try to stop them
+    /// </summary>
+   
     private void Start()
     {
+        // Get All References when going to new Scene from Main Menu Scene
+        points1Text = GameObject.Find("Points1").GetComponent<TextMeshProUGUI>();
+        points2Text = GameObject.Find("Points2").GetComponent<TextMeshProUGUI>();
+        
+        world = WorldManager.Instance;
+        noiseGen = PerlinNoiseGen.Instance;
+        
+        // Racer Mode References
+        start = noiseGen.waypoints[0].transform;
+        goal = noiseGen.waypoints[noiseGen.waypoints.Count - 1].transform;
+        
+        // Shooter Mode Point Handling
         Health.EnemyGotHit += CountPoints;
-        perlin = PerlinNoiseGen.Instance;
-        InitRace();
         points1 = 0;
         points2 = 0;
         points1Text.text = points1.ToString();
         points2Text.text = points2.ToString();
     }
-
-    private void Update()
-    {
-        if(points1 >= 10 || points2 >= 10)
-        {
-            WinCheck();
-        }
-    }
-
-    // -------- POINTS ---------------
+    
+    // Count poitns when Enemy is elemenated and show in UI
     private void CountPoints(GameObject enemy, GameObject player)
     {
         int points = 0;
@@ -91,10 +93,16 @@ public class GameMode1 : MonoBehaviour
             points2 += points;
         }
         
+        if(points1 >= 10 || points2 >= 10)
+        {
+            WinCheck();
+        }
+        
         points1Text.text = points1.ToString();
         points2Text.text = points2.ToString();
     }
 
+    // Check which player has won and send Win Event to change GameState
     private void WinCheck()
     {
         if (points1 > points2)
@@ -111,14 +119,13 @@ public class GameMode1 : MonoBehaviour
         }
     }
 
-    // -------- SHOOTER MODE ------------
-
+    // -------- SHOOTER INIT ------------
     public void InitShooter()
     {
-       
         Generate();
     }
     
+    // Generate Terrain
     private void Generate()
     {
              for (int i = 0; i < perlin.waypoints.Count - 1; i++){
@@ -143,9 +150,10 @@ public class GameMode1 : MonoBehaviour
         
     }
     
-    // -------- RACE MODE ------------
+    // -------- RACE MODE INIT ------------
     public void InitRace()
     {
+        PlayerInputManager.instance.EnableJoining();
         GenerateRace();
         
         // Get Start and End Point, place a goal/Start there
@@ -160,6 +168,7 @@ public class GameMode1 : MonoBehaviour
         Instantiate(portal, perlin.waypoints[randomPoint].transform.position * 5, rotation);
     }
     
+    // Generate Terrain
     private void GenerateRace()
     {
         noiseGen.raceMode = true;
