@@ -49,6 +49,8 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] private ParticleSystem boostEffect;
     private Rigidbody rb;
     private Rotator rotator;
+    private NewRotator newRotator;
+    
     
     //Input Values
     private float thrust1D, upDown1D, strafe1D, roll1D;
@@ -58,11 +60,12 @@ public class ShipMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rotator = gameObject.transform.GetChild(0).GetComponent<Rotator>();
+        //rotator = gameObject.transform.GetChild(0).GetComponent<Rotator>();
+        newRotator = gameObject.transform.GetChild(0).GetComponent<NewRotator>();
 
         Cursor.lockState = CursorLockMode.Confined;
         currentBoostAmount = maxBoostAmount;
-       boostEffect.Stop();
+        boostEffect.Stop();
     }
 
     // Update is called once per frame
@@ -142,17 +145,21 @@ public class ShipMovement : MonoBehaviour
             rb.AddRelativeForce(Vector3.right * strafe1D * strafeThrust * Time.fixedDeltaTime);
             horizontalGlide = strafe1D + strafeThrust;
             //Check if strafe left or right
+            //newRotator.SetStrafe(strafe1D);
             
+            /*
             if (strafe1D < 0)
             {
                 //left
                 //rotator.SetRotState(RotationDirection.Left);
+                
             }
             else
             {
                 //right
                 //rotator.SetRotState(RotationDirection.Right);
             }
+            */
             
         }
         else
@@ -160,7 +167,11 @@ public class ShipMovement : MonoBehaviour
             rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
             horizontalGlide *= leftRightGlideReduction;
             //rotator.SetRotState(RotationDirection.Neutral);
+            strafe1D = 0;
+            //newRotator.SetStrafe(strafe1D);
         }
+        
+        newRotator.SetStrafe(strafe1D);
         
     }
     
