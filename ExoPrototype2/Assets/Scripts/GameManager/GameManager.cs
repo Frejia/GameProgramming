@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,6 +53,17 @@ public class GameManager : MonoBehaviour
         GameModeManager.Player2Win += SetWin;
     }
 
+    private void Start()
+    {
+        // Get All References when going to new Scene from Main Menu Scene
+        inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
+        winCanvas = GameObject.Find("WinCanvas").GetComponent<Canvas>();
+        loseCanvas = GameObject.Find("LoseCanvas").GetComponent<Canvas>();
+        pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
+
+        player1 = GameObject.FindGameObjectWithTag("Player");
+    }
+
     // ------ Game State Setters ------ necessary for Event Delegates
     public void SetShooter()
     {
@@ -94,7 +106,7 @@ public class GameManager : MonoBehaviour
               {
                   SceneManager.LoadScene(1);
                   GetComponent<GameModeManager>().InitShooter();
-                  ShowCanvas(inGameUI);
+                 // ShowCanvas(inGameUI);
                   newGame = false;
               }
               else

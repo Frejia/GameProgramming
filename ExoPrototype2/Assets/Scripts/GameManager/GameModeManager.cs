@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
@@ -36,21 +37,31 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private Transform goal, start;
     [SerializeField] private GameObject portal;
     
-    //--- Game Modes
-    /*
-     Player vs AI Shooter
-     Player can fly through a level and fight enemies like in a bullet hell shooter
-     
-     Player vs Player Shooter
-     Players can fight one another in bullet hell style
-     
-     Player vs Player Racer
-     There is a start and goal and the players have to race one another there, Enemies try to stop them
-     */
+    /// <summary>
+    /// ------- GAME MODES ---------
+    ///Player vs AI Shooter
+    ///Player can fly through a level and fight enemies like in a bullet hell shooter
+    ///
+    ///Player vs Player Shooter
+    /// Players can fight one another in bullet hell style
+    ///
+    ///Player vs Player Racer
+    /// There is a start and goal and the players have to race one another there, Enemies try to stop them
+    /// </summary>
+   
     private void Start()
     {
-        perlin = PerlinNoiseGen.Instance;
-
+        // Get All References when going to new Scene from Main Menu Scene
+        points1Text = GameObject.Find("Points1").GetComponent<TextMeshProUGUI>();
+        points2Text = GameObject.Find("Points2").GetComponent<TextMeshProUGUI>();
+        
+        world = WorldManager.Instance;
+        noiseGen = PerlinNoiseGen.Instance;
+        
+        // Racer Mode References
+        start = noiseGen.waypoints[0].transform;
+        goal = noiseGen.waypoints[noiseGen.waypoints.Count - 1].transform;
+        
         // Shooter Mode Point Handling
         Health.EnemyGotHit += CountPoints;
         points1 = 0;
@@ -142,6 +153,7 @@ public class GameModeManager : MonoBehaviour
     // -------- RACE MODE INIT ------------
     public void InitRace()
     {
+        PlayerInputManager.instance.EnableJoining();
         GenerateRace();
         
         // Get Start and End Point, place a goal/Start there

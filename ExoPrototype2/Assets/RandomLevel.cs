@@ -13,7 +13,8 @@ public class RandomLevel : MonoBehaviour
     private List<GameObject> wayPoints;
     private bool raceMode, withCurve, sphere, meshSmoothing;
     
-    
+    // Generate Random Values for the Perlin Noise Generator
+    // Executed when pressing Generate Random Level Button
     public void GenerateRandomLevel()
     {
         PerlinNoiseGen perlin = PerlinNoiseGen.Instance;
@@ -24,6 +25,7 @@ public class RandomLevel : MonoBehaviour
             withCurve, sphere, meshSmoothing, wayPoints);
     }
 
+    // Set if Level for Racing Mode or not
     public void SetRaceMode(bool raceModeOn)
     {
         raceMode = raceModeOn;
@@ -31,6 +33,7 @@ public class RandomLevel : MonoBehaviour
         chunkSizeZ = 200;
     }
 
+    // Generate a random ChunkSize, ChunkSizeZ and Offset
     private void GenerateChunkSize()
     {
         chunkSize = Random.Range(1, 200);
@@ -38,6 +41,7 @@ public class RandomLevel : MonoBehaviour
         offset = Random.Range(0, 30);
     }
 
+    // Random waypoints for portals and the racing line to follow
     private void GenerateRandomWayPoints()
     {
         //Generate 6 Random Waypoints in the grid area

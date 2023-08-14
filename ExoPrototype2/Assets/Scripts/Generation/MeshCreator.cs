@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -17,10 +18,15 @@ using UnityEditor;
 /// </summary>
 public class MeshCreator : MonoBehaviour
 {
-    
+    public static MeshCreator Instance;
     [SerializeField] private ScriptableInvalidLevel savedLevels;
     private PerlinNoiseGen perlin;
-    
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void EditLevelSave()
     {
         perlin = PerlinNoiseGen.Instance;
