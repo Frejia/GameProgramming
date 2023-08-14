@@ -66,12 +66,12 @@ public class PerlinNoiseGen : MonoBehaviour
     private void Awake()
     {
         // Check if there are Invalid Levels and compare if currently generated values is one of the invalid ones.
-        invalidLevelSafe = GetComponent<InvalidLevelSafe>();
+        /*invalidLevelSafe = GetComponent<InvalidLevelSafe>();
         if (invalidLevelSafe.Equals(chunkSize, chunkSizeZ, offset))
         {
             Debug.Log("This Level Gen is not playable");
             offset += 20;
-        }
+        }*/
         
         if (Instance != null)
         {
