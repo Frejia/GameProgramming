@@ -22,8 +22,16 @@ public class ReachGoal : MonoBehaviour
     {
         if (!reachedGoal)
         {
-            ReachedGoal(other.gameObject);
-            reachedGoal = true;
+            // check if player one has enough points and is the first to reach the goal
+            if (GameModeManager.Instance.points1 > GameModeManager.Instance.pointsToWin  && other.gameObject.CompareTag("Player"))
+            {
+                ReachedGoal(other.gameObject);
+                reachedGoal = true;
+            } else if (GameModeManager.Instance.points2 > GameModeManager.Instance.pointsToWin && other.gameObject.CompareTag("Player2"))
+            {
+                ReachedGoal(other.gameObject);
+                reachedGoal = true;
+            }
         }
         else
         {

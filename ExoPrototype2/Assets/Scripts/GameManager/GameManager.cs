@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         newGame = true;
-        
+
         // Event Subscriptions
 //        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
         GameModeManager.Player1Win += SetWin;

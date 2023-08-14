@@ -174,7 +174,15 @@ public class PatternManager : MonoBehaviour
             bul.transform.position = transform.position;
             
             bul.SetActive(true);
-            bul.GetComponent<Bullet>().SetSpeed(bulletSpeed + GetComponent<Rigidbody>().velocity.magnitude);
+            
+            if (gameObject.tag == "Enemy")
+            {
+                bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+            }
+            else
+            {
+                bul.GetComponent<Bullet>().SetSpeed(bulletSpeed + GetComponent<Rigidbody>().velocity.magnitude);
+            }
             bul.GetComponent<Bullet>().SetDirection(bulDir);
             bul.GetComponent<Bullet>().SetUser(this.gameObject);
             bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
