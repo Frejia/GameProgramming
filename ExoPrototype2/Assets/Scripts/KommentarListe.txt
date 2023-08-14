@@ -18,7 +18,7 @@ ShipMovement DONE
 
 Bullet 
 BulletPool
-EnemyPatternManager
+EnemyPatternManager DONE
 ObjectsInView
 PatternManager
 PlayerShoot DONE

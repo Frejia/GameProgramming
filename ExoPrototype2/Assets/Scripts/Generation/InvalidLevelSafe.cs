@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class InvalidLevelSafe : MonoBehaviour
 {
-   /*[SerializeField] private List<InvalidLevelSafe> invalidLevels;
+   [SerializeField] private List<InvalidLevelSafe> invalidLevels;
    private string ScriptableObjectspath = "Assets/Prefabs/Levels/InvalidLevels";
    private int chunkSize, chunkSizeZ, seed;
 
@@ -98,6 +98,6 @@ public class InvalidLevelSafe : MonoBehaviour
          {
               CreateInvalidLevelObj();
          }
-    }*/
+    }
     
 }
