@@ -35,7 +35,9 @@ public class GameModeManager : MonoBehaviour
 
     // ------- RACER MODE ---------
     [SerializeField] private Transform goal, start;
+    [SerializeField] private List<Transform> checkPoints;
     [SerializeField] private GameObject portal;
+    [SerializeField] private GameObject goalParticles;
     
     /// <summary>
     /// ------- GAME MODES ---------
@@ -64,6 +66,7 @@ public class GameModeManager : MonoBehaviour
         
         // Shooter Mode Point Handling
         Health.EnemyGotHit += CountPoints;
+        ReachGoal.ReachedGoal += EndRace;
         points1 = 0;
         points2 = 0;
         points1Text.text = points1.ToString();
@@ -155,6 +158,12 @@ public class GameModeManager : MonoBehaviour
     {
         PlayerInputManager.instance.EnableJoining();
         GenerateRace();
+
+        for(int i = 1; i < perlin.waypoints.Count - 2; i++)
+        {
+            // Do not add Start and Finish to Checkpoints
+            checkPoints.Add(perlin.waypoints[i].transform);
+        }
         
         // Get Start and End Point, place a goal/Start there
         start = perlin.waypoints[0].transform;
@@ -182,10 +191,22 @@ public class GameModeManager : MonoBehaviour
        
     }
 
-    private void ReachGoal()
+    // Check which player has won and send Win Event to change GameState
+    // Connected to the ReachGoal Event on the Goal Object
+    private void EndRace(GameObject player)
     {
-        
-        
+        if(player.tag == "Player")
+        {
+            win = true;
+            Debug.Log("Player 1 Won");
+            Player1Win();
+        }
+        else
+        {
+            win = true;
+            Debug.Log("Player 2 Won");
+            Player2Win();
+        }
     }
     
 }

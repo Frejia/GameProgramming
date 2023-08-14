@@ -57,6 +57,7 @@ public class PlayerAim : Aim
             else
             {
                 target = enemy;
+                enemy.GetComponent<MeshRenderer>().material.color = Color.red;
             }
     }
 

@@ -52,14 +52,16 @@ public class PatternManager : MonoBehaviour
         this.startAngle = startAngle;
         this.endAngle = endAngle;
 
-        if (this.gameObject.tag == "Enemy")
-        {
-            PatternSwitchInvoke();
-        }
-        else
+        PatternSwitchRepeating();
+        
+        /*if (this.gameObject.tag == "Enemy")
         {
             PatternSwitchRepeating();
         }
+        else
+        {
+            PatternSwitchInvoke();
+        }*/
     }
     
     public void SetBulletPatternNone()
@@ -139,9 +141,12 @@ public class PatternManager : MonoBehaviour
 
     private void Straight()
     {
-        Vector3 bulDir = AimInstance.Aiming();
-        
-        float angle = (float)Math.Atan2(bulDir.y - transform.position.y,
+        if(isAiming)
+       {
+           bulDir = AimInstance.Aiming();
+       }
+
+       float angle = (float)Math.Atan2(bulDir.y - transform.position.y,
             bulDir.x - transform.position.x);
         for (int i = 0; i <= bulletsAmount; i++)
         {
@@ -151,6 +156,7 @@ public class PatternManager : MonoBehaviour
              bulDir = (bulMoveVector - transform.position).normalized;
             GameObject bul = GetCorrectBullet();
             bul.transform.position = transform.position;
+            
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
