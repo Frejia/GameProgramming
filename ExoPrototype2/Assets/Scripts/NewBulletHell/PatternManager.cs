@@ -145,6 +145,22 @@ public class PatternManager : MonoBehaviour
        {
            bulDir = AimInstance.Aiming();
        }
+        else
+        {
+            bulDir = -gameObject.transform.GetChild(0).transform.right;
+            
+            // create raycast
+            /*
+            Debug.DrawRay(new Vector3
+                (
+                    gameObject.transform.GetChild(0).transform.position.x, 
+                    gameObject.transform.GetChild(0).transform.position.y, 
+                    gameObject.transform.GetChild(0).transform.position.z
+                ), 
+                bulDir * 100000, Color.red);
+                */
+
+        }
 
        float angle = (float)Math.Atan2(bulDir.y - transform.position.y,
             bulDir.x - transform.position.x);
@@ -153,12 +169,12 @@ public class PatternManager : MonoBehaviour
             float bulDirX = transform.position.x + Mathf.Cos(angle) * 10;
             float bulDirY = transform.position.y + Mathf.Sin(angle) * 10;
             Vector3 bulMoveVector = new Vector3(bulDirX, bulDirY, 0f);
-             bulDir = (bulMoveVector - transform.position).normalized;
+            //bulDir = (bulMoveVector - transform.position).normalized;
             GameObject bul = GetCorrectBullet();
             bul.transform.position = transform.position;
             
             bul.SetActive(true);
-            bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+            bul.GetComponent<Bullet>().SetSpeed(bulletSpeed + GetComponent<Rigidbody>().velocity.magnitude);
             bul.GetComponent<Bullet>().SetDirection(bulDir);
             bul.GetComponent<Bullet>().SetUser(this.gameObject);
             bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
