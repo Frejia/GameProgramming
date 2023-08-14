@@ -39,7 +39,6 @@ public class Bullet : MonoBehaviour
         speed = savedSpeed;
         Invoke("Destroy", _bulletLifeTime);
         impactEffect.Stop();
-        SetFriendlyFire();
     }
     
     // Update is called once per frame
@@ -53,7 +52,7 @@ public class Bullet : MonoBehaviour
         this.direction = direction;
     }
 
-    private void SetFriendlyFire()
+    public void SetFriendlyFire()
     {
         friendlyFire = true;
         // renderer.enabled = true;
