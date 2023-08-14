@@ -77,8 +77,8 @@ public class PerlinNoiseGen : MonoBehaviour
     private void Awake()
     {
         // Check if there are Invalid Levels and compare if currently generated values is one of the invalid ones.
-        invalidLevelSafe = GetComponent<InvalidLevelSafe>();
-        invalidLevelSafe.LoadAndCompareCustomData();
+        /*invalidLevelSafe = GetComponent<InvalidLevelSafe>();
+        invalidLevelSafe.LoadAndCompareCustomData();*/
         
         if (Instance != null)
         {
@@ -86,6 +86,8 @@ public class PerlinNoiseGen : MonoBehaviour
             return;
         }
         Instance = this;
+
+        Generate();
     }
 
     /// <summary>
@@ -115,6 +117,7 @@ public class PerlinNoiseGen : MonoBehaviour
     /// </summary>
     public IEnumerator Generate()
     {
+        Debug.Log("Generating Terrain!");
         isDone = false;
         float startTime = Time.realtimeSinceStartup;
 

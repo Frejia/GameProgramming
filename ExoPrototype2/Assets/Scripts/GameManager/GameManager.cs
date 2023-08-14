@@ -26,12 +26,12 @@ public class GameManager : MonoBehaviour
 {
    //Game Manager Vairables
     public static GameManager Instance { get; private set; }
-    private GameState gameState;
+    [SerializeField] private GameState gameState;
     private bool newGame = false; // Needed to determine whether to load scene or continue ongoing game
     
     private bool allowSecondPlayer; // Allow Multiplayer or not
-    private GameObject player1;
-    private GameObject player2;
+    public GameObject player1 { get; set; }
+    public GameObject player2 { get; set; }
     
     [Header("UI Variables")]
     [SerializeField] private Canvas inGameUI;
@@ -46,9 +46,11 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         newGame = true;
+
+        PerlinNoiseGen.Instance.Generate();
         
         // Event Subscriptions
-        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
+//        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
         GameModeManager.Player1Win += SetWin;
         GameModeManager.Player2Win += SetWin;
     }
@@ -56,12 +58,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Get All References when going to new Scene from Main Menu Scene
-        inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
+        /*inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
         winCanvas = GameObject.Find("WinCanvas").GetComponent<Canvas>();
         loseCanvas = GameObject.Find("LoseCanvas").GetComponent<Canvas>();
-        pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
+        pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();*/
 
         player1 = GameObject.FindGameObjectWithTag("Player");
+        
+        SwitchGameState();
     }
 
     // ------ Game State Setters ------ necessary for Event Delegates
@@ -105,7 +109,7 @@ public class GameManager : MonoBehaviour
               if (newGame)
               {
                   SceneManager.LoadScene(1);
-                  GetComponent<GameModeManager>().InitShooter();
+                  GameModeManager.Instance.InitShooter();
                  // ShowCanvas(inGameUI);
                   newGame = false;
               }
@@ -118,9 +122,9 @@ public class GameManager : MonoBehaviour
           case GameState.Race:
               if (newGame)
               {
-                  SceneManager.LoadScene(2);
-                  GetComponent<GameModeManager>().InitRace();
-                  ShowCanvas(inGameUI);
+                 // SceneManager.LoadScene(2);
+                 GameModeManager.Instance.InitRace();
+                 // ShowCanvas(inGameUI);
                   newGame = false;
               }
               else

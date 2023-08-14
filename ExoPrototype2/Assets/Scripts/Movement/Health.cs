@@ -49,7 +49,7 @@ public class Health : MonoBehaviour
             
             if (this.gameObject.tag == "Player")
             {
-               GameManager.Instance.SetLose();
+              // GameManager.Instance.SetLose();
             }
            
         }
