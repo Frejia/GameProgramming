@@ -10,6 +10,17 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = System.Random;
 
+/// <summary>
+/// PerlinNoiseGen handles full Perlin Noise Terrain Generation for Level Generation
+/// used with Game Mode Manager, needs to run and be done before the Pathfinding is initialized
+/// Resource Video: https://youtu.be/TZFv493D7jo
+/// Changed aspects by Fanny: Sphere Settings, Commenting and code refactoring,
+/// Additional Gizmo and Race Mode (including PointGen and RemoveCubesWithinRadius),
+/// MeshSmoothing, Collider, Waypoints, Prism instead of Cube Prefab, Save Mesh, Invalid Levels
+///
+/// Legacy: Repeated Attempts at trying to make this into Marching Cubes --> failed and not in final version
+/// Reason for using this and not other Marching Cubes: see paper, section "problems"
+/// </summary>
 public class PerlinNoiseGen : MonoBehaviour
 {
     public static PerlinNoiseGen Instance { get; private set; }
@@ -80,8 +91,6 @@ public class PerlinNoiseGen : MonoBehaviour
         }
         Instance = this;
     }
-
-
     
     /// <summary>
     /// Generates the terrain mesh based on Perlin noise and settings.

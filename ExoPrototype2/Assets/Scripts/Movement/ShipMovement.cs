@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder;
 
+/// <summary>
+/// Handles full controls of ShipMovement and Player Input
+///
+/// Requires Rigidbody and PlayerInput
+/// Reference: https://youtu.be/fZvJvZA4nhY
+/// Extended by Fanny: rotation, boosting, shooting, aiming and changed settings
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class ShipMovement : MonoBehaviour
 {
-    
-    // God Tier Movement Tutorial: https://youtu.be/fZvJvZA4nhY
-
     [Header("Ship Movement Settings")] 
     [SerializeField]
     public float yawTorque = 500f;
@@ -33,8 +37,8 @@ public class ShipMovement : MonoBehaviour
 
     private float glide = 0f, horizontalGlide = 0f, verticalGlide = 0f;
 
-    [Header("Dash Settings")] [SerializeField]
-    public bool boosting = false;
+    [Header("Boost Settings")] 
+    [SerializeField] public bool boosting = false;
     private float currentBoostAmount;
     private float maxBoostAmount = 20f;
     [SerializeField] private float boostDepracationRate = 0.1f;
@@ -54,7 +58,7 @@ public class ShipMovement : MonoBehaviour
     private float thrust1D, upDown1D, strafe1D, roll1D;
     private Vector2 pitchYaw;
 
-    // Start is called before the first frame update
+    // Prepare for input
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -65,13 +69,14 @@ public class ShipMovement : MonoBehaviour
        boostEffect.Stop();
     }
 
-    // Update is called once per frame
+    // Handle input in Fixed Update --> Avoides FPS problems across different systems
     void FixedUpdate()
     {
         HandleBoosting();
         HandleMovement();
     }
 
+    // ------- BOOSTING -------
     private void HandleBoosting()
     {
         if (boosting && currentBoostAmount > 0f)
@@ -91,6 +96,7 @@ public class ShipMovement : MonoBehaviour
         }
     }
 
+    // ------- MOVEMENT -------
     private void HandleMovement()
     {
         //Roll
@@ -124,6 +130,7 @@ public class ShipMovement : MonoBehaviour
             rb.AddRelativeForce(Vector3.forward * glide * Time.fixedDeltaTime);
             glide *= thrustGlideReduction;
         }
+        
         //UpDown
         if (upDown1D > 0.1f || upDown1D < -0.1f)
         {
@@ -135,6 +142,7 @@ public class ShipMovement : MonoBehaviour
             rb.AddRelativeForce(Vector3.up * verticalGlide * Time.fixedDeltaTime);
             verticalGlide *= upDownGlideReduction;
         }
+        
         //Strafing
         if (strafe1D > 0.1f || strafe1D < -0.1f)
         {
@@ -164,6 +172,7 @@ public class ShipMovement : MonoBehaviour
         
     }
     
+    // ------- INPUT METHODS -------
     #region Input Methods
     public void OnThrust(InputAction.CallbackContext context)
     {

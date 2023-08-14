@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
+
+/// <summary>
+/// Changes Controls for the players
+///
+/// Used in Main Menu
+/// </summary>
 public class SetControls : MonoBehaviour
 {
     [SerializeField] private GameObject player1Prefab;
@@ -12,7 +18,7 @@ public class SetControls : MonoBehaviour
     [SerializeField] private Slider player1Sensitivity;
     [SerializeField] private Slider player2Sensitivity;
 
-    // Handle Controls
+    // Set Control Scheme on Player Prefab
     public void SetScheme(bool chosen)
     {
         if (chosen)
@@ -35,6 +41,7 @@ public class SetControls : MonoBehaviour
         }
     }
 
+    // Change Sensitivity Settings for pitch and yaw
     public void SetSensitivity(float sensitivity)
     {
         player1Prefab.GetComponent<ShipMovement>().yawTorque = sensitivity;
