@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -16,6 +17,7 @@ public class GameModeManager : MonoBehaviour
     
     // ------- SHOOTER MODE ---------
     [SerializeField] private GameObject playerBullet;
+    [SerializeField] private List<GameObject> respawnPoints;
     private bool friendlyFire = false;
     public int points1;
     public int points2;
@@ -73,6 +75,7 @@ public class GameModeManager : MonoBehaviour
         
         // Shooter Mode Point Handling
         Health.EnemyGotHit += CountPoints;
+        Health.PlayerGotHit += CountPoints;
         ReachGoal.ReachedGoal += EndRace;
         
         // Race Mode Point Handling
@@ -82,17 +85,30 @@ public class GameModeManager : MonoBehaviour
         points2 = 0;
         points1Text.text = points1.ToString();
         points2Text.text = points2.ToString();*/
-        
-        friendlyFire = false;
-        SetFriendlyFire();
+     
     }
     
-    // Count poitns when Enemy is elemenated and show in UI
+    // Count points when Enemy is eliminated and show in UI
     private void CountPoints(GameObject enemy, GameObject player)
     {
         int points = 0;
         
-        if (enemy.name.Equals("BigShip"))
+        if (enemy.gameObject.tag == "Player" || enemy.gameObject.tag == "Player2")
+        {
+            points = 3;
+            // Respawn dead player if he was not killed by an enemy
+            if (player.gameObject.tag == "Player" || player.gameObject.tag == "Player2")
+            {
+                RespawnPlayer(enemy);
+            }
+            else
+            {
+                Debug.Log("Player Died by Enemy");
+                GameManager.Instance.SetLose();
+            }
+            
+        }
+        else if(enemy.name.Equals("BigShip"))
         {
             points = 4;
         }
@@ -105,9 +121,14 @@ public class GameModeManager : MonoBehaviour
         {
             points1 += points;
         }
-        else
+        else if (player.tag == "Player2")
         {
             points2 += points;
+        }
+        else
+        {
+            Debug.Log("Player Died by Enemy");
+            GameManager.Instance.SetLose();
         }
         
         if(points1 >= 10 || points2 >= 10)
@@ -136,6 +157,13 @@ public class GameModeManager : MonoBehaviour
         }
     }
 
+    private void RespawnPlayer(GameObject player)
+    {
+        int random = Random.Range(0, respawnPoints.Count);
+        
+        player.transform.position = respawnPoints[random].transform.position;
+    }
+
     // -------- SHOOTER INIT ------------
     
     public void SetFriendlyFire()
@@ -143,11 +171,11 @@ public class GameModeManager : MonoBehaviour
         // Toggle Friendly Fire
         friendlyFire = !friendlyFire;
         playerBullet.GetComponent<Bullet>().friendlyFire = friendlyFire;
-        Debug.Log("Friendly Fire" + friendlyFire);
     }
     
     public void InitShooter()
     {
+        
         Generate();
     }
     

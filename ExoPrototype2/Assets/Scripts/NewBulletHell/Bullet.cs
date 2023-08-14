@@ -10,16 +10,12 @@ public class Bullet : MonoBehaviour
     private Vector3 direction;
     [SerializeField] public float speed = 30f;
     private float savedSpeed;
-    [SerializeField] private float _bulletLifeTime = 5f;
+    [SerializeField] private float _bulletLifeTime = 4f;
 
     [SerializeField] private ParticleSystem impactEffect;
-   // [SerializeField] private SpriteRenderer renderer;
-    
+
     [SerializeField, Range(10, 20)] private int _damage = 10;
 
-    [SerializeField] public bool _isEnemyBullet = false;
-
-    [SerializeField] private List<Collider> colliders;
     public bool friendlyFire = true;
     private GameObject attacker;
 
@@ -51,9 +47,8 @@ public class Bullet : MonoBehaviour
         this.direction = direction;
     }
 
-    public void SetFriendlyFire()
+    /*public void SetFriendlyFire()
     {
-        friendlyFire = true;
         int playerLayer = LayerMask.NameToLayer("Player");
         int player2Layer = LayerMask.NameToLayer("Player2");
         
@@ -74,7 +69,7 @@ public class Bullet : MonoBehaviour
                 Physics.IgnoreLayerCollision(player2Layer, playerLayer, true);
             }
         }
-    }
+    }*/
 
     private void Destroy()
     {
