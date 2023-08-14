@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 
     [SerializeField, Range(10, 20)] private int _damage = 10;
 
-    public bool friendlyFire = true;
+    public bool friendlyFire = false;
     private GameObject attacker;
 
     public void SetUser(GameObject user)
@@ -113,7 +113,8 @@ public class Bullet : MonoBehaviour
         }
         
         if (other.gameObject.layer == 8)
-        { Debug.Log("Hit Player1");
+        { 
+            Debug.Log("Hit Player1");
             if (friendlyFire && attacker.gameObject.tag == "Player2")
             {
                 Debug.Log("by Player2");
