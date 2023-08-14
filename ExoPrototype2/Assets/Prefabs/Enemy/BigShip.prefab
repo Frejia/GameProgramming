@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  attacker: {fileID: 0}
 --- !u!1 &1122125693960734607
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +320,6 @@ GameObject:
   - component: {fileID: 240271672140297449}
   - component: {fileID: 1900974988526206876}
   - component: {fileID: 1719164595118060094}
-  - component: {fileID: -3045109335756906155}
   - component: {fileID: -3183830924432631415}
   - component: {fileID: 7386341772623323122}
   - component: {fileID: 7721116811140168482}
@@ -482,19 +482,6 @@ MonoBehaviour:
   bulletSpeed: 0
   startAngle: 0
   endAngle: 0
---- !u!114 &-3045109335756906155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7094090093050274885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83b90cdbabe38746915681344356ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 50
 --- !u!114 &-3183830924432631415
 MonoBehaviour:
   m_ObjectHideFlags: 0
