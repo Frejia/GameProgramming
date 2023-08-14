@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
         this.attacker = attacker;
         Debug.Log(gameObject.name + "Took damage");
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+       // Debug.Log(currentHealth);
         CheckDeath();
     }
 

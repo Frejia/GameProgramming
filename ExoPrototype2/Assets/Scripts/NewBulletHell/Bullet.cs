@@ -19,9 +19,8 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] public bool _isEnemyBullet = false;
 
-    [SerializeField] private Collider triggerCollider;
-    [SerializeField] private Collider hardCollider;
-    public bool friendlyFire { get; set; }
+    [SerializeField] private List<Collider> colliders;
+    public bool friendlyFire = true;
     private GameObject attacker;
 
     public void SetUser(GameObject user)
@@ -55,35 +54,28 @@ public class Bullet : MonoBehaviour
     public void SetFriendlyFire()
     {
         friendlyFire = true;
+        int playerLayer = LayerMask.NameToLayer("Player");
+        int player2Layer = LayerMask.NameToLayer("Player2");
+        
         // renderer.enabled = true;
-        if (friendlyFire)
+        if (friendlyFire && attacker.CompareTag("Player"))
         {
-            if (attacker.gameObject.tag == "Player")
+            foreach (Collider col in colliders)
             {
-                //triggerCollider.includeLayers = LayerMask.NameToLayer("Player2");
-                //triggerCollider.excludeLayers  = LayerMask.NameToLayer("Player");
-                UpdateLayerCollision(triggerCollider);
-                UpdateLayerCollision(hardCollider);
-                /*triggerCollider.includeLayers = (1 << 13);
-                triggerCollider.excludeLayers = (1 << 7);
-                hardCollider.includeLayers = (1 << 13);
-                hardCollider.excludeLayers = (1 << 7);*/
+                // Set the layer collision settings for the triggerCollider
+                Physics.IgnoreLayerCollision(playerLayer, player2Layer, true);
             }
-            else
+        }
+        else
+        {
+            foreach (Collider col in colliders)
             {
-                /*triggerCollider.includeLayers = (1 << 7);
-                triggerCollider.excludeLayers = (1 << 13);
-                hardCollider.includeLayers = (1 << 7);
-                hardCollider.excludeLayers = (1 << 13);*/
+                // Set the layer collision settings for the triggerCollider
+                Physics.IgnoreLayerCollision(player2Layer, playerLayer, true);
             }
         }
     }
-    
-    private void UpdateLayerCollision(Collider collider)
-    {
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player2"), LayerMask.NameToLayer("Player"), true);
-    }
-    
+
     private void Destroy()
     {
         attacker = null;
@@ -104,39 +96,54 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7 || other.gameObject.layer == 8 || other.gameObject.layer == 13)
+        if (other.gameObject.layer == 13)
         {
-            other.GetComponent<Health>().GetsHit(_damage, attacker);
-            
-            impactEffect.Play();
-            StartCoroutine(WaitForParticleSystem());
-            speed = 0f;
-        }
-        /*if (other.gameObject.layer == 7)
+            Debug.Log("Hit Player2");
+            if (friendlyFire && attacker.gameObject.tag == "Player")
             {
+                Debug.Log("by Player1");
+                other.GetComponent<Health>().GetsHit(_damage, attacker);
                 impactEffect.Play();
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
             }
+            
+            if (attacker.CompareTag("Enemy"))
+            {
+                other.GetComponent<Health>().GetsHit(_damage, attacker);
+                impactEffect.Play();
+                StartCoroutine(WaitForParticleSystem());
+                speed = 0f;
+            }
+        }
         
         if (other.gameObject.layer == 8)
-        {
-            impactEffect.Play();
-            StartCoroutine(WaitForParticleSystem());
-            speed = 0f;
-        } else if (other.gameObject.layer == 9)
-        {
-            impactEffect.Play();
-            StartCoroutine(WaitForParticleSystem());
-            speed = 0f;
-        } else if (other.gameObject.layer == 13)
-        {
-            impactEffect.Play();
-            StartCoroutine(WaitForParticleSystem());
-            speed = 0f;
-        }*/
+        { Debug.Log("Hit Player1");
+            if (friendlyFire && attacker.gameObject.tag == "Player2")
+            {
+                Debug.Log("by Player2");
+                other.GetComponent<Health>().GetsHit(_damage, attacker);
+                impactEffect.Play();
+                StartCoroutine(WaitForParticleSystem());
+                speed = 0f;
+            }
 
-
+            if (attacker.CompareTag("Enemy"))
+            {
+                other.GetComponent<Health>().GetsHit(_damage, attacker);
+                impactEffect.Play();
+                StartCoroutine(WaitForParticleSystem());
+                speed = 0f;
+            }
+        }
+        
+        if (other.gameObject.layer == 7)
+        {
+            other.GetComponent<Health>().GetsHit(_damage, attacker);
+                impactEffect.Play();
+                StartCoroutine(WaitForParticleSystem());
+                speed = 0f;
+        }
     }
 
     public void SetSpeed(float newSpeed)
