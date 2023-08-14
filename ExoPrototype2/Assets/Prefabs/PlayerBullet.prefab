@@ -127,6 +127,8 @@ MonoBehaviour:
   impactEffect: {fileID: 1947765877439374934}
   _damage: 10
   _isEnemyBullet: 0
+  triggerCollider: {fileID: 3719271214382044348}
+  hardCollider: {fileID: -2660933309431044470}
 --- !u!114 &-998867342427067411
 MonoBehaviour:
   m_ObjectHideFlags: 0

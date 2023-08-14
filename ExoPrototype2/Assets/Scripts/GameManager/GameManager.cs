@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private bool newGame = false; // Needed to determine whether to load scene or continue ongoing game
     
     private bool allowSecondPlayer; // Allow Multiplayer or not
+    private bool allowFriendlyFire; // Allow Friendly Fire or not
     public GameObject player1 { get; set; }
     public GameObject player2 { get; set; }
     
@@ -46,8 +47,6 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         newGame = true;
-
-        PerlinNoiseGen.Instance.Generate();
         
         // Event Subscriptions
 //        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
@@ -64,8 +63,6 @@ public class GameManager : MonoBehaviour
         pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();*/
 
         player1 = GameObject.FindGameObjectWithTag("Player");
-        
-        SwitchGameState();
     }
 
     // ------ Game State Setters ------ necessary for Event Delegates

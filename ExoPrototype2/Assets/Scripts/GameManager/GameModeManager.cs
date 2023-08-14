@@ -15,6 +15,8 @@ public class GameModeManager : MonoBehaviour
     public static GameModeManager Instance;
     
     // ------- SHOOTER MODE ---------
+    [SerializeField] private GameObject playerBullet;
+    private bool friendlyFire = false;
     public int points1;
     public int points2;
     //true if win, false if lose
@@ -80,6 +82,9 @@ public class GameModeManager : MonoBehaviour
         points2 = 0;
         points1Text.text = points1.ToString();
         points2Text.text = points2.ToString();*/
+        
+        friendlyFire = false;
+        SetFriendlyFire();
     }
     
     // Count poitns when Enemy is elemenated and show in UI
@@ -132,6 +137,15 @@ public class GameModeManager : MonoBehaviour
     }
 
     // -------- SHOOTER INIT ------------
+    
+    public void SetFriendlyFire()
+    {
+        // Toggle Friendly Fire
+        friendlyFire = !friendlyFire;
+        playerBullet.GetComponent<Bullet>().friendlyFire = friendlyFire;
+        Debug.Log("Friendly Fire" + friendlyFire);
+    }
+    
     public void InitShooter()
     {
         Generate();
