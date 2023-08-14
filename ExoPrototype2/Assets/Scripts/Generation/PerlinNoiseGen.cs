@@ -115,7 +115,7 @@ public class PerlinNoiseGen : MonoBehaviour
     /// Generates the terrain mesh based on Perlin noise and settings.
     /// Used for entire Level Generation
     /// </summary>
-    public IEnumerator Generate()
+    public void Generate()
     {
         Debug.Log("Generating Terrain!");
         isDone = false;
@@ -229,7 +229,6 @@ public class PerlinNoiseGen : MonoBehaviour
 
         isDone = true;
         Debug.Log("Generated Mesh in " + timePassed + "seconds.");
-        yield return new WaitForSeconds(0.1f);
     }
     
     // Update is called once per frame

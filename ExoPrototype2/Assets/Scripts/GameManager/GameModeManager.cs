@@ -155,7 +155,7 @@ public class GameModeManager : MonoBehaviour
         
         if (!debug)
         {
-            StartCoroutine(noiseGen.Generate());
+            noiseGen.Generate();
             if(noiseGen.isDone)world.InitializeGrid();
         }
         
@@ -196,7 +196,7 @@ public class GameModeManager : MonoBehaviour
     {
         noiseGen.raceMode = true;
         noiseGen.withCurve = true;
-        StartCoroutine(noiseGen.Generate());
+       noiseGen.Generate();
         //if(noiseGen.isDone)world.InitializeGrid();
     }
 

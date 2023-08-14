@@ -2098,10 +2098,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 999246698}
     m_Modifications:
+    - target: {fileID: 24341901203686159, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 565181693434178818, guid: 15a5f222b8932324187de40e2f061702, type: 3}
       propertyPath: m_Name
       value: Generator
       objectReference: {fileID: 0}
+    - target: {fileID: 5799891003915910939, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: waypoints.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: waypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1408900049}
+    - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: waypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1408900048}
+    - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: waypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1408900047}
+    - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: waypoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 1408900046}
+    - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: waypoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 1408900045}
+    - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: waypoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 1408900044}
+    - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      propertyPath: waypoints.Array.data[6]
+      value: 
+      objectReference: {fileID: 1408900043}
     - target: {fileID: 8243883003580495579, guid: 15a5f222b8932324187de40e2f061702, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2154,6 +2194,41 @@ PrefabInstance:
 --- !u!4 &1408900042 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8243883003580495579, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+  m_PrefabInstance: {fileID: 1408900041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408900043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1792386450675709201, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+  m_PrefabInstance: {fileID: 1408900041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408900044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919879591322467685, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+  m_PrefabInstance: {fileID: 1408900041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408900045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1359517456058173186, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+  m_PrefabInstance: {fileID: 1408900041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408900046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3735417412979329434, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+  m_PrefabInstance: {fileID: 1408900041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408900047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5117505900507108667, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+  m_PrefabInstance: {fileID: 1408900041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408900048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3774760727532201190, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+  m_PrefabInstance: {fileID: 1408900041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1408900049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3711362837742419383, guid: 15a5f222b8932324187de40e2f061702, type: 3}
   m_PrefabInstance: {fileID: 1408900041}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1468378168
