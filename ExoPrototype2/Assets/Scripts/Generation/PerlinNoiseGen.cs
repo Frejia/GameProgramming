@@ -77,8 +77,8 @@ public class PerlinNoiseGen : MonoBehaviour
     private void Awake()
     {
         // Check if there are Invalid Levels and compare if currently generated values is one of the invalid ones.
-        invalidLevelSafe = GetComponent<InvalidLevelSafe>();
-        invalidLevelSafe.LoadAndCompareCustomData();
+        /*invalidLevelSafe = GetComponent<InvalidLevelSafe>();
+        invalidLevelSafe.LoadAndCompareCustomData();*/
         
         if (Instance != null)
         {
@@ -86,6 +86,8 @@ public class PerlinNoiseGen : MonoBehaviour
             return;
         }
         Instance = this;
+
+        Generate();
     }
 
     /// <summary>
@@ -113,8 +115,9 @@ public class PerlinNoiseGen : MonoBehaviour
     /// Generates the terrain mesh based on Perlin noise and settings.
     /// Used for entire Level Generation
     /// </summary>
-    public IEnumerator Generate()
+    public void Generate()
     {
+        Debug.Log("Generating Terrain!");
         isDone = false;
         float startTime = Time.realtimeSinceStartup;
 
@@ -226,7 +229,6 @@ public class PerlinNoiseGen : MonoBehaviour
 
         isDone = true;
         Debug.Log("Generated Mesh in " + timePassed + "seconds.");
-        yield return new WaitForSeconds(0.1f);
     }
     
     // Update is called once per frame

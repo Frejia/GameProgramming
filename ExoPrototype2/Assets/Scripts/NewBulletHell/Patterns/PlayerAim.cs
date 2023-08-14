@@ -69,6 +69,10 @@ public class PlayerAim : Aim
         {
             targets.Remove(enemy);
         }
+        else
+        {
+            Debug.Log("Enemy not in list");
+        }
         // If there are still enemies in the list, update the nearest enemy
         if (targets.Count > 0)
         {
