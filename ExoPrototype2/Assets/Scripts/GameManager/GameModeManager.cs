@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
@@ -175,8 +176,12 @@ public class GameModeManager : MonoBehaviour
     
     public void InitShooter()
     {
-        
-        Generate();
+        // Scene Loaded
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("PvEShooter"))
+        {
+            Generate();
+        }
+       
     }
     
     // Generate Terrain
@@ -194,14 +199,8 @@ public class GameModeManager : MonoBehaviour
     
         noiseGen.raceMode = true;
         noiseGen.withCurve = false;
-        
-        if (!debug)
-        {
-            noiseGen.Generate();
-            if(noiseGen.isDone)world.InitializeGrid();
-        }
-        
-        
+        noiseGen.Generate();
+        if(noiseGen.isDone)world.InitializeGrid();
     }
     
     // -------- RACE MODE INIT ------------

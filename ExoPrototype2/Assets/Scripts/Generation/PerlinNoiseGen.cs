@@ -86,8 +86,7 @@ public class PerlinNoiseGen : MonoBehaviour
             return;
         }
         Instance = this;
-
-        Generate();
+        
     }
 
     /// <summary>

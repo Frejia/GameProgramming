@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public enum GameState
 {
+    None,
     Shooter,
     Race,
     Win,
