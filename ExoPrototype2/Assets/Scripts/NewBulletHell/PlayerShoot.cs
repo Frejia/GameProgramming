@@ -65,6 +65,12 @@ public class PlayerShoot : MonoBehaviour
              // Straight Pattern Example
              patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, false, 1, 10f);
 
+             if (GetComponent<PlayerAim>().target != null)
+             {
+                 patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, true, 1, 10f);
+
+             }
+             
          }
          else if(shot == 1)
          {
