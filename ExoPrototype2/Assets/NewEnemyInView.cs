@@ -28,7 +28,6 @@ public class NewEnemyInView : Aim
             else
             {
                 target = other.gameObject;
-                other.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             }
             Debug.Log(gameObject.name + " is visible");
         }

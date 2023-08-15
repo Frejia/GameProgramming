@@ -83,6 +83,7 @@ public class EnemyPatternManager : MonoBehaviour
                     else patternDuration = pattern.patternDuration;
                     Cooldown = pattern.Cooldown;
                     fireBullets.SetBulletPatternNone();
+                    isPlayerClose = false;
                     yield return new WaitForSeconds(pattern.patternDuration);
                 }
                 else
@@ -98,15 +99,16 @@ public class EnemyPatternManager : MonoBehaviour
                     // Set the isOnCooldown flag to true and start the cooldown timer
                     isOnCooldown = true;
                     isFiring = false;
+                    isPlayerClose = false;
                     yield return new WaitForSeconds(Cooldown);
                     isOnCooldown = false;
                 }
             }
         }
-            isFiring = false;
-            StopCoroutine(ReadBulletPatterns());
+        StopCoroutine(ReadBulletPatterns());
 
             isFiring = false;
+            isPlayerClose = false;
     }
 
     // Method to start a specific given bullet pattern

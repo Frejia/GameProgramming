@@ -11,8 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalGameScenes/PvEShooter.unity
     guid: bfeb0c771ddeb3543ad680b859e7ba92
-  - enabled: 0
-    path: Assets/Scenes/FinalGameScenes/PvP Race.unity
-    guid: 6dade78c8396f434f8a1dfa598348fb9
+  - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/PvP Race 1.unity
+    guid: d31c2a943f0f6d3448fb27475e957fb0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d230d16bc81b2054dacf77926f37017b, type: 2}

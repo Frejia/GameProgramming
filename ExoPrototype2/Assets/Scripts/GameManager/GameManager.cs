@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
    //Game Manager Vairables
     public static GameManager Instance { get; private set; }
     [SerializeField] private GameState gameState;
+    [SerializeField] private StartGen startGen;
     private bool newGame = false; // Needed to determine whether to load scene or continue ongoing game
     
     private bool allowSecondPlayer; // Allow Multiplayer or not
@@ -136,7 +137,8 @@ public class GameManager : MonoBehaviour
               {
                   levelToLoad = 1;
                   loadLevel = true;
-                    GameModeManager.Instance.InitShooter();
+                  startGen.raceMode = false;
+                  //  GameModeManager.Instance.InitShooter();
                  // ShowCanvas(inGameUI);
                   newGame = false;
               }
@@ -151,8 +153,9 @@ public class GameManager : MonoBehaviour
               {
                   levelToLoad = 2;
                   loadLevel = true;
+                  startGen.raceMode = true;
                  // SceneManager.LoadScene(2);
-                 GameModeManager.Instance.InitRace();
+                // GameModeManager.Instance.InitRace();
                  // ShowCanvas(inGameUI);
                   newGame = false;
               }

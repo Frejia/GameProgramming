@@ -401,12 +401,10 @@ public class PatternManager : MonoBehaviour
         if (this.gameObject.tag == "Player" || this.gameObject.tag == "Player2")
         {
             bul = BulletPool.Instance.GetBulletPlayer();
-            Debug.Log("Player Shoots");
         }
         else
         {
             bul = BulletPool.Instance.GetBulletEnemy();
-            Debug.Log("Enemy Shoots");
         }
         return bul;
     }

@@ -6362,6 +6362,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -30
       objectReference: {fileID: 0}
+    - target: {fileID: 3504717539879821456, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+      propertyPath: startGen
+      value: 
+      objectReference: {fileID: 2585888059386046672, guid: 15a5f222b8932324187de40e2f061702, type: 3}
     - target: {fileID: 3573703774740779980, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: savedLevels
       value: 

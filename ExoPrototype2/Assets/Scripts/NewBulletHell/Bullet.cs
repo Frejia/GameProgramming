@@ -93,19 +93,25 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.layer == 13)
         {
-            Debug.Log("Hit Player2");
             if (friendlyFire && attacker.gameObject.tag == "Player")
             {
-                Debug.Log("by Player1");
-                other.GetComponent<Health>().GetsHit(_damage, attacker);
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
+
                 impactEffect.Play();
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
             }
             
-            if (attacker.CompareTag("Enemy"))
+            if (attacker.gameObject.tag == "Enemy")
             {
-                other.GetComponent<Health>().GetsHit(_damage, attacker);
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
+
                 impactEffect.Play();
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
@@ -113,20 +119,26 @@ public class Bullet : MonoBehaviour
         }
         
         if (other.gameObject.layer == 8)
-        { 
-            Debug.Log("Hit Player1");
+        {
             if (friendlyFire && attacker.gameObject.tag == "Player2")
             {
-                Debug.Log("by Player2");
-                other.GetComponent<Health>().GetsHit(_damage, attacker);
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
+
                 impactEffect.Play();
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
             }
 
-            if (attacker.CompareTag("Enemy"))
+            if (attacker.gameObject.tag == "Enemy")
             {
-                other.GetComponent<Health>().GetsHit(_damage, attacker);
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
+
                 impactEffect.Play();
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
@@ -135,8 +147,11 @@ public class Bullet : MonoBehaviour
         
         if (other.gameObject.layer == 7)
         {
-            other.GetComponent<Health>().GetsHit(_damage, attacker);
-                impactEffect.Play();
+            if (other.GetComponent<Health>() != null)
+            {
+                other.GetComponent<Health>().GetsHit(_damage, attacker);
+            }
+            impactEffect.Play();
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
         }

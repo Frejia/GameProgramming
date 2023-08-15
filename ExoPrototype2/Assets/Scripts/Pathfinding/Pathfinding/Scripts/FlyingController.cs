@@ -12,7 +12,7 @@ public class FlyingController : MonoBehaviour
     [SerializeField] AnimationCurve _SpeedCurve;
     [SerializeField] float _Speed;
     private bool sawPlayer = false;
-    
+
     private void Start()
     {
         _MoveToPoint = GameObject.Find("MovePoint").transform;
@@ -21,6 +21,7 @@ public class FlyingController : MonoBehaviour
         StartCoroutine(Coroutine_MoveRandom());
         // When enemy sees player, leave curve
         EnemySeesPlayer.CanSee += StartToPlayer;
+        
        // EnemySeesPlayer.CantSee += StopToPlayer;
     }
 
@@ -28,6 +29,7 @@ public class FlyingController : MonoBehaviour
     {
        // _Agent.StopMoving();
        //Only stop the Coroutine on the Enemy Object
+       Debug.Log("Move To Player");
        sawPlayer = true;
         StopCoroutine(enemy.GetComponent<FlyingController>().Coroutine_MoveRandom());
         StartCoroutine(enemy.GetComponent<CharacterMoveAB>().Coroutine_MoveAB());

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8243883003580495579}
+  - component: {fileID: 2585888059386046672}
   - component: {fileID: 3301993436205717278}
   - component: {fileID: 8227015059232435417}
   - component: {fileID: 5799891003915910939}
@@ -36,6 +37,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2585888059386046672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565181693434178818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0622bcf61806140a248a1585506b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raceMode: 1
 --- !u!114 &3301993436205717278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,13 +82,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bff75741f3105a42acd196f2fc9e90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0
+  offset: 19
   noiseScale: 0.06
   threshold: 0.5
   blockPrefab: {fileID: 919132149155446097, guid: a8126d228e1b0f34983f831390bb38c7, type: 3}
   material: {fileID: 2100000, guid: 39b5cea2515d7894e9e5eeef9dccdbb0, type: 2}
-  chunkSize: 100
-  chunkSizeZ: 100
+  chunkSize: 73
+  chunkSizeZ: 22
   sphere: 0
   meshSmoothing: 0
   collider: 1

@@ -23,10 +23,10 @@ public class EnemySeesPlayer : MonoBehaviour
     //If Player is in a specific range of the player, then the event is triggered
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Player2"))
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
         {
+            CanSee(this.gameObject);
             Debug.Log("Enemy sees Player");
-            if (CanSee != null) CanSee(other.gameObject);
             GoFindPlayer(other.gameObject, gameObject.transform.parent.gameObject);
         }
     }
@@ -36,7 +36,7 @@ public class EnemySeesPlayer : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Enemy does not see Player");
-            if (CantSee != null) CantSee(other.gameObject);
+            if (CantSee != null) CantSee(this.gameObject);
         }
     }
 }

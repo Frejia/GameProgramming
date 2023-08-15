@@ -179,6 +179,7 @@ public class GameModeManager : MonoBehaviour
     public void InitShooter()
     {
         // Scene Loaded
+        Generate();
     }
     
     // Generate Terrain
@@ -192,21 +193,14 @@ public class GameModeManager : MonoBehaviour
                 Instantiate(portal, noiseGen.waypoints[i].transform.position * 5, rotation);
             }
             Instantiate(portal, noiseGen.waypoints[noiseGen.waypoints.Count-1].transform.position * 5, Quaternion.identity);
-            
-    
-        noiseGen.raceMode = false;
-        noiseGen.withCurve = false;
-       // noiseGen.Generate();
-       // if(noiseGen.isDone)world.InitializeGrid();
+        
     }
     
     // -------- RACE MODE INIT ------------
     public void InitRace()
     {
-        Debug.Log("init Racer!");
         PlayerInputManager.instance.EnableJoining();
         //PlayerInputManager.instance.JoinPlayer();
-        GenerateRace();
 
         for(int i = 1; i < noiseGen.waypoints.Count - 2; i++)
         {
