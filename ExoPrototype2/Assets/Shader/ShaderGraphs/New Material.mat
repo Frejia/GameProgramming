@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
-  m_Shader: {fileID: -6465566751694194690, guid: 9265d4d97f638334bb8ff51a981a62db, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b0fb684561330f84d9f190812a244175, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -61,6 +61,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Shading_Ramp:
+        m_Texture: {fileID: 2800000, guid: e15293fd7d1058a48bd6ee2be9891b56, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -143,8 +147,10 @@ Material:
     - _Color1: {r: 0.46226412, g: 0.10757085, b: 0.10757085, a: 0}
     - _Color2: {r: 0.24634355, g: 0.24474895, b: 0.7075471, a: 0}
     - _Color3: {r: 0, g: 0, b: 0, a: 0}
+    - _Dark_Color: {r: 0.11372549, g: 0.7254902, b: 0.37077758, a: 0}
     - _DotColor: {r: 0.14841071, g: 0.7058824, b: 0.109803915, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Lit_Color: {r: 0, g: 0.13839364, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 8, g: 4, b: 0, a: 0}
   m_BuildTextureStacks: []

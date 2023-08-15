@@ -7,7 +7,8 @@ using UnityEngine;
 /// </summary>
 public class RandomLevel : MonoBehaviour
 {
-    [Header("RandomValues")]
+    [Header("RandomValues")] [SerializeField]
+    private GameObject perlin;
     private int chunkSize, chunkSizeZ, offset;
 
     private List<GameObject> wayPoints;
@@ -17,11 +18,10 @@ public class RandomLevel : MonoBehaviour
     // Executed when pressing Generate Random Level Button
     public void GenerateRandomLevel()
     {
-        PerlinNoiseGen perlin = PerlinNoiseGen.Instance;
         GenerateChunkSize();
-        GenerateRandomWayPoints();
+      //  GenerateRandomWayPoints();
         
-        perlin.PerlinSetter(chunkSize,chunkSizeZ, offset, raceMode,
+        perlin.GetComponent<PerlinNoiseGen>().PerlinSetter(chunkSize,chunkSizeZ, offset, raceMode,
             withCurve, sphere, meshSmoothing, wayPoints);
     }
 
@@ -36,8 +36,8 @@ public class RandomLevel : MonoBehaviour
     // Generate a random ChunkSize, ChunkSizeZ and Offset
     private void GenerateChunkSize()
     {
-        chunkSize = Random.Range(1, 200);
-        chunkSizeZ = Random.Range(1, 200);
+        chunkSize = Random.Range(20, 100);
+        chunkSizeZ = Random.Range(20, 100);
         offset = Random.Range(0, 30);
     }
 

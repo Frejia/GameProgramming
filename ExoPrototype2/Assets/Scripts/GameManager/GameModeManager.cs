@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
@@ -15,6 +17,9 @@ public class GameModeManager : MonoBehaviour
     public static GameModeManager Instance;
     
     // ------- SHOOTER MODE ---------
+    [SerializeField] private GameObject playerBullet;
+    [SerializeField] private List<GameObject> respawnPoints;
+    private bool friendlyFire = false;
     public int points1;
     public int points2;
     //true if win, false if lose
@@ -73,6 +78,7 @@ public class GameModeManager : MonoBehaviour
         
         // Shooter Mode Point Handling
         Health.EnemyGotHit += CountPoints;
+        Health.PlayerGotHit += CountPoints;
         ReachGoal.ReachedGoal += EndRace;
         
         // Race Mode Point Handling
@@ -82,14 +88,30 @@ public class GameModeManager : MonoBehaviour
         points2 = 0;
         points1Text.text = points1.ToString();
         points2Text.text = points2.ToString();*/
+     
     }
     
-    // Count poitns when Enemy is elemenated and show in UI
+    // Count points when Enemy is eliminated and show in UI
     private void CountPoints(GameObject enemy, GameObject player)
     {
         int points = 0;
         
-        if (enemy.name.Equals("BigShip"))
+        if (enemy.gameObject.tag == "Player" || enemy.gameObject.tag == "Player2")
+        {
+            points = 3;
+            // Respawn dead player if he was not killed by an enemy
+            if (player.gameObject.tag == "Player" || player.gameObject.tag == "Player2")
+            {
+                RespawnPlayer(enemy);
+            }
+            else
+            {
+                Debug.Log("Player Died by Enemy");
+                GameManager.Instance.SetLose();
+            }
+            
+        }
+        else if(enemy.name.Equals("BigShip"))
         {
             points = 4;
         }
@@ -102,9 +124,14 @@ public class GameModeManager : MonoBehaviour
         {
             points1 += points;
         }
-        else
+        else if (player.tag == "Player2")
         {
             points2 += points;
+        }
+        else
+        {
+            Debug.Log("Player Died by Enemy");
+            GameManager.Instance.SetLose();
         }
         
         if(points1 >= 10 || points2 >= 10)
@@ -133,9 +160,25 @@ public class GameModeManager : MonoBehaviour
         }
     }
 
+    private void RespawnPlayer(GameObject player)
+    {
+        int random = Random.Range(0, respawnPoints.Count);
+        
+        player.transform.position = respawnPoints[random].transform.position;
+    }
+
     // -------- SHOOTER INIT ------------
+    
+    public void SetFriendlyFire()
+    {
+        // Toggle Friendly Fire
+        friendlyFire = !friendlyFire;
+        playerBullet.GetComponent<Bullet>().friendlyFire = friendlyFire;
+    }
+    
     public void InitShooter()
     {
+        // Scene Loaded
         Generate();
     }
     
@@ -150,27 +193,14 @@ public class GameModeManager : MonoBehaviour
                 Instantiate(portal, noiseGen.waypoints[i].transform.position * 5, rotation);
             }
             Instantiate(portal, noiseGen.waypoints[noiseGen.waypoints.Count-1].transform.position * 5, Quaternion.identity);
-            
-    
-        noiseGen.raceMode = true;
-        noiseGen.withCurve = false;
-        
-        if (!debug)
-        {
-            noiseGen.Generate();
-            if(noiseGen.isDone)world.InitializeGrid();
-        }
-        
         
     }
     
     // -------- RACE MODE INIT ------------
     public void InitRace()
     {
-        Debug.Log("init Racer!");
         PlayerInputManager.instance.EnableJoining();
         //PlayerInputManager.instance.JoinPlayer();
-        GenerateRace();
 
         for(int i = 1; i < noiseGen.waypoints.Count - 2; i++)
         {
@@ -197,7 +227,7 @@ public class GameModeManager : MonoBehaviour
     {
         noiseGen.raceMode = true;
         noiseGen.withCurve = true;
-        noiseGen.Generate();
+       // noiseGen.Generate();
         //if(noiseGen.isDone)world.InitializeGrid();
     }
 

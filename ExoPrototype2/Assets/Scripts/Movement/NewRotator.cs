@@ -20,7 +20,7 @@ public class NewRotator : MonoBehaviour
     private void FixedUpdate()
     {
         HandleRotation();
-        Debug.Log(Time.fixedDeltaTime);
+        //Debug.Log(Time.fixedDeltaTime);
     }
 
     private void HandleRotation()

@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     
     public delegate void Hit(GameObject enemy, GameObject attacker);
     public static event Hit EnemyGotHit;
+    public static event Hit PlayerGotHit;
     
     private void Start()
     {
@@ -29,7 +30,9 @@ public class Health : MonoBehaviour
         this.attacker = attacker;
         Debug.Log(gameObject.name + "Took damage");
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+
+        if (currentHealth < 0) currentHealth = -1;
+            // Debug.Log(currentHealth);
         CheckDeath();
     }
 
@@ -49,7 +52,13 @@ public class Health : MonoBehaviour
             
             if (this.gameObject.tag == "Player")
             {
+                PlayerGotHit(this.gameObject, attacker);
               // GameManager.Instance.SetLose();
+            }
+            if (this.gameObject.tag == "Player2")
+            {
+                PlayerGotHit(this.gameObject, attacker);
+                // GameManager.Instance.SetLose();
             }
            
         }

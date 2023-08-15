@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,17 +9,9 @@ using UnityEngine;
 public class PlayerAim : Aim
 {
     private List<GameObject> targets;
-    
-    void OnEnable()
+
+    private void Start()
     {
-        ObjectsInView.OnEnemyInScreen += EnemyLockOn;
-        ObjectsInView.OnEnemyNotInScreen += RemoveFromTargets;
-    }
-    
-    private void OnDisable()
-    {
-        ObjectsInView.OnEnemyInScreen -= EnemyLockOn;
-        ObjectsInView.OnEnemyNotInScreen -= RemoveFromTargets;
     }
 
     // Get Nearest Enemy if there are more than one in the proximity
@@ -44,6 +37,8 @@ public class PlayerAim : Aim
     // Create list of which Enemies are currently in proximity and set the correct target
     private void EnemyLockOn(GameObject enemy)
     {
+        Debug.Log("Enemy in screen");
+        
         // If that gameobject is not already in the list, add it
             if (!targets.Contains(enemy))
             {
@@ -59,6 +54,8 @@ public class PlayerAim : Aim
                 target = enemy;
                 enemy.GetComponent<MeshRenderer>().material.color = Color.red;
             }
+            
+            Debug.Log("Target" + target);
     }
 
     // When enemy leaves player proximity, then remove it from the list and update the target

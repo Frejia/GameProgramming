@@ -10,15 +10,13 @@ public class Bullet : MonoBehaviour
     private Vector3 direction;
     [SerializeField] public float speed = 30f;
     private float savedSpeed;
-    [SerializeField] private float _bulletLifeTime = 5f;
+    [SerializeField] private float _bulletLifeTime = 4f;
 
     [SerializeField] private ParticleSystem impactEffect;
-   // [SerializeField] private SpriteRenderer renderer;
-    
+
     [SerializeField, Range(10, 20)] private int _damage = 10;
 
-    [SerializeField] public bool _isEnemyBullet = false;
-    
+    public bool friendlyFire = false;
     private GameObject attacker;
 
     public void SetUser(GameObject user)
@@ -33,7 +31,6 @@ public class Bullet : MonoBehaviour
 
     private void OnEnable()
     {
-       // renderer.enabled = true;
         speed = savedSpeed;
         Invoke("Destroy", _bulletLifeTime);
         impactEffect.Stop();
@@ -49,7 +46,31 @@ public class Bullet : MonoBehaviour
     {
         this.direction = direction;
     }
-    
+
+    /*public void SetFriendlyFire()
+    {
+        int playerLayer = LayerMask.NameToLayer("Player");
+        int player2Layer = LayerMask.NameToLayer("Player2");
+        
+        // renderer.enabled = true;
+        if (friendlyFire && attacker.CompareTag("Player"))
+        {
+            foreach (Collider col in colliders)
+            {
+                // Set the layer collision settings for the triggerCollider
+                Physics.IgnoreLayerCollision(playerLayer, player2Layer, true);
+            }
+        }
+        else
+        {
+            foreach (Collider col in colliders)
+            {
+                // Set the layer collision settings for the triggerCollider
+                Physics.IgnoreLayerCollision(player2Layer, playerLayer, true);
+            }
+        }
+    }*/
+
     private void Destroy()
     {
         attacker = null;
@@ -70,39 +91,70 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
+        if (other.gameObject.layer == 13)
         {
-            other.GetComponent<Health>().GetsHit(_damage, attacker);
-            
-            impactEffect.Play();
-            StartCoroutine(WaitForParticleSystem());
-            speed = 0f;
-        }
-        /*if (other.gameObject.layer == 7)
+            if (friendlyFire && attacker.gameObject.tag == "Player")
             {
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
+
                 impactEffect.Play();
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
             }
+            
+            if (attacker.gameObject.tag == "Enemy")
+            {
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
+
+                impactEffect.Play();
+                StartCoroutine(WaitForParticleSystem());
+                speed = 0f;
+            }
+        }
         
         if (other.gameObject.layer == 8)
         {
-            impactEffect.Play();
-            StartCoroutine(WaitForParticleSystem());
-            speed = 0f;
-        } else if (other.gameObject.layer == 9)
-        {
-            impactEffect.Play();
-            StartCoroutine(WaitForParticleSystem());
-            speed = 0f;
-        } else if (other.gameObject.layer == 13)
-        {
-            impactEffect.Play();
-            StartCoroutine(WaitForParticleSystem());
-            speed = 0f;
-        }*/
+            if (friendlyFire && attacker.gameObject.tag == "Player2")
+            {
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
 
+                impactEffect.Play();
+                StartCoroutine(WaitForParticleSystem());
+                speed = 0f;
+            }
 
+            if (attacker.gameObject.tag == "Enemy")
+            {
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
+
+                impactEffect.Play();
+                StartCoroutine(WaitForParticleSystem());
+                speed = 0f;
+            }
+        }
+        
+        if (other.gameObject.layer == 7)
+        {
+            if (other.GetComponent<Health>() != null)
+            {
+                other.GetComponent<Health>().GetsHit(_damage, attacker);
+            }
+            impactEffect.Play();
+                StartCoroutine(WaitForParticleSystem());
+                speed = 0f;
+        }
     }
 
     public void SetSpeed(float newSpeed)
