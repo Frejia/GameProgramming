@@ -179,11 +179,6 @@ public class GameModeManager : MonoBehaviour
     public void InitShooter()
     {
         // Scene Loaded
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("PvEShooter"))
-        {
-            Generate();
-        }
-       
     }
     
     // Generate Terrain
@@ -199,10 +194,10 @@ public class GameModeManager : MonoBehaviour
             Instantiate(portal, noiseGen.waypoints[noiseGen.waypoints.Count-1].transform.position * 5, Quaternion.identity);
             
     
-        noiseGen.raceMode = true;
+        noiseGen.raceMode = false;
         noiseGen.withCurve = false;
-        noiseGen.Generate();
-        if(noiseGen.isDone)world.InitializeGrid();
+       // noiseGen.Generate();
+       // if(noiseGen.isDone)world.InitializeGrid();
     }
     
     // -------- RACE MODE INIT ------------
@@ -238,7 +233,7 @@ public class GameModeManager : MonoBehaviour
     {
         noiseGen.raceMode = true;
         noiseGen.withCurve = true;
-        noiseGen.Generate();
+       // noiseGen.Generate();
         //if(noiseGen.isDone)world.InitializeGrid();
     }
 

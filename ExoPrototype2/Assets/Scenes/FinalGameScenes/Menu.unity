@@ -340,22 +340,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3301993436205717278, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+    - {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+    - {fileID: 5799891003915910939, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+    - {fileID: 24341901203686159, guid: 15a5f222b8932324187de40e2f061702, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 565181693434178818, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1370450295}
   m_SourcePrefab: {fileID: 100100000, guid: 15a5f222b8932324187de40e2f061702, type: 3}
---- !u!114 &353672779 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+--- !u!1 &353672779 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 565181693434178818, guid: 15a5f222b8932324187de40e2f061702, type: 3}
   m_PrefabInstance: {fileID: 353672778}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bff75741f3105a42acd196f2fc9e90f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &353672780 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1792386450675709201, guid: 15a5f222b8932324187de40e2f061702, type: 3}
@@ -391,17 +392,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3711362837742419383, guid: 15a5f222b8932324187de40e2f061702, type: 3}
   m_PrefabInstance: {fileID: 353672778}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &353672787 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3301993436205717278, guid: 15a5f222b8932324187de40e2f061702, type: 3}
-  m_PrefabInstance: {fileID: 353672778}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc057dacda4227b4486cd01f97ded249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &374460106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2216,6 +2206,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8243883003580495579, guid: 15a5f222b8932324187de40e2f061702, type: 3}
   m_PrefabInstance: {fileID: 353672778}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1370450295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353672779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1204016bb0e4b5f4aa6ff016c5ada963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perlin: {fileID: 565181693434178818, guid: 15a5f222b8932324187de40e2f061702, type: 3}
 --- !u!1 &1375927577
 GameObject:
   m_ObjectHideFlags: 0
@@ -2933,17 +2936,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7655386259046718470, guid: 75dfcbf4545a8414cb9f3f44fee924f3, type: 3}
   m_PrefabInstance: {fileID: 1766210978}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1822106818 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8968486549472095450, guid: 15a5f222b8932324187de40e2f061702, type: 3}
-  m_PrefabInstance: {fileID: 353672778}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1204016bb0e4b5f4aa6ff016c5ada963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1851978284
 GameObject:
   m_ObjectHideFlags: 0
@@ -6329,11 +6321,19 @@ PrefabInstance:
     - target: {fileID: 1914607380432804403, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: world
       value: 
-      objectReference: {fileID: 353672787}
+      objectReference: {fileID: 3301993436205717278, guid: 15a5f222b8932324187de40e2f061702, type: 3}
     - target: {fileID: 1914607380432804403, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: noiseGen
       value: 
-      objectReference: {fileID: 353672779}
+      objectReference: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
+    - target: {fileID: 1914607380432804403, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+      propertyPath: playerBullet
+      value: 
+      objectReference: {fileID: 8344811235910112286, guid: 23268876f7a53a945b9a948379043a05, type: 3}
+    - target: {fileID: 1914607380432804403, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+      propertyPath: goalParticles
+      value: 
+      objectReference: {fileID: 3438763212639888650, guid: 7c1d978638d1c524ea310d5445dffecd, type: 3}
     - target: {fileID: 2234848712776417728, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -7896,7 +7896,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1822106818}
+      - m_Target: {fileID: 1370450295}
         m_TargetAssemblyTypeName: RandomLevel, Assembly-CSharp
         m_MethodName: SetRaceMode
         m_Mode: 6
@@ -7908,7 +7908,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1822106818}
+      - m_Target: {fileID: 1370450295}
         m_TargetAssemblyTypeName: RandomLevel, Assembly-CSharp
         m_MethodName: GenerateRandomLevel
         m_Mode: 1
@@ -7918,7 +7918,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1623123457569546365
 CanvasRenderer:
@@ -13449,7 +13449,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1822106818}
+      - m_Target: {fileID: 1370450295}
+        m_TargetAssemblyTypeName: RandomLevel, Assembly-CSharp
+        m_MethodName: SetRaceMode
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1370450295}
         m_TargetAssemblyTypeName: RandomLevel, Assembly-CSharp
         m_MethodName: GenerateRandomLevel
         m_Mode: 1

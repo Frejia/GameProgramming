@@ -9,10 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8243883003580495579}
-  - component: {fileID: 8968486549472095450}
   - component: {fileID: 3301993436205717278}
   - component: {fileID: 8227015059232435417}
-  - component: {fileID: 2561337846942762704}
   - component: {fileID: 5799891003915910939}
   - component: {fileID: 24341901203686159}
   m_Layer: 0
@@ -38,18 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8968486549472095450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565181693434178818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1204016bb0e4b5f4aa6ff016c5ada963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3301993436205717278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,9 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _GridPointPrefab: {fileID: 290581813581882863, guid: 3dc67fa14d014c847a9a3ba58a3418d4, type: 3}
-  GridWidth: 150
-  GridHeight: 150
-  GridLength: 150
+  GridWidth: 158
+  GridHeight: 160
+  GridLength: 159
   PointDistance: 3
   PointSize: 0
   InvalidPointSize: 0
@@ -97,25 +83,13 @@ MonoBehaviour:
   segments: 0
   pathradius: 10
   waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &2561337846942762704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565181693434178818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb2e0f404e30e349b19c2b2414e4445, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  - {fileID: 3711362837742419383}
+  - {fileID: 3774760727532201190}
+  - {fileID: 5117505900507108667}
+  - {fileID: 3735417412979329434}
+  - {fileID: 1359517456058173186}
+  - {fileID: 919879591322467685}
+  - {fileID: 1792386450675709201}
 --- !u!114 &5799891003915910939
 MonoBehaviour:
   m_ObjectHideFlags: 0

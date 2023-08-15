@@ -102,12 +102,12 @@ public class PerlinNoiseGen : MonoBehaviour
         this.withCurve = withCurve;
         this.sphere = sphere;
         this.meshSmoothing = meshSmoothing;
-        foreach(GameObject point in wayPoints)
+       /* foreach(GameObject point in wayPoints)
         {
             this.waypoints.Add(point);
-        }
+        }*/
         Debug.Log("Setted Saved Level Stats");
-        invalidLevelSafe.LoadAndCompareCustomData();
+       // invalidLevelSafe.LoadAndCompareCustomData();
     }
 
     /// <summary>
@@ -229,7 +229,7 @@ public class PerlinNoiseGen : MonoBehaviour
         isDone = true;
         Debug.Log("Generated Mesh in " + timePassed + "seconds.");
     }
-    
+
     // Update is called once per frame
     private void Update() {
         

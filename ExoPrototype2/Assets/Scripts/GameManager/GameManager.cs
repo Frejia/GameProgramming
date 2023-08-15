@@ -34,7 +34,11 @@ public class GameManager : MonoBehaviour
     private bool allowFriendlyFire; // Allow Friendly Fire or not
     public GameObject player1 { get; set; }
     public GameObject player2 { get; set; }
-    
+
+    [Header("Scene Variables")] 
+    public bool loadLevel;
+    public int levelToLoad;
+
     [Header("UI Variables")]
     [SerializeField] private Canvas inGameUI;
     [SerializeField] private Canvas winCanvas;
@@ -64,6 +68,30 @@ public class GameManager : MonoBehaviour
         pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();*/
 
         player1 = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void Update()
+    {
+        if (loadLevel)
+        {
+            loadLevel = false;
+            StartCoroutine(LoadLevelAsync());
+            
+           // AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Single);
+           // asyncLoad.completed += (op) => { Debug.Log("Level Loading Done"); };
+        }
+    }
+    
+    private IEnumerator LoadLevelAsync()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Single);
+       
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        
+        Debug.Log("Level Loaded!");
     }
 
     // ------ Game State Setters ------ necessary for Event Delegates
@@ -106,8 +134,9 @@ public class GameManager : MonoBehaviour
           case GameState.Shooter:
               if (newGame)
               {
-                  SceneManager.LoadScene(1);
-                  GameModeManager.Instance.InitShooter();
+                  levelToLoad = 1;
+                  loadLevel = true;
+                    GameModeManager.Instance.InitShooter();
                  // ShowCanvas(inGameUI);
                   newGame = false;
               }
@@ -120,6 +149,8 @@ public class GameManager : MonoBehaviour
           case GameState.Race:
               if (newGame)
               {
+                  levelToLoad = 2;
+                  loadLevel = true;
                  // SceneManager.LoadScene(2);
                  GameModeManager.Instance.InitRace();
                  // ShowCanvas(inGameUI);
