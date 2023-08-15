@@ -650,7 +650,11 @@ PrefabInstance:
     - target: {fileID: 5285761136543051495, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f7ed7b977c78a347a23659869015508, type: 2}
+      objectReference: {fileID: 2100000, guid: 4549bdad81bbd0c4290dd479adfd0135, type: 2}
+    - target: {fileID: 5285761136543051495, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4549bdad81bbd0c4290dd479adfd0135, type: 2}
     - target: {fileID: 6618891251029887762, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_Name
       value: Player1
@@ -2601,7 +2605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1743879378
 MonoBehaviour:
   m_ObjectHideFlags: 0
