@@ -70,24 +70,6 @@ public class SetControls : MonoBehaviour
         player1Prefab.transform.GetChild(0).GetComponent<MeshFilter>().mesh = model.GetComponent<MeshFilter>().mesh;
         player1Prefab.transform.GetChild(0).GetComponent<MeshRenderer>().materials = model.GetComponent<MeshRenderer>().materials;
     }
-
-    private GameObject TrailObj;
     
-    public void PlayTrail(GameObject trail)
-    {
-        TrailObj = trail;
-        
-        // Move the object slowly left and right
-        Vector3 A = new Vector3(-98.6999969f, 0f, -97.0999985f);
-        Vector3 B = new Vector3(-266.600006f, -2.9000001f, -378.799988f);
-        float timeElapsed = 0f;
-        
-        while(timeElapsed < 20f)
-        {
-            timeElapsed += Time.deltaTime * 0.001f;
-            Debug.Log("Moving Trail");
-            TrailObj.transform.position = Vector3.Lerp(A, B, timeElapsed);
-        }
-    }
     
 }
