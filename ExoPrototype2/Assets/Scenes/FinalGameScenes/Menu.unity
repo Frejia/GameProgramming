@@ -857,10 +857,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2119830462}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: AllowSecondPlayer
-        m_Mode: 1
+      - m_Target: {fileID: 2032038479}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -868,6 +868,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6281780558622152161}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &414155545
 MonoBehaviour:
@@ -907,6 +919,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414155539}
   m_CullTransparentMesh: 1
+--- !u!1 &422370538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6618891251029887762, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+  m_PrefabInstance: {fileID: 1280740637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &422370550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422370538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb2e0f404e30e349b19c2b2414e4445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &467356268 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5818630410637998962, guid: 9abc661e35638b5488950d19a024feeb, type: 3}
@@ -3195,7 +3224,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6618891251029887762, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 422370550}
   m_SourcePrefab: {fileID: 100100000, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
 --- !u!114 &1287782315
 MonoBehaviour:
@@ -7453,9 +7485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftTrailTransform: {fileID: 1518752501}
   _rightTrailTransform: {fileID: 1270533688}
-  _dotTrail: {fileID: 0}
-  _gateEffectTrail: {fileID: 0}
-  _nyanCatTrail: {fileID: 0}
 --- !u!114 &2085995025 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4574405309768725019, guid: 9abc661e35638b5488950d19a024feeb, type: 3}
@@ -9298,7 +9327,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2119830462}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: AllowSecondPlayer
+        m_MethodName: SetRacer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14827,7 +14856,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2119830462}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: AllowSecondPlayer
+        m_MethodName: SetShooter
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
