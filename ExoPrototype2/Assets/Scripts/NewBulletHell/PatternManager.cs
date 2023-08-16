@@ -22,6 +22,7 @@ public class PatternManager : MonoBehaviour
     public float startAngle, endAngle;
 
     private Aim AimInstance;
+    [SerializeField] private NewEnemyInView _newEnemyInView;
 
     void Awake()
     {
@@ -34,7 +35,8 @@ public class PatternManager : MonoBehaviour
         }
         else if (this.gameObject.tag == "Player")
         {
-            AimInstance = this.gameObject.GetComponent<PlayerAim>();
+            //AimInstance = this.gameObject.GetComponent<PlayerAim>();
+            AimInstance = _newEnemyInView;
             AimInstance.user = this.gameObject;
         }
     }
@@ -141,10 +143,19 @@ public class PatternManager : MonoBehaviour
 
     private void Straight()
     {
+        // direction for bullet is 
         if(isAiming)
-       {
-           bulDir = AimInstance.Aiming();
-       }
+        {
+            if (AimInstance.target != null)
+            {
+                bulDir = AimInstance.Aiming();
+            }
+            else
+            {
+                bulDir = -gameObject.transform.GetChild(0).transform.right;
+            }
+            
+        }
         else
         {
             bulDir = -gameObject.transform.GetChild(0).transform.right;
@@ -162,13 +173,10 @@ public class PatternManager : MonoBehaviour
 
         }
 
-       float angle = (float)Math.Atan2(bulDir.y - transform.position.y,
+        float angle = (float)Math.Atan2(bulDir.y - transform.position.y,
             bulDir.x - transform.position.x);
         for (int i = 0; i <= bulletsAmount; i++)
         {
-            float bulDirX = transform.position.x + Mathf.Cos(angle) * 10;
-            float bulDirY = transform.position.y + Mathf.Sin(angle) * 10;
-            Vector3 bulMoveVector = new Vector3(bulDirX, bulDirY, 0f);
             //bulDir = (bulMoveVector - transform.position).normalized;
             GameObject bul = GetCorrectBullet();
             bul.transform.position = transform.position;
@@ -186,7 +194,6 @@ public class PatternManager : MonoBehaviour
             bul.GetComponent<Bullet>().SetDirection(bulDir);
             bul.GetComponent<Bullet>().SetUser(this.gameObject);
             bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
-        
         }
     }
     

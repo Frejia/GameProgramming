@@ -23,11 +23,16 @@ public class PlayerShoot : MonoBehaviour
     private PatternManager patternManager;
     public delegate void Shoot(int i);
     public static event Shoot Shot;
+    
+    // Aim Reference
+    [SerializeField] private NewEnemyInView _newEnemyInView;
+    private GameObject _closestTarget;
 
     // Start is called before the first frame update
     void Start()
     {
         patternManager = this.gameObject.GetComponent<PatternManager>();
+        //_newEnemyInView = this.gameObject.GetComponent<NewEnemyInView>();
     }
     
     void FixedUpdate()
@@ -58,6 +63,9 @@ public class PlayerShoot : MonoBehaviour
     // Start Pattern and send events to sound manager
      private IEnumerator StartPattern(int shot)
      {
+
+         _closestTarget = _newEnemyInView.GetClosestTarget();
+         
          isFiring = true;
          if (shot == 0)
          {
@@ -65,8 +73,9 @@ public class PlayerShoot : MonoBehaviour
              // Straight Pattern Example
              patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, false, 1, 10f);
 
-             if (GetComponent<PlayerAim>().target != null)
+             if (_newEnemyInView.GetClosestTarget() != null)
              {
+                 
                  patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, true, 1, 10f);
 
              }

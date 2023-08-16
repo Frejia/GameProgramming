@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0173218, g: 0.008811036, b: 0.015950419, a: 1}
+  m_IndirectSpecularColor: {r: 0.017285202, g: 0.008805449, b: 0.015912674, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -306,6 +306,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1940164731197101937, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: _newEnemyInView
+      value: 
+      objectReference: {fileID: 1297342796}
     - target: {fileID: 4700564430129391693, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -398,6 +402,14 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 9004116030529150478, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: newEnemyInView
+      value: 
+      objectReference: {fileID: 1297342796}
+    - target: {fileID: 9004116030529150478, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+      propertyPath: _newEnemyInView
+      value: 
+      objectReference: {fileID: 1297342796}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -562,6 +574,7 @@ MonoBehaviour:
   bulletSpeed: 0
   startAngle: 0
   endAngle: 0
+  _newEnemyInView: {fileID: 0}
 --- !u!114 &609347632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,6 +1405,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6867069364763975726, guid: 275a2ae1ed21adf4ca138d5a103d4e95, type: 3}
   m_PrefabInstance: {fileID: 1287498822}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1297342796 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6970177879386280386, guid: e7c73eef5777e4e43839a474c43e6b40, type: 3}
+  m_PrefabInstance: {fileID: 192631861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9c2c93ca277a143876bc01e2ad0c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1369360660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1806,6 +1830,7 @@ MonoBehaviour:
   bulletSpeed: 0
   startAngle: 0
   endAngle: 0
+  _newEnemyInView: {fileID: 0}
 --- !u!114 &1599204909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,6 +2157,7 @@ MonoBehaviour:
   bulletSpeed: 0
   startAngle: 0
   endAngle: 0
+  _newEnemyInView: {fileID: 0}
 --- !u!114 &1834047600
 MonoBehaviour:
   m_ObjectHideFlags: 0
