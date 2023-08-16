@@ -28,6 +28,7 @@ public class EnemySeesPlayer : MonoBehaviour
             CanSee(this.gameObject);
             Debug.Log("Enemy sees Player");
             GoFindPlayer(other.gameObject, gameObject.transform.parent.gameObject);
+
         }
     }
     

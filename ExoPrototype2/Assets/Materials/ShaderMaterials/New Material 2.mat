@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
-  m_Shader: {fileID: -6465566751694194690, guid: 01d68a9b61a6554439f905f801e84969, type: 3}
-  m_Parent: {fileID: 2100000, guid: 1b0824b7d95691d4e954196644e0f5e2, type: 2}
+  m_Name: New Material 2
+  m_Shader: {fileID: -6465566751694194690, guid: 04901a9adf46b5548a885bb0ae685761, type: 3}
+  m_Parent: {fileID: 2100000, guid: ce82af2eb23ae7147be971216c6ab15c, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -23,27 +23,21 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MaskTex:
-        m_Texture: {fileID: 0}
+    - _RenderTexture:
+        m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistortionAmount: 0.17
-    - _DotPower: 0.21
-    - _DotSize: 76.31
-    - _DotSpace: 474.43
-    - _NoisePower: 2.38
-    - _NoiseScale: 20
-    - _NoiseSpeed: 0.28
+    - _CloudScale: 0.62
+    - _MixAmount: 1.95
+    - _ScrollSpeed: 0.05
+    - _VertexAmount: 1
+    - _VertexHeight: 19.1
     m_Colors:
-    - _Color: {r: 0, g: 0.050111055, b: 1, a: 1}
-    - _DotColor: {r: 0.14841071, g: 0.7058824, b: 0.109803915, a: 0}
-    - _LaserColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Add: {r: 1.26, g: -14.67, b: 0.31, a: 0}
+    - _Clamp: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _CloudColor: {r: 0.74509805, g: 0.2, b: 0.331985, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5945564408095714609
 MonoBehaviour:
