@@ -18,7 +18,10 @@ public class SetControls : MonoBehaviour
     [SerializeField] private GameObject player1Prefab;
     [SerializeField] private Material mat1;
     [SerializeField] private Material mat2;
+    [SerializeField] private Material outlineMat;
     //[SerializeField] private GameObject player2Prefab;
+
+    [SerializeField] private GameObject playerModelHolderTransform;
 
     [SerializeField] private Slider player1Sensitivity;
     //[SerializeField] private Slider player2Sensitivity;
@@ -57,12 +60,32 @@ public class SetControls : MonoBehaviour
 
     public void SetModeColor1(Material newMat)
     {
-        mat1 = newMat;
+        Renderer[] renderers = playerModelHolderTransform.GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer renderer in renderers)
+        {
+            Material[] materials = renderer.materials;
+
+            foreach (Material material in materials)
+            {
+                //delete every material
+                Destroy(material);
+            }
+
+            //add new material
+            materials[0] = outlineMat;
+            materials[1] = newMat;
+            
+            
+            renderer.materials = materials;
+        }
     }
+    
 
     public void SetModeColor2(Material newMat)
     {
-        mat2 = newMat;
+        //mat2 = newMat;
+        SetModeColor1(newMat);
     }
 
     public void SetPlayerModel(GameObject model)
