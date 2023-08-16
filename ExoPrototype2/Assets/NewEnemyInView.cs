@@ -6,8 +6,11 @@ using UnityEngine;
 public class NewEnemyInView : Aim
 {
     public delegate void EnemyInScreen(GameObject enemy);
+
+    public delegate void EnemySeenSound(int index);
     public static event EnemyInScreen OnEnemyInScreen;
     public static event EnemyInScreen OnEnemyNotInScreen;
+    public static event EnemySeenSound OnEnemySeenSound;
 
     [SerializeField] private List<GameObject> targets;
     [SerializeField] private GameObject target;
@@ -24,10 +27,12 @@ public class NewEnemyInView : Aim
             if(targets.Count > 1)
             {
                 target = GetClosestEnemy();
+                OnEnemySeenSound(5);
             }
             else
             {
                 target = other.gameObject;
+                OnEnemySeenSound(5);
             }
             Debug.Log(gameObject.name + " is visible");
         }
