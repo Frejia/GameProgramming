@@ -95,7 +95,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Level Loaded!");
     }
 
-    // ------ Game State Setters ------ necessary for Event Delegates
+    // ------ Game State Setters ------ necessary for Event Delegates and Buttons
+    public void SetNone()
+    {
+        this.gameState = GameState.None;
+        SwitchGameState();
+    }
     public void SetShooter()
     {
         this.gameState = GameState.Shooter;

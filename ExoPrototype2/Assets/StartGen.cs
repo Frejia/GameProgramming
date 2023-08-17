@@ -9,23 +9,31 @@ using UnityEngine.SceneManagement;
 public class StartGen : MonoBehaviour
 {
     public bool raceMode = false;
+    public bool genPathOnly = false;
+    public bool startGen = false;
     private PerlinNoiseGen _perlinNoiseGen;
-    
+
     private void Awake()
     {
+
+        if (genPathOnly) WorldManager.Instance.InitializeGrid();
+
         _perlinNoiseGen = GetComponent<PerlinNoiseGen>();
-        if (raceMode)
+        if (startGen)
         {
-          // GameModeManager.Instance.InitRace();
-           _perlinNoiseGen.Generate();
-           if (PerlinNoiseGen.Instance.isDone) WorldManager.Instance.InitializeGrid();
-        }
-        else
-        {
-          //  GameModeManager.Instance.InitShooter();
-            _perlinNoiseGen.Generate();
-            if (PerlinNoiseGen.Instance.isDone) WorldManager.Instance.InitializeGrid();
+            if (raceMode)
+            {
+                // GameModeManager.Instance.InitRace();
+                _perlinNoiseGen.Generate();
+                if (PerlinNoiseGen.Instance.isDone) WorldManager.Instance.InitializeGrid();
+            }
+            else
+            {
+                //  GameModeManager.Instance.InitShooter();
+                _perlinNoiseGen.Generate();
+                if (PerlinNoiseGen.Instance.isDone) WorldManager.Instance.InitializeGrid();
+            }
         }
     }
-    
+
 }
