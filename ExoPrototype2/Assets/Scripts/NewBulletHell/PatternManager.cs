@@ -24,20 +24,22 @@ public class PatternManager : MonoBehaviour
     private Aim AimInstance;
     [SerializeField] private NewEnemyInView _newEnemyInView;
 
-    void Awake()
+    void Start()
     {
         //AimInstance = Aim.Instance;
-        if (this.gameObject.tag == "Enemy")
+        if (this.gameObject.CompareTag("Enemy"))
         {
             AimInstance = this.gameObject.AddComponent<EnemyAim>();
             AimInstance.target = GameObject.FindGameObjectWithTag("Player");
             AimInstance.user = this.gameObject;
         }
-        else if (this.gameObject.tag == "Player")
+        else if (this.gameObject.CompareTag("Player"))
         {
-            //AimInstance = this.gameObject.GetComponent<PlayerAim>();
-            AimInstance = _newEnemyInView;
-            AimInstance.user = this.gameObject;
+            // get component in children with transform.name "ViewArea"
+            AimInstance = gameObject.GetComponentInChildren<NewEnemyInView>();
+            
+            
+            AimInstance.user = gameObject;
         }
     }
 

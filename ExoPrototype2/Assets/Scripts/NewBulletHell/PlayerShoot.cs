@@ -67,7 +67,7 @@ public class PlayerShoot : MonoBehaviour
      private IEnumerator StartPattern(int shot)
      {
 
-         _closestTarget = _newEnemyInView.GetClosestTarget();
+         //_closestTarget = _newEnemyInView.GetClosestTarget();
          
          isFiring = true;
          if (shot == 0)
