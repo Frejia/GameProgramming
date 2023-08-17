@@ -24,7 +24,7 @@ public class PatternManager : MonoBehaviour
     private Aim AimInstance;
     [SerializeField] private NewEnemyInView _newEnemyInView;
 
-    void Awake()
+    void Start()
     {
         //AimInstance = Aim.Instance;
         if (this.gameObject.tag == "Enemy")
