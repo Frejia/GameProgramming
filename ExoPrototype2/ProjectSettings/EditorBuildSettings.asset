@@ -14,5 +14,23 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalGameScenes/PvP Race 1.unity
     guid: d31c2a943f0f6d3448fb27475e957fb0
+  - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/Levels/Shooter/Level1.unity
+    guid: 1cb0725cfb4c1aa4786e107a1e9de056
+  - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/Levels/Shooter/Level2.unity
+    guid: 337e179cb9a89bc45ba20c403b2fac59
+  - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/Levels/Shooter/Level3.unity
+    guid: d206f83aa872365438ccde77e1954efc
+  - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/Levels/Racer/Level1.unity
+    guid: 14667ea56cbcb8b4eab5f0195bf77f68
+  - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/Levels/Racer/Level2.unity
+    guid: 069b508e75f93a94f9795d3f88e630b6
+  - enabled: 1
+    path: Assets/Scenes/FinalGameScenes/Levels/Racer/Level3.unity
+    guid: 82a3ba2bc06c4804eb96b0b8a832be3a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d230d16bc81b2054dacf77926f37017b, type: 2}

@@ -18,7 +18,11 @@ public class ButtonHandler : MonoBehaviour
     {
         panel.SetActive(false);
     }
-
+    
+    public void LoadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
     public void ContinueGame()
     {
         GameManager.Instance.ContinueGame();
@@ -37,6 +41,7 @@ public class ButtonHandler : MonoBehaviour
     public void GoToMainMenu()
     {
         GameManager.Instance.GoToMainMenu();
+        GameManager.Instance.SetNone();
     }
     
     public void QuitGame()
