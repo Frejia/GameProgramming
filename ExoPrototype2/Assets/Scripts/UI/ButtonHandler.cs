@@ -19,6 +19,11 @@ public class ButtonHandler : MonoBehaviour
         panel.SetActive(false);
     }
     
+    public void Toggle(GameObject panel)
+    {
+        panel.SetActive(!panel.activeSelf);
+    }
+    
     public void LoadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
