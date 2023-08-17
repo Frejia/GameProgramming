@@ -54,6 +54,8 @@ public class MusicLoader : MonoBehaviour
         button.transform.parent = ScrollList.transform;
         button.GetComponentInChildren<TextMeshProUGUI>().text = "Music Track " + i;
         button.GetComponentInChildren<MusicButton>().SetAudioClip(clip);
+        
+        i++;
     }
     
     
