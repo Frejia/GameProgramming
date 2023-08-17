@@ -24,8 +24,9 @@ public abstract class Aim : MonoBehaviour
         Vector3 direction;
         //Calculate Angle for Direction of player from this gameobject position in a 3D Space, including the z axis
         direction = target.transform.position - user.transform.position;
+        //direction = user.transform.position - target.transform.position;
 
-            return direction.normalized;
+        return direction;
     }
 
     // get a random direction to shoot in if Aiming is off --> LEGACY mostly

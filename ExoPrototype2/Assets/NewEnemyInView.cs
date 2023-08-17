@@ -77,4 +77,9 @@ public class NewEnemyInView : Aim
        return closestObject;
     }
     
+    public GameObject GetClosestTarget()
+    {
+        return target;
+    }
+    
 }

@@ -6,9 +6,11 @@ using UnityEngine;
 /// <summary>
 /// uses Aim abstract class, but overrides the target to be closest Enemy with the EnemyLockOn and RemoveFromTargets methods
 /// </summary>
-public class PlayerAim : Aim
+//public class PlayerAim : Aim
+/*
 {
-    private List<GameObject> targets;
+    
+    public List<GameObject> targets;
 
     private void Start()
     {
@@ -80,4 +82,5 @@ public class PlayerAim : Aim
             target = null;
         }
     }
-}
+  }  
+*/

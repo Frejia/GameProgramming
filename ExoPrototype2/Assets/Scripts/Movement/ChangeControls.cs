@@ -18,7 +18,10 @@ public class SetControls : MonoBehaviour
     [SerializeField] private GameObject player1Prefab;
     [SerializeField] private Material mat1;
     [SerializeField] private Material mat2;
+    [SerializeField] private Material outlineMat;
     //[SerializeField] private GameObject player2Prefab;
+
+    [SerializeField] private GameObject playerModelHolderTransform;
 
     [SerializeField] private Slider player1Sensitivity;
     //[SerializeField] private Slider player2Sensitivity;
@@ -57,12 +60,32 @@ public class SetControls : MonoBehaviour
 
     public void SetModeColor1(Material newMat)
     {
-        mat1 = newMat;
+        Renderer[] renderers = playerModelHolderTransform.GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer renderer in renderers)
+        {
+            Material[] materials = renderer.materials;
+
+            foreach (Material material in materials)
+            {
+                //delete every material
+                Destroy(material);
+            }
+
+            //add new material
+            materials[0] = outlineMat;
+            materials[1] = newMat;
+            
+            
+            renderer.materials = materials;
+        }
     }
+    
 
     public void SetModeColor2(Material newMat)
     {
-        mat2 = newMat;
+        //mat2 = newMat;
+        SetModeColor1(newMat);
     }
 
     public void SetPlayerModel(GameObject model)
@@ -70,24 +93,6 @@ public class SetControls : MonoBehaviour
         player1Prefab.transform.GetChild(0).GetComponent<MeshFilter>().mesh = model.GetComponent<MeshFilter>().mesh;
         player1Prefab.transform.GetChild(0).GetComponent<MeshRenderer>().materials = model.GetComponent<MeshRenderer>().materials;
     }
-
-    private GameObject TrailObj;
     
-    public void PlayTrail(GameObject trail)
-    {
-        TrailObj = trail;
-        
-        // Move the object slowly left and right
-        Vector3 A = new Vector3(-98.6999969f, 0f, -97.0999985f);
-        Vector3 B = new Vector3(-266.600006f, -2.9000001f, -378.799988f);
-        float timeElapsed = 0f;
-        
-        while(timeElapsed < 20f)
-        {
-            timeElapsed += Time.deltaTime * 0.001f;
-            Debug.Log("Moving Trail");
-            TrailObj.transform.position = Vector3.Lerp(A, B, timeElapsed);
-        }
-    }
     
 }
