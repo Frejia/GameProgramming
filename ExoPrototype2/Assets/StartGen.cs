@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class StartGen : MonoBehaviour
 {
-    public bool raceMode;
+    public bool raceMode = false;
     private PerlinNoiseGen _perlinNoiseGen;
     
     private void Awake()
@@ -16,13 +16,13 @@ public class StartGen : MonoBehaviour
         _perlinNoiseGen = GetComponent<PerlinNoiseGen>();
         if (raceMode)
         {
-           GameModeManager.Instance.InitRace();
+          // GameModeManager.Instance.InitRace();
            _perlinNoiseGen.Generate();
            if (PerlinNoiseGen.Instance.isDone) WorldManager.Instance.InitializeGrid();
         }
         else
         {
-            GameModeManager.Instance.InitShooter();
+          //  GameModeManager.Instance.InitShooter();
             _perlinNoiseGen.Generate();
             if (PerlinNoiseGen.Instance.isDone) WorldManager.Instance.InitializeGrid();
         }

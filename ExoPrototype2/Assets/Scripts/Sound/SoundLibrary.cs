@@ -20,7 +20,11 @@ public class SoundLibrary : MonoBehaviour
         //Events
         PlayerShoot.Shot += PlaySound;
         ShipMovement.boostInit += PlaySound;
-
+        Health.PlayerHitSound += PlaySound;
+        Health.EnemyHitSound += PlaySound;
+        Health.PlayerDead += PlaySound;
+        Health.EnemyDead += PlaySound;
+        NewEnemyInView.OnEnemySeenSound += PlaySound;
     }
     
     private void OnDisable()

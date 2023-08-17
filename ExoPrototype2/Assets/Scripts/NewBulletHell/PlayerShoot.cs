@@ -45,16 +45,19 @@ public class PlayerShoot : MonoBehaviour
      {
          if (shooting)
          {
+             Shot(0);
              StartCoroutine(StartPattern(0));
          }
 
          if (shotSpecial)
          {
+             Shot(1);
              StartCoroutine(StartPattern(1));
          }
 
          if (shotSpecial2)
          {
+             Shot(2);
              StartCoroutine(StartPattern(2));
          }
          
@@ -69,7 +72,6 @@ public class PlayerShoot : MonoBehaviour
          isFiring = true;
          if (shot == 0)
          {
-             Shot(0);
              // Straight Pattern Example
              patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, false, 1, 10f);
 
@@ -84,13 +86,12 @@ public class PlayerShoot : MonoBehaviour
          else if(shot == 1)
          {
              // Cone Pattern Example
-             Shot(1);
+            
              patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 2f, true, 10, 10f);
          }
          else
          {
              // Circle Pattern Example
-             Shot(2);
              patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Circle, BulletBehaviour.BulletBehaviours.None, 0,360, 2f, true, 20, 10f);
          }
          

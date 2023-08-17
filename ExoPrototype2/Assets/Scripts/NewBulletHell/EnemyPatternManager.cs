@@ -32,6 +32,9 @@ public class EnemyPatternManager : MonoBehaviour
     public bool isPlayerClose = false;
     private BulletPool pool;
     
+    public delegate void EnemyShootSound(int index);
+    public static event EnemyShootSound EnemyShoot;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -116,7 +119,7 @@ public class EnemyPatternManager : MonoBehaviour
     {
         
         isFiring = true;
-        
+        EnemyShoot(2);
         // Set the pattern duration and cooldown
         if (useAlternateDurations) patternDuration = patternDurations[patterns.IndexOf(pattern)];
         else  patternDuration = pattern.patternDuration;
