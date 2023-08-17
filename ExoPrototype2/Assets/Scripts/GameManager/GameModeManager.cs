@@ -77,8 +77,8 @@ public class GameModeManager : MonoBehaviour
         goal = noiseGen.waypoints[noiseGen.waypoints.Count - 1].transform;
         
         // Shooter Mode Point Handling
-        Health.EnemyGotHit += CountPoints;
-        Health.PlayerGotHit += CountPoints;
+        Health.EnemyKilledBy += CountPoints;
+        Health.PlayerKilledBy += CountPoints;
         ReachGoal.ReachedGoal += EndRace;
         
         // Race Mode Point Handling

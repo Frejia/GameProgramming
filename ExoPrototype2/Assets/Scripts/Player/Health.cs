@@ -13,14 +13,18 @@ public class Health : MonoBehaviour
 {
     [SerializeField] public int maxHealth = 100;
     [SerializeField] public float currentHealth;
-
+    [SerializeField] public bool isImmune;
+    [SerializeField] public float immuneDuration = 3f;
+    
     [SerializeField] private GameObject attacker;
     
     public delegate void Hit(GameObject enemy, GameObject attacker);
 
     public delegate void HitSound(int index);
-    public static event Hit EnemyGotHit;
-    public static event Hit PlayerGotHit;
+    public static event Hit EnemyKilledBy;
+    public static event Hit PlayerKilledBy;
+    public static event Hit Player1GotHit;
+    public static event Hit Player2GotHit;
     public static event HitSound PlayerHitSound;
     public static event HitSound PlayerDead;
     public static event HitSound EnemyHitSound;
@@ -32,25 +36,51 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void GetsHit(int damage, GameObject attacker)
-    {
+    private void GetsHit(int damage, GameObject attacker){
+       
         this.attacker = attacker;
+    if (!isImmune) // Check if not already immune
+    {
         currentHealth -= damage;
-        if (currentHealth > 0){
-        if (this.gameObject.tag == "Enemy")
+
+        // Time of immunity after getting hit
+        StartCoroutine(Immunity());
+
+        if (currentHealth > 0)
         {
-            EnemyHitSound(8);
-        }
-        else
-        {
-            PlayerHitSound(8);
-        }
+            if (this.gameObject.CompareTag("Enemy"))
+            {
+                EnemyHitSound(8);
+            }
+            else
+            {
+                PlayerHitSound(8);
+            }
         }
         
+        if(this.gameObject.CompareTag("Player"))
+        {
+            Player1GotHit(this.gameObject, attacker);
+        }
+        if(this.gameObject.CompareTag("Player2"))
+        {
+            Player2GotHit(this.gameObject, attacker);
+        }
+
         if (currentHealth < 0) currentHealth = -1;
-            // Debug.Log(currentHealth);
         CheckDeath();
     }
+}
+
+private IEnumerator Immunity()
+{
+    isImmune = true; // Set immunity flag
+    // Add any visual or audio feedback for immunity
+
+    yield return new WaitForSeconds(immuneDuration); // Duration of immunity
+
+    isImmune = false; // Reset immunity flag
+}
 
     private void CheckDeath()
     {
@@ -60,7 +90,7 @@ public class Health : MonoBehaviour
             if (this.gameObject.tag == "Enemy")
             {
                 this.GetComponent<Dissolve>().isdissolving = true;
-                EnemyGotHit(this.transform.parent.gameObject, attacker);
+                EnemyKilledBy(this.transform.parent.gameObject, attacker);
                 EnemyDead(7);
                 //Destroy Object
                 Destroy(this.transform.parent, 5f);
@@ -68,13 +98,13 @@ public class Health : MonoBehaviour
             
             if (this.gameObject.tag == "Player")
             {
-                PlayerGotHit(this.gameObject, attacker);
+                PlayerKilledBy(this.gameObject, attacker);
                 PlayerDead(4);
                 // GameManager.Instance.SetLose();
             }
             if (this.gameObject.tag == "Player2")
             {
-                PlayerGotHit(this.gameObject, attacker);
+                PlayerKilledBy(this.gameObject, attacker);
                 PlayerDead(4);
                 // GameManager.Instance.SetLose();
             }
