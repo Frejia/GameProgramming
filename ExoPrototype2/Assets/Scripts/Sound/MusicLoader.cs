@@ -26,9 +26,14 @@ public class MusicLoader : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadAudioClip(string filePath)
+    private IEnumerator LoadAudioClip(string fileName)
     {
-        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip("file://" + filePath, AudioType.MPEG))
+        string audioFilePath = Path.Combine(Application.streamingAssetsPath, "Music", fileName);
+
+        // Convert the local file path to a URL format
+        string audioFileURL = "file://" + audioFilePath;
+
+        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(audioFileURL, AudioType.MPEG))
         {
             yield return www.SendWebRequest();
 
