@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -75,7 +76,7 @@ public class GameModeManager : MonoBehaviour
         // Racer Mode References
         start = noiseGen.waypoints[0].transform;
         goal = noiseGen.waypoints[noiseGen.waypoints.Count - 1].transform;
-        
+
         // Shooter Mode Point Handling
         Health.EnemyKilledBy += CountPoints;
         Health.PlayerKilledBy += CountPoints;
@@ -88,9 +89,8 @@ public class GameModeManager : MonoBehaviour
         points2 = 0;
         points1Text.text = points1.ToString();
         points2Text.text = points2.ToString();*/
-     
     }
-    
+
     // Count points when Enemy is eliminated and show in UI
     private void CountPoints(GameObject enemy, GameObject player)
     {
@@ -178,13 +178,16 @@ public class GameModeManager : MonoBehaviour
     
     public void InitShooter()
     {
+        if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
+        if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
         // Scene Loaded
         Generate();
     }
     
     // Generate Terrain
     private void Generate()
-    {
+    { 
+        noiseGen = PerlinNoiseGen.Instance;
              for (int i = 0; i < noiseGen.waypoints.Count - 1; i++){
                  //Get Direction to previous point
                 Vector3 dir = (noiseGen.waypoints[i].transform.position - noiseGen.waypoints[i+1].transform.position).normalized;
@@ -199,7 +202,10 @@ public class GameModeManager : MonoBehaviour
     // -------- RACE MODE INIT ------------
     public void InitRace()
     {
+        if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
+        if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
         PlayerInputManager.instance.EnableJoining();
+        noiseGen = PerlinNoiseGen.Instance;
         //PlayerInputManager.instance.JoinPlayer();
 
         for(int i = 1; i < noiseGen.waypoints.Count - 2; i++)

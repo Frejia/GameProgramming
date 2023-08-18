@@ -15,10 +15,10 @@ MonoBehaviour:
   chunkSizeI: 0
   chunkSizeZI: 0
   offsetI: 0
-  chunkSize: 
-  chunkSizeZ: 
-  offset: 
-  raceMode: 
-  withCurve: 
-  sphere: 
-  meshSmoothing: 
+  chunkSize: 0a000000
+  chunkSizeZ: 0a000000
+  offset: 05000000
+  raceMode: 00
+  withCurve: 00
+  sphere: 00
+  meshSmoothing: 01

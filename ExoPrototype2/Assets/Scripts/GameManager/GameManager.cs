@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Variables")]
     [SerializeField] private Canvas inGameUI;
+    [SerializeField] private Canvas inGameUIPlayer2;
     [SerializeField] private Canvas winCanvas;
     [SerializeField] private Canvas loseCanvas;
     [SerializeField] private Canvas pauseCanvas;
@@ -55,19 +56,13 @@ public class GameManager : MonoBehaviour
         newGame = true;
 
         // Event Subscriptions
-//        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
+       PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
         GameModeManager.Player1Win += SetWin;
         GameModeManager.Player2Win += SetWin;
     }
 
     private void Start()
     {
-        // Get All References when going to new Scene from Main Menu Scene
-        /*inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
-        winCanvas = GameObject.Find("WinCanvas").GetComponent<Canvas>();
-        loseCanvas = GameObject.Find("LoseCanvas").GetComponent<Canvas>();
-        pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();*/
-
         player1 = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -81,6 +76,7 @@ public class GameManager : MonoBehaviour
            // AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Single);
            // asyncLoad.completed += (op) => { Debug.Log("Level Loading Done"); };
         }
+
     }
     
     private IEnumerator LoadLevelAsync()
@@ -104,12 +100,16 @@ public class GameManager : MonoBehaviour
     public void SetShooter()
     {
         this.gameState = GameState.Shooter;
+        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
+        if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
         SwitchGameState();
     }
     
     public void SetRacer()
     {
         this.gameState = GameState.Race;
+        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
+        if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
         SwitchGameState();
     }
     
@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour
   private void GetSecondPlayer(PlayerInput obj)
   {
       player2 = obj.gameObject;
+      inGameUIPlayer2.gameObject.SetActive(true);
   }
 
   // ------ UI ------

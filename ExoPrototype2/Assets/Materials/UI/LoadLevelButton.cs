@@ -1,31 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Cinemachine;
-using Sound;
-using TMPro;
 using UnityEngine;
 
-public class ReadLevelSO : MonoBehaviour
+public class LoadLevelButton : MonoBehaviour
 {
     private PerlinNoiseGen perlin;
     [SerializeField] private ScriptableInvalidLevel savedLevels;
+    [SerializeField] public int levelIndex;
     
-    [SerializeField] private GameObject ButtonPrefab;
-    [SerializeField] private GameObject ScrollList;
-    
-    
-    public void LoadSavedLevels()
-    {
-        int buttonCount = savedLevels.chunkSize.Count;
-        
-        for(int i = 0; i < buttonCount; i++)
-        {
-            LoadLevelList(i);
-        }
-    }
-    
-    public void LoadLevel(int levelIndex)
+    public void LoadLevel()
     {
         perlin = PerlinNoiseGen.Instance;
         
@@ -39,7 +23,7 @@ public class ReadLevelSO : MonoBehaviour
             // Set the values of the PerlinNoiseGen
             perlin.PerlinSetter(savedLevels.chunkSize[levelIndex],savedLevels.chunkSizeZ[levelIndex], savedLevels.offset[levelIndex], savedLevels.raceMode[levelIndex],
                 savedLevels.withCurve[levelIndex], savedLevels.sphere[levelIndex], savedLevels.meshSmoothing[levelIndex], savedLevels.wayPoints[levelIndex]);
-            
+           
         }
         else
         {
@@ -47,13 +31,8 @@ public class ReadLevelSO : MonoBehaviour
         }
     }
 
-    private void LoadLevelList(int i)
+    private void StartScene()
     {
-        GameObject button = Instantiate(ButtonPrefab, transform);
-        button.transform.parent = ScrollList.transform;
-        button.GetComponentInChildren<TextMeshProUGUI>().text = "Level " + i;
+        
     }
-    
-    
-}    
-
+}

@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1817900472438067727}
   - component: {fileID: 7283632243034382803}
   m_Layer: 8
-  m_Name: Music
+  m_Name: MusicAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,12 +92,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630133458560246215}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6698166929898196515}
+  m_Father: {fileID: 5822890122483942579}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7283632243034382803
@@ -1156,7 +1156,6 @@ Transform:
   - {fileID: 5339853948549076405}
   - {fileID: 7663740237822656269}
   - {fileID: 5822890122483942579}
-  - {fileID: 1817900472438067727}
   - {fileID: 6306983506958052179}
   - {fileID: 1386960306323821992}
   - {fileID: 7401441175033348650}
@@ -1297,6 +1296,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  isImmune: 0
+  immuneDuration: 3
   attacker: {fileID: 0}
 --- !u!114 &6824005594536758395
 MonoBehaviour:
@@ -1674,7 +1675,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1817900472438067727}
   m_Father: {fileID: 6698166929898196515}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

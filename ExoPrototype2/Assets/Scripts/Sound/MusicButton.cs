@@ -14,6 +14,7 @@ namespace Sound
         
         public void PlayMusic()
         {
+            musicSource = GameObject.Find("MusicAudioSource").GetComponent<AudioSource>();
             musicSource.clip = clip;
             musicSource.Play();
         }
