@@ -11220,7 +11220,7 @@ GameObject:
   - component: {fileID: 1817900473449520914}
   - component: {fileID: 7283632241898679502}
   m_Layer: 8
-  m_Name: Music
+  m_Name: MusicAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13899,12 +13899,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630133459435973850}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6698166931034161982}
+  m_Father: {fileID: 5822890123622074798}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1858293162244552820
@@ -26635,7 +26635,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1817900473449520914}
   m_Father: {fileID: 6698166931034161982}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28705,7 +28706,6 @@ Transform:
   - {fileID: 5339853947411273896}
   - {fileID: 7663740236544864784}
   - {fileID: 5822890123622074798}
-  - {fileID: 1817900473449520914}
   - {fileID: 6306983506080556622}
   - {fileID: 1386960305311520949}
   - {fileID: 7401441175900950327}
