@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class WorldManager : MonoBehaviour
@@ -26,7 +27,8 @@ public class WorldManager : MonoBehaviour
             return;
         }
         Instance = this;
-       if(debug) InitializeGrid();
+
+        if(debug) InitializeGrid();
     }
 
     private void AddNeighbour(Point p, Vector3Int neighbour) 
@@ -41,6 +43,11 @@ public class WorldManager : MonoBehaviour
 
     public void InitializeGrid()
     {
+        PerlinNoiseGen noiseGen = PerlinNoiseGen.Instance;
+        GridWidth = (int)(noiseGen.chunkSize * 1.76f);
+        GridHeight = (int) (noiseGen.chunkSize * 1.76f);
+        GridLength = (int) (noiseGen.chunkSizeZ * 1.76f);
+        
         startPoint = new Vector3(-GridWidth, -GridHeight, -GridLength) / 2f * PointDistance + transform.position;
         GameObject gridParent = new GameObject("Grid");
         Grid = new Point[GridWidth][][];

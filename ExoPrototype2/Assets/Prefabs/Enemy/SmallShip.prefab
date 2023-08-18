@@ -181,7 +181,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8448
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 767
@@ -448,7 +448,6 @@ GameObject:
   - component: {fileID: 1466033225271903422}
   - component: {fileID: 8552135943583058479}
   - component: {fileID: 809186830052155279}
-  - component: {fileID: 8565784320940094642}
   m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
@@ -521,28 +520,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8565784320940094642
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8723292633858985275}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &3372074700714320598
 PrefabInstance:
   m_ObjectHideFlags: 0

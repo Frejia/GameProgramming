@@ -99,10 +99,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8568
+    m_Bits: 8456
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 20223
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   _bulletLifeTime: 6
   impactEffect: {fileID: 2641755993004317472}
   _damage: 10
+  isEnemyBullet: 1
   friendlyFire: 0
 --- !u!114 &-998867342427067411
 MonoBehaviour:

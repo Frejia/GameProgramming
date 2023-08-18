@@ -23,6 +23,7 @@ public class GameModeManager : MonoBehaviour
     private bool friendlyFire = false;
     public int points1;
     public int points2;
+    public int pointsToWinShooter;
     //true if win, false if lose
     public bool win;
     
@@ -134,7 +135,7 @@ public class GameModeManager : MonoBehaviour
             GameManager.Instance.SetLose();
         }
         
-        if(points1 >= 10 || points2 >= 10)
+        if(points1 >= pointsToWinShooter || points2 >= pointsToWinShooter)
         {
             WinCheck();
         }

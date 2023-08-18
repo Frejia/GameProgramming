@@ -105,7 +105,7 @@ public class Rotator : MonoBehaviour
     {
         target = player.transform;
         enemy.GetComponent<Rotator>().isEnemy = true;
-        if (this.gameObject.tag == "Enemy" && isEnemy)
+        if (this.gameObject.layer == 7 && isEnemy)
         {
             directionToTarget = target.position - transform.position;
             if (isAimPoint)

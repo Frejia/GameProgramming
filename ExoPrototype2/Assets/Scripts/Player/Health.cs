@@ -89,7 +89,7 @@ private IEnumerator Immunity()
         {
             isDead = true;
             //Dissolve Shield TO DO: Compare layer instead of tag
-            if (this.gameObject.transform.parent.gameObject.CompareTag("Enemy"))
+            if (gameObject.layer == 7)
             {
                 this.GetComponent<Dissolve>().isdissolving = true;
                 Debug.Log("Enemy is killed");

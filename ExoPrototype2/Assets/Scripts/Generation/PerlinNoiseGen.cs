@@ -77,8 +77,8 @@ public class PerlinNoiseGen : MonoBehaviour
     private void Awake()
     {
         // Check if there are Invalid Levels and compare if currently generated values is one of the invalid ones.
-        /*invalidLevelSafe = GetComponent<InvalidLevelSafe>();
-        invalidLevelSafe.LoadAndCompareCustomData();*/
+       // invalidLevelSafe = GetComponent<InvalidLevelSafe>();
+       // invalidLevelSafe.LoadAndCompareCustomData();
         
         if (Instance != null)
         {
