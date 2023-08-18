@@ -91,12 +91,6 @@ public class GameModeManager : MonoBehaviour
         points2Text.text = points2.ToString();*/
     }
 
-    private void Update()
-    {
-        if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
-        if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
-    }
-
     // Count points when Enemy is eliminated and show in UI
     private void CountPoints(GameObject enemy, GameObject player)
     {
@@ -184,6 +178,8 @@ public class GameModeManager : MonoBehaviour
     
     public void InitShooter()
     {
+        if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
+        if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
         // Scene Loaded
         Generate();
     }
@@ -206,6 +202,8 @@ public class GameModeManager : MonoBehaviour
     // -------- RACE MODE INIT ------------
     public void InitRace()
     {
+        if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
+        if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
         PlayerInputManager.instance.EnableJoining();
         noiseGen = PerlinNoiseGen.Instance;
         //PlayerInputManager.instance.JoinPlayer();
