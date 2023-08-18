@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3054780770814687416}
   - component: {fileID: 758714511942758157}
   - component: {fileID: -4275953474817931738}
+  - component: {fileID: 7418701413186379122}
   m_Layer: 7
   m_Name: SmallShip
   m_TagString: Enemy
@@ -221,6 +222,18 @@ MonoBehaviour:
   isEnemy: 0
   target: {fileID: 0}
   isRotating: 0
+--- !u!114 &7418701413186379122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031741032062270357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0ce46d727e2764f991bfeb24825f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3167310554678085145
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +435,7 @@ MonoBehaviour:
   currentHealth: 0
   isImmune: 0
   immuneDuration: 3
+  isDead: 0
   attacker: {fileID: 0}
 --- !u!1 &8723292633858985275
 GameObject:

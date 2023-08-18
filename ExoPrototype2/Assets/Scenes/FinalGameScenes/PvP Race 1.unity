@@ -406,9 +406,29 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 10.1
       objectReference: {fileID: 0}
+    - target: {fileID: 990548296955510643, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3271919011038832301, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3373969270086994812, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
       propertyPath: m_Name
       value: RaceTrack1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963500799108109866, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567394392619315314, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195611617025034024, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5769474336548162890, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
       propertyPath: m_RootOrder
@@ -452,6 +472,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5769474336548162890, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652316938665011586, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705205669025379116, guid: a53b57e858f410849acdc5cc3959ce46, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

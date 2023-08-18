@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d9bb15968dc8a408598c333fea41f1, type: 3}
   m_Name: InvalidLevels
   m_EditorClassIdentifier: 
-  chunkSize: 20
-  chunkSizeZ: 20
-  seed: 5
+  chunkSizeI: 0
+  chunkSizeZI: 0
+  offsetI: 0
+  chunkSize: 
+  chunkSizeZ: 
+  offset: 
+  raceMode: 
+  withCurve: 
+  sphere: 
+  meshSmoothing: 

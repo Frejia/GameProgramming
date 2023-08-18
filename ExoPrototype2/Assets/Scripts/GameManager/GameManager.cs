@@ -91,8 +91,7 @@ public class GameManager : MonoBehaviour
         
         Debug.Log("Level Loaded!");
         if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
-        if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
-    }
+         }
 
     // ------ Game State Setters ------ necessary for Event Delegates and Buttons
     public void SetNone()
@@ -200,8 +199,6 @@ public class GameManager : MonoBehaviour
       // Pause game
       Time.timeScale = 0;
       pauseCanvas.gameObject.SetActive(true);
-      PlayerInputManager.instance.StopAllCoroutines();
-      player1.GetComponent<PlayerInput>().StopAllCoroutines();
       player1.GetComponent<ShipMovement>().enabled = false;
       player1.GetComponent<PlayerShoot>().enabled = false;
       player1.transform.GetChild(0).gameObject.SetActive(false);
@@ -216,21 +213,22 @@ public class GameManager : MonoBehaviour
 
   public void ContinueGame()
   {
-   
+      Debug.Log("Continue Game");
+      gameState = previousGameState;
+      SwitchGameState();
+      pauseCanvas.gameObject.SetActive(false);
       Time.timeScale = 1;
       player1.GetComponent<ShipMovement>().enabled = true;
       player1.GetComponent<PlayerShoot>().enabled = true;
       player1.transform.GetChild(0).gameObject.SetActive(true);
-      pauseCanvas.gameObject.SetActive(false);
-        
+      
       if (player2 != null)
       {
           player2.GetComponent<ShipMovement>().enabled = true;
           player2.GetComponent<PlayerShoot>().enabled = true;
           player2.transform.GetChild(0).gameObject.SetActive(true);
       }
-      gameState = previousGameState;
-      SwitchGameState();
+      
   }
 
   // ------ Multiplayer ------
@@ -255,6 +253,8 @@ public class GameManager : MonoBehaviour
   {
       player2 = obj.gameObject;
       inGameUIPlayer2.gameObject.SetActive(true);
+     if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
+
   }
 
   // ------ UI ------

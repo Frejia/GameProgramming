@@ -48,7 +48,7 @@ public class MeshCreator : MonoBehaviour
             
             
         }
-        savedLevels.wayPoints.Add(points);
+      //  savedLevels.wayPoints.Add(points);
         
         string filePath = Path.Combine(Application.persistentDataPath, "SavedLevel.asset");
         SaveScriptableObject(savedLevels, filePath);
