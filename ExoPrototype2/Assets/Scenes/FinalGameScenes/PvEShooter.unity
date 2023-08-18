@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 548280383}
-  m_IndirectSpecularColor: {r: 0.1829001, g: 0.0469876, b: 0.022743132, a: 1}
+  m_IndirectSpecularColor: {r: 0.18298844, g: 0.046947792, b: 0.022770107, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -808,7 +808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
       propertyPath: collider
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8227015059232435417, guid: 15a5f222b8932324187de40e2f061702, type: 3}
       propertyPath: material

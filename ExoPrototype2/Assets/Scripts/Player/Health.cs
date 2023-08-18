@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 /// <summary>
@@ -15,7 +16,7 @@ public class Health : MonoBehaviour
     [SerializeField] public float currentHealth;
     [SerializeField] public bool isImmune;
     [SerializeField] public float immuneDuration = 3f;
-    
+    [SerializeField] public bool isDead = false;
     [SerializeField] private GameObject attacker;
     
     public delegate void Hit(GameObject enemy, GameObject attacker);
@@ -68,8 +69,8 @@ public class Health : MonoBehaviour
         }
 
         if (currentHealth < 0) currentHealth = -1;
-        CheckDeath();
     }
+    CheckDeath();
 }
 
 private IEnumerator Immunity()
@@ -86,14 +87,16 @@ private IEnumerator Immunity()
     {
         if(currentHealth <= 0)
         {
-            //Dissolve Shield
-            if (this.gameObject.tag == "Enemy")
+            isDead = true;
+            //Dissolve Shield TO DO: Compare layer instead of tag
+            if (this.gameObject.transform.parent.gameObject.CompareTag("Enemy"))
             {
                 this.GetComponent<Dissolve>().isdissolving = true;
+                Debug.Log("Enemy is killed");
                 EnemyKilledBy(this.transform.parent.gameObject, attacker);
                 EnemyDead(7);
                 //Destroy Object
-                Destroy(this.transform.parent, 5f);
+                this.transform.parent.gameObject.SetActive(false);
             }
             
             if (this.gameObject.tag == "Player")
@@ -106,7 +109,7 @@ private IEnumerator Immunity()
             {
                 PlayerKilledBy(this.gameObject, attacker);
                 PlayerDead(4);
-                // GameManager.Instance.SetLose();
+                GameManager.Instance.SetLose();
             }
            
         }

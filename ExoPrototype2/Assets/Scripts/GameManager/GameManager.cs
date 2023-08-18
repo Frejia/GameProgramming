@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
    //Game Manager Vairables
     public static GameManager Instance { get; private set; }
     [SerializeField] private GameState gameState;
+    private GameState previousGameState;
     [SerializeField] private StartGen startGen;
     private bool newGame = false; // Needed to determine whether to load scene or continue ongoing game
     
@@ -89,7 +90,8 @@ public class GameManager : MonoBehaviour
         }
         
         Debug.Log("Level Loaded!");
-    }
+        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
+         }
 
     // ------ Game State Setters ------ necessary for Event Delegates and Buttons
     public void SetNone()
@@ -100,33 +102,32 @@ public class GameManager : MonoBehaviour
     public void SetShooter()
     {
         this.gameState = GameState.Shooter;
-        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
-        if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
         SwitchGameState();
     }
     
     public void SetRacer()
     {
         this.gameState = GameState.Race;
-        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
-        if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
         SwitchGameState();
     }
     
     public void SetPause()
     {
+        previousGameState = gameState;
         this.gameState = GameState.Paused;
         SwitchGameState();
     }
     
     public void SetLose()
     {
+        previousGameState = gameState;
         this.gameState = GameState.Lose;
         SwitchGameState();
     }
     
     public void SetWin()
     {
+        previousGameState = gameState;
         this.gameState = GameState.Win;
         SwitchGameState();
     }
@@ -134,7 +135,6 @@ public class GameManager : MonoBehaviour
     // GameState Switch
   private void SwitchGameState()
   {
-
       switch (gameState)
       {
           case GameState.Shooter:
@@ -192,12 +192,13 @@ public class GameManager : MonoBehaviour
   }
   
     // ------ GameState Methods ------
+    
+    
   private void PauseGame()
   {
       // Pause game
       Time.timeScale = 0;
-      PlayerInputManager.instance.StopAllCoroutines();
-      player1.GetComponent<PlayerInput>().StopAllCoroutines();
+      pauseCanvas.gameObject.SetActive(true);
       player1.GetComponent<ShipMovement>().enabled = false;
       player1.GetComponent<PlayerShoot>().enabled = false;
       player1.transform.GetChild(0).gameObject.SetActive(false);
@@ -212,17 +213,22 @@ public class GameManager : MonoBehaviour
 
   public void ContinueGame()
   {
+      Debug.Log("Continue Game");
+      gameState = previousGameState;
+      SwitchGameState();
+      pauseCanvas.gameObject.SetActive(false);
       Time.timeScale = 1;
       player1.GetComponent<ShipMovement>().enabled = true;
       player1.GetComponent<PlayerShoot>().enabled = true;
       player1.transform.GetChild(0).gameObject.SetActive(true);
-        
+      
       if (player2 != null)
       {
           player2.GetComponent<ShipMovement>().enabled = true;
           player2.GetComponent<PlayerShoot>().enabled = true;
           player2.transform.GetChild(0).gameObject.SetActive(true);
       }
+      
   }
 
   // ------ Multiplayer ------
@@ -247,6 +253,8 @@ public class GameManager : MonoBehaviour
   {
       player2 = obj.gameObject;
       inGameUIPlayer2.gameObject.SetActive(true);
+     if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
+
   }
 
   // ------ UI ------

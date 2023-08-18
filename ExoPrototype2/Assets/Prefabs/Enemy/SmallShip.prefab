@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3054780770814687416}
   - component: {fileID: 758714511942758157}
   - component: {fileID: -4275953474817931738}
+  - component: {fileID: 7418701413186379122}
   m_Layer: 7
   m_Name: SmallShip
   m_TagString: Enemy
@@ -33,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 1031741032062270357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.276789, y: -28.924368, z: -49.567783}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 522739132117034265}
@@ -103,8 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37415fff28723104ab0ef133e5b8413c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  TurnSpeed: 3.5
+  Speed: 30
+  TurnSpeed: 8
   TotalPath: []
   CornerPoints: []
   _DebugPath: 1
@@ -169,6 +170,7 @@ MonoBehaviour:
   bulletSpeed: 0
   startAngle: 0
   endAngle: 0
+  _newEnemyInView: {fileID: 0}
 --- !u!65 &3054780770814687416
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -220,6 +222,18 @@ MonoBehaviour:
   isEnemy: 0
   target: {fileID: 0}
   isRotating: 0
+--- !u!114 &7418701413186379122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031741032062270357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0ce46d727e2764f991bfeb24825f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3167310554678085145
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +433,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  isImmune: 0
+  immuneDuration: 3
+  isDead: 0
   attacker: {fileID: 0}
 --- !u!1 &8723292633858985275
 GameObject:

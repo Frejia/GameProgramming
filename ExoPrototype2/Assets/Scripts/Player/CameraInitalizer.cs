@@ -50,7 +50,8 @@ public class CameraInitalizer : MonoBehaviour
                       | (1 << 8)
                       | (1 << 9)
                       | (1 << 10)
-                      | (1 << 11);
+                      | (1 << 11)
+                        | (1 << 14);
         
         cam.cullingMask = bitMask;
         cam.gameObject.layer = layer;

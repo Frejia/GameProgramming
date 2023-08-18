@@ -26,12 +26,14 @@ public class StartGen : MonoBehaviour
                 // GameModeManager.Instance.InitRace();
                 _perlinNoiseGen.Generate();
                 if (PerlinNoiseGen.Instance.isDone) WorldManager.Instance.InitializeGrid();
+                GameModeManager.Instance.InitRace();
             }
             else
             {
                 //  GameModeManager.Instance.InitShooter();
                 _perlinNoiseGen.Generate();
                 if (PerlinNoiseGen.Instance.isDone) WorldManager.Instance.InitializeGrid();
+                GameModeManager.Instance.InitShooter();
             }
         }
     }

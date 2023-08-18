@@ -179,7 +179,6 @@ public class GameModeManager : MonoBehaviour
     public void InitShooter()
     {
         if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
-        if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
         // Scene Loaded
         Generate();
     }
@@ -203,8 +202,7 @@ public class GameModeManager : MonoBehaviour
     public void InitRace()
     {
         if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
-        if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
-        PlayerInputManager.instance.EnableJoining();
+         PlayerInputManager.instance.EnableJoining();
         noiseGen = PerlinNoiseGen.Instance;
         //PlayerInputManager.instance.JoinPlayer();
 
@@ -240,6 +238,7 @@ public class GameModeManager : MonoBehaviour
     private void PlacePlayer(PlayerInput player)
     {
         player.gameObject.transform.position = new Vector3(start.position.x + 10, start.position.y + 10, start.position.z + 10);
+        if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
     }
 
     private void StartRace()
