@@ -36,7 +36,7 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    private void GetsHit(int damage, GameObject attacker){
+    public void GetsHit(int damage, GameObject attacker){
        
         this.attacker = attacker;
     if (!isImmune) // Check if not already immune
