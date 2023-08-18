@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 548280383}
-  m_IndirectSpecularColor: {r: 0.13488777, g: 0.16751213, b: 0.17482702, a: 1}
+  m_IndirectSpecularColor: {r: 0.13486603, g: 0.16749658, b: 0.1748239, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2076,6 +2076,18 @@ PrefabInstance:
     - target: {fileID: 7400916077876163853, guid: 0fc1fec0e6f770a4c98e9dfecfa7b2c1, type: 3}
       propertyPath: m_Name
       value: InGameUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424349847380255367, guid: 0fc1fec0e6f770a4c98e9dfecfa7b2c1, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424349847380255367, guid: 0fc1fec0e6f770a4c98e9dfecfa7b2c1, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424349847380255367, guid: 0fc1fec0e6f770a4c98e9dfecfa7b2c1, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 7765063513671313988, guid: 0fc1fec0e6f770a4c98e9dfecfa7b2c1, type: 3}
       propertyPath: m_Pivot.x
