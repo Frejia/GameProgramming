@@ -1757,7 +1757,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000005722046, y: -0.0000076293945}
+  m_AnchoredPosition: {x: -0.000005722046, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &710298936
@@ -2588,13 +2588,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2119830462}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: AllowSecondPlayer
+      - m_Target: {fileID: 2119830465}
+        m_TargetAssemblyTypeName: GameModeManager, Assembly-CSharp
+        m_MethodName: SetFriendlyFire
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1287782315}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 710298934}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9703,6 +9715,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6430428921339509889, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
   m_PrefabInstance: {fileID: 2119830461}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2119830465 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1914607380432804403, guid: 7b4f8ec5c11b1274a9f80507c96d9c86, type: 3}
+  m_PrefabInstance: {fileID: 2119830461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2631e07dfcbecb44797acb5d77cb07c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6191902851782527
 GameObject:
   m_ObjectHideFlags: 0
@@ -24246,13 +24269,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1748601141}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1287782315}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1748601141}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
