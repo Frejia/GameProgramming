@@ -10,14 +10,41 @@ public class HealthUI : MonoBehaviour
     
     private void OnEnable()
     {
-        Health.Player1GotHit += UpdateHealth;
-        Health.Player2GotHit += UpdateHealth;
+        Health.Player1GotHit += ApplyDamage;
+        Health.Player2GotHit += ApplyDamage;
     }
     
     private void OnDisable()
     {
-        Health.Player1GotHit -= UpdateHealth;
-        Health.Player2GotHit -= UpdateHealth;
+        Health.Player1GotHit -= ApplyDamage;
+        Health.Player2GotHit -= ApplyDamage;
+    }
+    
+    public int damageThreshold = 10;
+
+    private int currentDamage = 0;
+
+    // Call this method to apply damage to the player
+    public void ApplyDamage(int damage)
+    {
+        currentDamage += damage;
+
+        while (currentDamage >= damageThreshold)
+        {
+            if (healthBarsPlayer1.Count > 0)
+            {
+                GameObject healthBar = healthBarsPlayer1[0];
+                healthBarsPlayer1.RemoveAt(0);
+                healthBar.SetActive(false);
+
+                currentDamage -= damageThreshold;
+            }
+            else
+            {
+                // No more health bars to disable
+                break;
+            }
+        }
     }
 
     private void UpdateHealth(GameObject player, GameObject attacker)
