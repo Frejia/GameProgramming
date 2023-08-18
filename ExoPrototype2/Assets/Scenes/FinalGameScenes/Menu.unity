@@ -29762,7 +29762,7 @@ MonoBehaviour:
     m_ActionName: Ship/Join[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2119830462}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetPause
         m_Mode: 1

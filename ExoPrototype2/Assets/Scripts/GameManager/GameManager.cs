@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
    //Game Manager Vairables
     public static GameManager Instance { get; private set; }
     [SerializeField] private GameState gameState;
+    private GameState previousGameState;
     [SerializeField] private StartGen startGen;
     private bool newGame = false; // Needed to determine whether to load scene or continue ongoing game
     
@@ -113,18 +114,21 @@ public class GameManager : MonoBehaviour
     
     public void SetPause()
     {
+        previousGameState = gameState;
         this.gameState = GameState.Paused;
         SwitchGameState();
     }
     
     public void SetLose()
     {
+        previousGameState = gameState;
         this.gameState = GameState.Lose;
         SwitchGameState();
     }
     
     public void SetWin()
     {
+        previousGameState = gameState;
         this.gameState = GameState.Win;
         SwitchGameState();
     }
@@ -132,7 +136,6 @@ public class GameManager : MonoBehaviour
     // GameState Switch
   private void SwitchGameState()
   {
-
       switch (gameState)
       {
           case GameState.Shooter:
@@ -190,10 +193,13 @@ public class GameManager : MonoBehaviour
   }
   
     // ------ GameState Methods ------
+    
+    
   private void PauseGame()
   {
       // Pause game
       Time.timeScale = 0;
+      pauseCanvas.gameObject.SetActive(true);
       PlayerInputManager.instance.StopAllCoroutines();
       player1.GetComponent<PlayerInput>().StopAllCoroutines();
       player1.GetComponent<ShipMovement>().enabled = false;
@@ -210,10 +216,12 @@ public class GameManager : MonoBehaviour
 
   public void ContinueGame()
   {
+   
       Time.timeScale = 1;
       player1.GetComponent<ShipMovement>().enabled = true;
       player1.GetComponent<PlayerShoot>().enabled = true;
       player1.transform.GetChild(0).gameObject.SetActive(true);
+      pauseCanvas.gameObject.SetActive(false);
         
       if (player2 != null)
       {
@@ -221,6 +229,8 @@ public class GameManager : MonoBehaviour
           player2.GetComponent<PlayerShoot>().enabled = true;
           player2.transform.GetChild(0).gameObject.SetActive(true);
       }
+      gameState = previousGameState;
+      SwitchGameState();
   }
 
   // ------ Multiplayer ------
