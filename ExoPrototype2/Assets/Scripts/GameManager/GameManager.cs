@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
         if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
         
         if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
+   
     }
     
     private IEnumerator LoadLevelAsync()
