@@ -32,11 +32,6 @@ public class ButtonHandler : MonoBehaviour
     {
         GameManager.Instance.SetShooter();
     }
-    public void StartGameRacer()
-    {
-        GameManager.Instance.SetRacer();
-    }
-    
     public void ContinueGame()
     {
         GameManager.Instance.ContinueGame();
