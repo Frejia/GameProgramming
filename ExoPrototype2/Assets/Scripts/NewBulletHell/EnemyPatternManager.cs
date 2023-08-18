@@ -119,7 +119,7 @@ public class EnemyPatternManager : MonoBehaviour
     {
         
         isFiring = true;
-        EnemyShoot(2);
+        if (EnemyShoot != null) EnemyShoot(2);
         // Set the pattern duration and cooldown
         if (useAlternateDurations) patternDuration = patternDurations[patterns.IndexOf(pattern)];
         else  patternDuration = pattern.patternDuration;

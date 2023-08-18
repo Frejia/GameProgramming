@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
         }
         
         Debug.Log("Level Loaded!");
+        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
+        if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
     }
 
     // ------ Game State Setters ------ necessary for Event Delegates and Buttons
@@ -100,16 +102,12 @@ public class GameManager : MonoBehaviour
     public void SetShooter()
     {
         this.gameState = GameState.Shooter;
-        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
-        if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
         SwitchGameState();
     }
     
     public void SetRacer()
     {
         this.gameState = GameState.Race;
-        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
-        if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
         SwitchGameState();
     }
     

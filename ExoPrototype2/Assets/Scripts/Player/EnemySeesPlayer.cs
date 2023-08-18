@@ -26,9 +26,12 @@ public class EnemySeesPlayer : MonoBehaviour
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
         {
             CanSee(this.gameObject);
-            Debug.Log("Enemy sees Player");
-            GoFindPlayer(other.gameObject, gameObject.transform.parent.gameObject);
 
+            if (CanSee != null)
+            {
+                Debug.Log("Enemy sees Player");
+                GoFindPlayer(other.gameObject, gameObject.transform.parent.gameObject);
+            }
         }
     }
     
@@ -38,6 +41,8 @@ public class EnemySeesPlayer : MonoBehaviour
         {
             Debug.Log("Enemy does not see Player");
             if (CantSee != null) CantSee(this.gameObject);
+            
+            CanSee = null;
         }
     }
 }
