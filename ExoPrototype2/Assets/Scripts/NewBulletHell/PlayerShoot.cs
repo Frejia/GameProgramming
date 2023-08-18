@@ -32,7 +32,7 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         patternManager = this.gameObject.GetComponent<PatternManager>();
-        //_newEnemyInView = this.gameObject.GetComponent<NewEnemyInView>();
+        _newEnemyInView = transform.Find("ViewArea").GetComponent<NewEnemyInView>();
     }
     
     void FixedUpdate()
@@ -60,7 +60,6 @@ public class PlayerShoot : MonoBehaviour
              Shot(2);
              StartCoroutine(StartPattern(2));
          }
-         
      }
 
     // Start Pattern and send events to sound manager
@@ -73,12 +72,13 @@ public class PlayerShoot : MonoBehaviour
          if (shot == 0)
          {
              // Straight Pattern Example
-             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, false, 1, 10f);
-
              if (_newEnemyInView.GetClosestTarget() != null)
              {
-                 
                  patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, true, 1, 10f);
+             }
+             else
+             {
+                 patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Straight, BulletBehaviour.BulletBehaviours.None, 0,0,5f, false, 1, 10f);
 
              }
              
@@ -86,13 +86,27 @@ public class PlayerShoot : MonoBehaviour
          else if(shot == 1)
          {
              // Cone Pattern Example
-            
-             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, 40,90, 2f, true, 10, 10f);
+             if (_newEnemyInView.GetClosestTarget() != null)
+             {
+                 patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, -25,25, 2f, true, 10, 10f);
+             }
+             else
+             {
+                 patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Cone, BulletBehaviour.BulletBehaviours.None, -25,25, 2f, false, 10, 10f);
+             }
          }
          else
          {
              // Circle Pattern Example
-             patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Circle, BulletBehaviour.BulletBehaviours.None, 0,360, 2f, true, 20, 10f);
+             if (_newEnemyInView.GetClosestTarget() != null)
+             {
+                 patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Circle,
+                     BulletBehaviour.BulletBehaviours.None, 0, 360, 2f, true, 20, 10f);
+             }
+             else
+             {
+                 patternManager.SetBulletPattern(BulletPatternEnum.BulletPatternsEnum.Circle, BulletBehaviour.BulletBehaviours.None, 0,360, 2f, false, 20, 10f);
+             }
          }
          
          yield return new WaitForSeconds(0.3f);

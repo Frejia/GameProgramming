@@ -24,6 +24,8 @@ public class PatternManager : MonoBehaviour
     private Aim AimInstance;
     [SerializeField] private NewEnemyInView _newEnemyInView;
 
+    private float _passedTimeSinceLastSpecialShoot;
+
     void Start()
     {
         //AimInstance = Aim.Instance;
@@ -37,15 +39,34 @@ public class PatternManager : MonoBehaviour
         {
             // get component in children with transform.name "ViewArea"
             AimInstance = gameObject.GetComponentInChildren<NewEnemyInView>();
-            
-            
             AimInstance.user = gameObject;
         }
+    }
+
+    void Update()
+    {
+        _passedTimeSinceLastSpecialShoot += Time.deltaTime;
     }
 
     public void SetBulletPattern(BulletPatternEnum.BulletPatternsEnum bulletPattern, BulletHell.BulletBehaviour.BulletBehaviours bulletBehaviour, 
         float startAngle, float endAngle, float fireRate, bool isAiming, int bulletsAmount, float bulletSpeed)
     {
+        // set cooldown for patterns
+        if (bulletPattern is BulletPatternEnum.BulletPatternsEnum.Cone or BulletPatternEnum.BulletPatternsEnum.Circle)
+        {
+            // if the pattern is a cone or circle and time since last special shoot is less than 2 seconds, return
+            // if the pattern is a cone or circle and time since last special shoot is more than 2 seconds, reset timer and continue
+            switch (_passedTimeSinceLastSpecialShoot)
+            {
+                case < 2.0f:
+                    return;
+                default:
+                    _passedTimeSinceLastSpecialShoot = 0.0f;
+                    break;
+            }
+        }
+        
+        
         this.activebulletPattern = bulletPattern;
         this.activebulletBehaviour = bulletBehaviour;
         this.fireRate = fireRate;
@@ -56,16 +77,16 @@ public class PatternManager : MonoBehaviour
         this.startAngle = startAngle;
         this.endAngle = endAngle;
 
-        PatternSwitchRepeating();
+        //PatternSwitchRepeating();
         
-        /*if (this.gameObject.tag == "Enemy")
+        if (this.gameObject.tag == "Enemy")
         {
             PatternSwitchRepeating();
         }
         else
         {
             PatternSwitchInvoke();
-        }*/
+        }
     }
     
     public void SetBulletPatternNone()
@@ -230,6 +251,7 @@ public class PatternManager : MonoBehaviour
             //bul.transform.rotation = this.gameObject.transform.rotation;
             bul.SetActive(true);
             bul.GetComponent<Bullet>().SetSpeed(bulletSpeed);
+            
             bul.GetComponent<Bullet>().SetDirection(bulDir);
             bul.GetComponent<Bullet>().SetUser(this.gameObject);
             bul.GetComponent<BulletHell.BulletBehaviour>().SetBehaviour(activebulletBehaviour, bulDir);
