@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class HealthUI : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> healthBars;
+    [SerializeField] private List<GameObject> healthBarsPlayer1;
+    [SerializeField] private List<GameObject> healthBarsPlayer2;
     private int health;
-    private GameObject playerHealthBar;
-    private GameObject player2HealthBar;
-
+    
     private void OnEnable()
     {
         Health.Player1GotHit += UpdateHealth;
@@ -29,13 +28,24 @@ public class HealthUI : MonoBehaviour
            health = (int) player.GetComponent<Health>().currentHealth / 10;
            if (player.CompareTag("Player"))
            {
-               playerHealthBar = healthBars[health];
-               playerHealthBar.SetActive(false);
+               // Deactivate the amount of health bars that the player has lost
+                for (int i = 0; i < healthBarsPlayer1.Count; i++)
+                {
+                     if (i >= health)
+                     {
+                          healthBarsPlayer1[i].SetActive(false);
+                     }
+                }
            }
            else
            {
-               player2HealthBar = healthBars[health];
-               player2HealthBar.SetActive(false);
+               for (int i = 0; i < healthBarsPlayer2.Count; i++)
+               {
+                   if (i >= health)
+                   {
+                       healthBarsPlayer2[i].SetActive(false);
+                   }
+               }
            }
        }
     }
