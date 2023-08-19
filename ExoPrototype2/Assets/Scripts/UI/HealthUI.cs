@@ -24,13 +24,15 @@ public class HealthUI : MonoBehaviour
 
     private int currentDamagePlayer1 = 0;
     private int currentDamagePlayer2 = 0;
+    public int damage;
 
     // Call this method to apply damage to the player
     public void ApplyDamagePlayer1(int damage)
     {
-        currentDamagePlayer1 += damage;
+        this.damage = damage;
+        currentDamagePlayer1 = damage;
 
-        while (currentDamagePlayer1 >= damageThreshold)
+        if (currentDamagePlayer1 >= damageThreshold)
         {
             if (healthBarsPlayer1.Count > 0)
             {
@@ -43,7 +45,6 @@ public class HealthUI : MonoBehaviour
             else
             {
                 // No more health bars to disable
-                break;
             }
         }
     }
@@ -52,7 +53,7 @@ public class HealthUI : MonoBehaviour
     {
         currentDamagePlayer2 += damage;
 
-        while (currentDamagePlayer2 >= damageThreshold)
+        if (currentDamagePlayer2 >= damageThreshold)
         {
             if (healthBarsPlayer2.Count > 0)
             {
@@ -65,38 +66,8 @@ public class HealthUI : MonoBehaviour
             else
             {
                 // No more health bars to disable
-                break;
             }
         }
     }
-
-    private void UpdateHealth(GameObject player, GameObject attacker)
-    {
-       // Every time the player loses 10 health points or more, the health bar will be updated
-       if(player.GetComponent<Health>().currentHealth % 10 == 0)
-       {
-           health = (int) player.GetComponent<Health>().currentHealth / 10;
-           if (player.CompareTag("Player"))
-           {
-               // Deactivate the amount of health bars that the player has lost
-                for (int i = 0; i < healthBarsPlayer1.Count; i++)
-                {
-                     if (i >= health)
-                     {
-                          healthBarsPlayer1[i].SetActive(false);
-                     }
-                }
-           }
-           else
-           {
-               for (int i = 0; i < healthBarsPlayer2.Count; i++)
-               {
-                   if (i >= health)
-                   {
-                       healthBarsPlayer2[i].SetActive(false);
-                   }
-               }
-           }
-       }
-    }
+    
 }
