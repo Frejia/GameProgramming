@@ -10,11 +10,13 @@ namespace BulletHell
         public static BulletPool Instance { get; private set; }
 
         [SerializeField] private GameObject pooledBulletEnemy;
-        [SerializeField] private GameObject pooledBulletPlayer;
+        [SerializeField] private GameObject pooledBulletPlayer1;
+        [SerializeField] private GameObject pooledBulletPlayer2;
         private bool notEnoughBulletsInPool = true;
         
         private List<GameObject> bulletsEnemy;
-        private List<GameObject> bulletsPlayer;
+        private List<GameObject> bulletsPlayer1;
+        private List<GameObject> bulletsPlayer2;
 
         private void Awake()
         {
@@ -24,16 +26,22 @@ namespace BulletHell
         void Start()
         {
             bulletsEnemy = new List<GameObject>();
-            bulletsPlayer = new List<GameObject>();
+            bulletsPlayer1 = new List<GameObject>();
+            bulletsPlayer2 = new List<GameObject>();
         }
 
         public GameObject GetEnemyBulletPrefab()
         {
             return pooledBulletEnemy;
         }
-        public GameObject GetPlayerBulletPrefab()
+        public GameObject GetPlayer1BulletPrefab()
         {
-            return pooledBulletPlayer;
+            return pooledBulletPlayer1;
+        }
+        
+        public GameObject GetPlayer2BulletPrefab()
+        {
+            return pooledBulletPlayer2;
         }
         
         public GameObject GetBulletEnemy()
@@ -58,23 +66,45 @@ namespace BulletHell
             return null;
         }
         
-        public GameObject GetBulletPlayer()
+        public GameObject GetBulletPlayer1()
         {
-            if (bulletsPlayer.Count > 0)
+            if (bulletsPlayer1.Count > 0)
             {
-                for (int i = 0; i < bulletsPlayer.Count; i++)
+                for (int i = 0; i < bulletsPlayer1.Count; i++)
                 {
-                    if (!bulletsPlayer[i].activeInHierarchy)
+                    if (!bulletsPlayer1[i].activeInHierarchy)
                     {
-                        return bulletsPlayer[i];
+                        return bulletsPlayer1[i];
                     }
                 }
             }
             if (notEnoughBulletsInPool)
             {
-                GameObject bulletplayer = Instantiate(pooledBulletPlayer);
+                GameObject bulletplayer = Instantiate(pooledBulletPlayer1);
                 bulletplayer.SetActive(false);
-                bulletsPlayer.Add(bulletplayer);
+                bulletsPlayer1.Add(bulletplayer);
+                return bulletplayer;
+            }
+            return null;
+        }
+        
+        public GameObject GetBulletPlayer2()
+        {
+            if (bulletsPlayer2.Count > 0)
+            {
+                for (int i = 0; i < bulletsPlayer2.Count; i++)
+                {
+                    if (!bulletsPlayer2[i].activeInHierarchy)
+                    {
+                        return bulletsPlayer2[i];
+                    }
+                }
+            }
+            if (notEnoughBulletsInPool)
+            {
+                GameObject bulletplayer = Instantiate(pooledBulletPlayer2);
+                bulletplayer.SetActive(false);
+                bulletsPlayer2.Add(bulletplayer);
                 return bulletplayer;
             }
             return null;

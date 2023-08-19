@@ -429,9 +429,13 @@ public class PatternManager : MonoBehaviour
     private GameObject GetCorrectBullet()
     {
         GameObject bul = null;
-        if (this.gameObject.tag == "Player" || this.gameObject.tag == "Player2")
+        if (this.gameObject.tag == "Player")
         {
-            bul = BulletPool.Instance.GetBulletPlayer();
+            bul = BulletPool.Instance.GetBulletPlayer1();
+        }
+        else if (this.gameObject.tag == "Player2")
+        {
+            bul = BulletPool.Instance.GetBulletPlayer2();
         }
         else
         {

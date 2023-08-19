@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -1217640066515684251}
   - component: {fileID: -2660933309431044470}
   m_Layer: 9
-  m_Name: PlayerBullet
+  m_Name: Player1Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   _bulletLifeTime: 6
   impactEffect: {fileID: 1947765877439374934}
   _damage: 10
+  isEnemyBullet: 0
   friendlyFire: 1
 --- !u!114 &-998867342427067411
 MonoBehaviour:
@@ -161,10 +162,10 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 8447
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
