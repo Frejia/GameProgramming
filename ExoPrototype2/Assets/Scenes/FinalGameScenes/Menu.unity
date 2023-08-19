@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14737,7 +14737,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!1 &1493360563105086856
 GameObject:
   m_ObjectHideFlags: 0
@@ -15056,7 +15056,7 @@ Canvas:
   m_GameObject: {fileID: 208681104754505787}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 6874969680960558666}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -24186,7 +24186,7 @@ Canvas:
   m_GameObject: {fileID: 6431755393791528165}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 6874969680960558666}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -26489,7 +26489,7 @@ Canvas:
   m_GameObject: {fileID: 3231701712995245118}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 6874969680960558666}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -28794,7 +28794,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!222 &6153779198099749834
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30037,7 +30037,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!1 &6618891250160715279
 GameObject:
   m_ObjectHideFlags: 0
