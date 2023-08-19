@@ -48,7 +48,7 @@ namespace BulletHell
 
         public void Awake()
         {
-          player = GameObject.FindGameObjectWithTag("Player").transform;
+//          player = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
         public void Start()

@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Variables")]
     [SerializeField] private Canvas inGameUI;
-    [SerializeField] private Canvas inGameUIPlayer2;
+    [SerializeField] private GameObject inGameUIPlayer2;
     [SerializeField] private Canvas winCanvas;
     [SerializeField] private Canvas loseCanvas;
     [SerializeField] private Canvas pauseCanvas;
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
                   loadLevel = true;
                   startGen.raceMode = false;
                   //  GameModeManager.Instance.InitShooter();
-                 // ShowCanvas(inGameUI);
+                 ShowCanvas(inGameUI);
                   newGame = false;
               }
               else
@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
                   startGen.raceMode = true;
                  // SceneManager.LoadScene(2);
                 // GameModeManager.Instance.InitRace();
-                 // ShowCanvas(inGameUI);
+                  ShowCanvas(inGameUI);
                   newGame = false;
               }
               else
@@ -204,6 +204,7 @@ public class GameManager : MonoBehaviour
       player1.transform.GetChild(0).gameObject.SetActive(false);
       if (player2 != null)
       {
+          player2.transform.GetChild(2).gameObject.SetActive(false);
           player2.GetComponent<PlayerInput>().StopAllCoroutines();
           player2.GetComponent<ShipMovement>().enabled = false;
           player2.GetComponent<PlayerShoot>().enabled = false;
@@ -227,6 +228,7 @@ public class GameManager : MonoBehaviour
       
       if (player2 != null)
       {
+          player2.transform.GetChild(2).gameObject.SetActive(true);
           player2.GetComponent<ShipMovement>().enabled = true;
           player2.GetComponent<PlayerShoot>().enabled = true;
           player2.transform.GetChild(0).gameObject.SetActive(true);
@@ -255,9 +257,8 @@ public class GameManager : MonoBehaviour
   private void GetSecondPlayer(PlayerInput obj)
   {
       player2 = obj.gameObject;
+      if(inGameUIPlayer2 == null) inGameUIPlayer2 = GameObject.Find("InGameUIP2").gameObject;
       inGameUIPlayer2.gameObject.SetActive(true);
-     if(inGameUIPlayer2 == null) inGameUI = GameObject.Find("InGameUIP2").GetComponent<Canvas>();
-
   }
 
   // ------ UI ------
