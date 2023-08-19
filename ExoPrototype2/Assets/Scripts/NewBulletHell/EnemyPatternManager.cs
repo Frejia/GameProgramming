@@ -34,19 +34,6 @@ public class EnemyPatternManager : MonoBehaviour
     
     public delegate void EnemyShootSound(int index);
     public static event EnemyShootSound EnemyShoot;
-    
-    // Start is called before the first frame update
-    private void OnEnable()
-    { // Subscribe to events
-        EnemySeesPlayer.CanSee += PlayerClose;
-        //EnemySeesPlayer.CantSee += StopPatterns;
-    }
-    
-    private void OnDisable()
-    { 
-        EnemySeesPlayer.CanSee -= PlayerClose;
-        //EnemySeesPlayer.CantSee -= StopPatterns;
-    }
 
     void Start()
     {
@@ -59,11 +46,11 @@ public class EnemyPatternManager : MonoBehaviour
     }
 
     // Called by Event, if the player is close, start firing patterns
-    private void PlayerClose(GameObject enemy)
+    public void PlayerClose(GameObject enemy)
     {
         Debug.Log("Player Close");
-            enemy.GetComponent<EnemyPatternManager>().isPlayerClose = true;
-            enemy.GetComponent<EnemyPatternManager>().StartFiringPatterns();
+        enemy.GetComponent<EnemyPatternManager>().isPlayerClose = true;
+        enemy.GetComponent<EnemyPatternManager>().StartFiringPatterns();
     }
     
     // Only start Firing Patterns if the enemy is not already firing or on Cooldown
@@ -87,7 +74,7 @@ public class EnemyPatternManager : MonoBehaviour
                 if (pattern.patternType == BulletPatternEnum.BulletPatternsEnum.None)
                 {
                     StopCoroutine(StartPattern(pattern));
-                   // isFiring = false;
+                    isFiring = false;
                     if (useAlternateDurations) patternDuration = patternDurations[patterns.IndexOf(pattern)];
                     else patternDuration = pattern.patternDuration;
                     Cooldown = pattern.Cooldown;
@@ -118,7 +105,6 @@ public class EnemyPatternManager : MonoBehaviour
     // Method to start a specific given bullet pattern
     private IEnumerator StartPattern(BulletPatterns pattern)
     {
-        
         isFiring = true;
         if (EnemyShoot != null) EnemyShoot(2);
         // Set the pattern duration and cooldown
@@ -139,8 +125,9 @@ public class EnemyPatternManager : MonoBehaviour
     }
 
     // Stop all patterns in case player is out of proximity or enemy is dead
-    private void StopPatterns(GameObject enemy)
+    public void StopPatterns(GameObject enemy)
     {
+        Debug.Log("Stop Shooting");
         StopCoroutine(enemy.GetComponent<EnemyPatternManager>().ReadBulletPatterns());
         enemy.GetComponent<EnemyPatternManager>().isFiring = false;
         enemy.GetComponent<EnemyPatternManager>().isPlayerClose = false;

@@ -164,8 +164,8 @@ public class GameModeManager : MonoBehaviour
     private void RespawnPlayer(GameObject player)
     {
         int random = Random.Range(0, respawnPoints.Count);
-        
         player.transform.position = respawnPoints[random].transform.position;
+        player.GetComponent<Health>().ResetHealth(player);
     }
 
     // -------- SHOOTER INIT ------------
@@ -180,6 +180,10 @@ public class GameModeManager : MonoBehaviour
     public void InitShooter()
     {
         // Scene Loaded
+        // Set player 1 to first respawn point
+        GameObject player1 = GameObject.FindGameObjectWithTag("Player");
+        player1.transform.position = respawnPoints[0].transform.position;
+        
         Generate();
     }
     
@@ -237,7 +241,7 @@ public class GameModeManager : MonoBehaviour
 
     private void PlacePlayer(PlayerInput player)
     {
-        player.gameObject.transform.position = new Vector3(start.position.x + 10, start.position.y + 10, start.position.z + 10);
+        player.gameObject.transform.position = new Vector3(GameManager.Instance.player1.transform.position.x + 10, GameManager.Instance.player1.transform.position.y + 10, start.position.z + 10);
         if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
     }
 

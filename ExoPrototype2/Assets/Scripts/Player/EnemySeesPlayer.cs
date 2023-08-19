@@ -26,8 +26,7 @@ public class EnemySeesPlayer : MonoBehaviour
         Debug.Log("Something close to Enemy");
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
         {
-            CanSee?.Invoke(this.gameObject);
-            Debug.Log("Enemy sees Player");
+            this.GetComponent<EnemyPatternManager>().PlayerClose(this.gameObject);
             GoFindPlayer(gameObject, other.gameObject);
             
         }
@@ -35,10 +34,9 @@ public class EnemySeesPlayer : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
         { Debug.Log("Player out of range");
-            CantSee?.Invoke(this.gameObject);
-            CanSee = null;
+            this.GetComponent<EnemyPatternManager>().StopPatterns(this.gameObject);
         }
     }
 }
