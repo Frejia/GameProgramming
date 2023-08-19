@@ -114,4 +114,10 @@ private IEnumerator Immunity()
            
         }
     }
+
+    public void ResetHealth(GameObject player)
+    {
+        currentHealth = maxHealth;
+        isDead = false;
+    }
 }
