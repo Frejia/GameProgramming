@@ -23,6 +23,7 @@ public class GameModeManager : MonoBehaviour
     private bool friendlyFire = false;
     public int points1;
     public int points2;
+    public int pointsToWinShooter;
     //true if win, false if lose
     public bool win;
     
@@ -134,7 +135,7 @@ public class GameModeManager : MonoBehaviour
             GameManager.Instance.SetLose();
         }
         
-        if(points1 >= 10 || points2 >= 10)
+        if(points1 >= pointsToWinShooter || points2 >= pointsToWinShooter)
         {
             WinCheck();
         }
@@ -178,7 +179,6 @@ public class GameModeManager : MonoBehaviour
     
     public void InitShooter()
     {
-        if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
         // Scene Loaded
         Generate();
     }
@@ -195,7 +195,7 @@ public class GameModeManager : MonoBehaviour
                 Instantiate(portal, noiseGen.waypoints[i].transform.position * 5, rotation);
             }
             Instantiate(portal, noiseGen.waypoints[noiseGen.waypoints.Count-1].transform.position * 5, Quaternion.identity);
-        
+            if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
     }
     
     // -------- RACE MODE INIT ------------

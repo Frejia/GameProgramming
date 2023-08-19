@@ -15,7 +15,8 @@ using UnityEngine.UIElements;
 /// </summary>
 public class SetControls : MonoBehaviour
 {
-    [SerializeField] private GameObject player1Prefab;
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2Prefab;
     [SerializeField] private Material mat1;
     [SerializeField] private Material mat2;
     [SerializeField] private Material outlineMat;
@@ -31,29 +32,27 @@ public class SetControls : MonoBehaviour
     {
         if (chosen)
         {
-            //Keyboard
-            Debug.Log("Made a Keyboard player");
-            // var p1 = PlayerInput.Instantiate(playerPrefab, controlScheme: "Keyboard");
-            player1Prefab.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Keyboard", Keyboard.current);
-            //player2Prefab.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Controller", Gamepad.current);
-          
-            
+            Debug.Log("Switching to Keyboard control scheme");
+            // Check if Keyboard.current is null
+            Debug.Log(Keyboard.current);
+
+            player1.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Keyboard", Keyboard.current);
+            player2Prefab.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Controller", Gamepad.current);
         }
         else
         {
-            //Controller
-            Debug.Log("Made a Controller player");
-            // var p2 = PlayerInput.Instantiate(playerPrefab, controlScheme: "Controller");
-            player1Prefab.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Controller", Gamepad.current);
-           // player2Prefab.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Keyboard", Keyboard.current);
+            Debug.Log("Switching to Controller control scheme");
+            Debug.Log(Gamepad.current);
+            player1.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Controller", Gamepad.current);
+            player2Prefab.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Keyboard", Keyboard.current);
         }
     }
 
     // Change Sensitivity Settings for pitch and yaw
     public void SetSensitivity()
     {
-        player1Prefab.GetComponent<ShipMovement>().yawTorque = player1Sensitivity.value;
-        player1Prefab.GetComponent<ShipMovement>().pitchTorque = player1Sensitivity.value;
+        player1.GetComponent<ShipMovement>().yawTorque = player1Sensitivity.value;
+        player1.GetComponent<ShipMovement>().pitchTorque = player1Sensitivity.value;
        // player2Prefab.GetComponent<ShipMovement>().yawTorque = sensitivity;
        // player2Prefab.GetComponent<ShipMovement>().pitchTorque = sensitivity;
     }
@@ -90,8 +89,8 @@ public class SetControls : MonoBehaviour
 
     public void SetPlayerModel(GameObject model)
     {
-        player1Prefab.transform.GetChild(0).GetComponent<MeshFilter>().mesh = model.GetComponent<MeshFilter>().mesh;
-        player1Prefab.transform.GetChild(0).GetComponent<MeshRenderer>().materials = model.GetComponent<MeshRenderer>().materials;
+        player1.transform.GetChild(0).GetComponent<MeshFilter>().mesh = model.GetComponent<MeshFilter>().mesh;
+        player1.transform.GetChild(0).GetComponent<MeshRenderer>().materials = model.GetComponent<MeshRenderer>().materials;
     }
     
     

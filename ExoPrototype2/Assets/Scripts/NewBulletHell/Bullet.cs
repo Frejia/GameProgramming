@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private ParticleSystem impactEffect;
 
     [SerializeField, Range(10, 20)] private int _damage = 10;
-
+    public bool isEnemyBullet = false;
     public bool friendlyFire = false;
     private GameObject attacker;
 
@@ -131,7 +131,7 @@ public class Bullet : MonoBehaviour
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
             }
-
+            
             if (attacker.gameObject.tag == "Enemy")
             {
                 if (other.GetComponent<Health>() != null)
@@ -144,16 +144,20 @@ public class Bullet : MonoBehaviour
                 speed = 0f;
             }
         }
-        
-        if (other.gameObject.layer == 7)
+
+        if (!isEnemyBullet)
         {
-            if (other.GetComponent<Health>() != null)
+            if (other.gameObject.layer == 7)
             {
-                other.GetComponent<Health>().GetsHit(_damage, attacker);
-            }
-            impactEffect.Play();
+                if (other.GetComponent<Health>() != null)
+                {
+                    other.GetComponent<Health>().GetsHit(_damage, attacker);
+                }
+
+                impactEffect.Play();
                 StartCoroutine(WaitForParticleSystem());
                 speed = 0f;
+            }
         }
     }
 

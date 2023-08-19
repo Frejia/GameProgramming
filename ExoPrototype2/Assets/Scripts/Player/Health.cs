@@ -20,12 +20,13 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject attacker;
     
     public delegate void Hit(GameObject enemy, GameObject attacker);
+    public delegate void HitDamage(int damage);
 
     public delegate void HitSound(int index);
     public static event Hit EnemyKilledBy;
     public static event Hit PlayerKilledBy;
-    public static event Hit Player1GotHit;
-    public static event Hit Player2GotHit;
+    public static event HitDamage Player1GotHit;
+    public static event HitDamage Player2GotHit;
     public static event HitSound PlayerHitSound;
     public static event HitSound PlayerDead;
     public static event HitSound EnemyHitSound;
@@ -56,16 +57,15 @@ public class Health : MonoBehaviour
             else
             {
                 PlayerHitSound(8);
+                if(this.gameObject.CompareTag("Player"))
+                {
+                    Player1GotHit(damage);
+                }
+                if(this.gameObject.CompareTag("Player2"))
+                {
+                    Player2GotHit(damage);
+                }
             }
-        }
-        
-        if(this.gameObject.CompareTag("Player"))
-        {
-            Player1GotHit(this.gameObject, attacker);
-        }
-        if(this.gameObject.CompareTag("Player2"))
-        {
-            Player2GotHit(this.gameObject, attacker);
         }
 
         if (currentHealth < 0) currentHealth = -1;
@@ -89,7 +89,7 @@ private IEnumerator Immunity()
         {
             isDead = true;
             //Dissolve Shield TO DO: Compare layer instead of tag
-            if (this.gameObject.transform.parent.gameObject.CompareTag("Enemy"))
+            if (gameObject.layer == 7)
             {
                 this.GetComponent<Dissolve>().isdissolving = true;
                 Debug.Log("Enemy is killed");

@@ -77,8 +77,8 @@ public class PerlinNoiseGen : MonoBehaviour
     private void Awake()
     {
         // Check if there are Invalid Levels and compare if currently generated values is one of the invalid ones.
-        /*invalidLevelSafe = GetComponent<InvalidLevelSafe>();
-        invalidLevelSafe.LoadAndCompareCustomData();*/
+       // invalidLevelSafe = GetComponent<InvalidLevelSafe>();
+       // invalidLevelSafe.LoadAndCompareCustomData();
         
         if (Instance != null)
         {
@@ -213,7 +213,7 @@ public class PerlinNoiseGen : MonoBehaviour
            
             mr.transform.localScale = new Vector3(5,5,5);// Fanny: scale up the mesh so it's visible
             mf.mesh.CombineMeshes(data.ToArray());//set mesh to the combination of all of the blocks in the list
-            mf.GameObject().layer = 14;//set layer to "ShinyOutline"
+            mf.GameObject().layer = 3;//set layer to "Terrain"
             
             //Fanny: Use the Mesh Smoothing Script for adding additional noise to the meshes
             if (meshSmoothing)

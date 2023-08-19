@@ -60,11 +60,9 @@ public class GameManager : MonoBehaviour
        PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
         GameModeManager.Player1Win += SetWin;
         GameModeManager.Player2Win += SetWin;
-    }
 
-    private void Start()
-    {
         player1 = GameObject.FindGameObjectWithTag("Player");
+        PauseGame();
     }
 
     private void Update()
@@ -102,17 +100,20 @@ public class GameManager : MonoBehaviour
     public void SetShooter()
     {
         this.gameState = GameState.Shooter;
+        ContinueGame();
         SwitchGameState();
     }
     
     public void SetRacer()
     {
         this.gameState = GameState.Race;
+        ContinueGame();
         SwitchGameState();
     }
     
     public void SetPause()
     {
+        pauseCanvas.gameObject.SetActive(true);
         previousGameState = gameState;
         this.gameState = GameState.Paused;
         SwitchGameState();
@@ -198,7 +199,6 @@ public class GameManager : MonoBehaviour
   {
       // Pause game
       Time.timeScale = 0;
-      pauseCanvas.gameObject.SetActive(true);
       player1.GetComponent<ShipMovement>().enabled = false;
       player1.GetComponent<PlayerShoot>().enabled = false;
       player1.transform.GetChild(0).gameObject.SetActive(false);
@@ -214,8 +214,11 @@ public class GameManager : MonoBehaviour
   public void ContinueGame()
   {
       Debug.Log("Continue Game");
-      gameState = previousGameState;
-      SwitchGameState();
+      if (!newGame)
+      {
+          gameState = previousGameState;
+          SwitchGameState();
+      }
       pauseCanvas.gameObject.SetActive(false);
       Time.timeScale = 1;
       player1.GetComponent<ShipMovement>().enabled = true;

@@ -18,9 +18,7 @@ public class RandomLevel : MonoBehaviour
     // Executed when pressing Generate Random Level Button
     public void GenerateRandomLevel()
     {
-        GenerateChunkSize();
-      //  GenerateRandomWayPoints();
-        
+        //OffsetRandomWayPoints();
         perlin.GetComponent<PerlinNoiseGen>().PerlinSetter(chunkSize,chunkSizeZ, offset, raceMode,
             withCurve, sphere, meshSmoothing, wayPoints);
     }
@@ -30,30 +28,32 @@ public class RandomLevel : MonoBehaviour
     {
         raceMode = raceModeOn;
         withCurve = raceModeOn;
+        chunkSize = Random.Range(80, 200);
         chunkSizeZ = 200;
+        offset = Random.Range(0, 100);
     }
 
     // Generate a random ChunkSize, ChunkSizeZ and Offset
-    private void GenerateChunkSize()
+    public void GenerateChunkSize()
     {
+        raceMode = false;
+        withCurve = false;
         chunkSize = Random.Range(20, 100);
         chunkSizeZ = Random.Range(20, 100);
         offset = Random.Range(0, 30);
     }
 
     // Random waypoints for portals and the racing line to follow
-    private void GenerateRandomWayPoints()
+    private void OffsetRandomWayPoints()
     {
         //Generate 6 Random Waypoints in the grid area
         for (int i = 0; i < 6; i++)
         {
-            int x = Random.Range(0, chunkSize);
-            int y = Random.Range(0, chunkSize);
-            int z = Random.Range(0, chunkSizeZ);
+            int x = Random.Range(0, 30);
+            int y = Random.Range(0, 30);
+            int z = Random.Range(0, 30);
             Vector3 pos = new Vector3(x, y, z);
-            GameObject point = new GameObject("Waypoint" + i);
-            point.transform.position = pos;
-            wayPoints.Add(point);
+            perlin.GetComponent<PerlinNoiseGen>().waypoints[i].transform.position = wayPoints[i].transform.position + pos;
         }
     }
     

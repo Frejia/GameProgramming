@@ -34,7 +34,6 @@ public class NewEnemyInView : Aim
                 target = other.gameObject;
                 OnEnemySeenSound(5);
             }
-            Debug.Log(gameObject.name + " is visible");
         }
     }
     
