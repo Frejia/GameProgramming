@@ -175,7 +175,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""72b0c43a-e686-4674-aa21-cb98f02b040d"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -186,7 +186,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""7ff705da-5b3c-4572-97d5-175bf76daad8"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -307,7 +307,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""405bb186-6733-4f2a-b92c-3d301120d03b"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -318,7 +318,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""c782b256-a02b-40c2-83c2-5bdc527da33b"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -373,7 +373,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""f4f50549-397e-4ad4-8250-7c0e98ade70b"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -384,7 +384,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""6b955888-a5c6-4770-b934-0d7d7dbdffe0"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
