@@ -68,6 +68,8 @@ public class PlayerShoot : MonoBehaviour
 
          //_closestTarget = _newEnemyInView.GetClosestTarget();
          
+         Debug.Log(shot);
+         
          isFiring = true;
          if (shot == 0)
          {
