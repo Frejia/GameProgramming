@@ -175,7 +175,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""72b0c43a-e686-4674-aa21-cb98f02b040d"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -186,7 +186,7 @@ public partial class @Ship1: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""7ff705da-5b3c-4572-97d5-175bf76daad8"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",

@@ -60,10 +60,12 @@ public class MusicLoader : MonoBehaviour
         }
     }
 
+    int i = 0;
+    
     //Create a Button for given Clip
     private void LoadIntoList(AudioClip clip)
     {
-        int i = 0;
+        
         // Init a new button for the given Audioclip
         GameObject button = Instantiate(ButtonPrefab, transform);
         button.transform.parent = ScrollList.transform;

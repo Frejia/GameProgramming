@@ -38,9 +38,9 @@ public class GameManager : MonoBehaviour
     private bool allowFriendlyFire; // Allow Friendly Fire or not
    
     // Player Variables
-    public GameObject player1 { get; set; }
-    public GameObject player2 { get; set; }
-
+    [SerializeField] public GameObject player1;
+    [SerializeField] public GameObject player2;
+    [SerializeField] private PlayerInputManager playerInputManager; 
     [Header("Scene Variables")] 
     public bool loadLevel;
     public int levelToLoad;
@@ -62,11 +62,10 @@ public class GameManager : MonoBehaviour
         newGame = true;
 
         // Event Subscriptions
-       PlayerInputManager.instance.onPlayerJoined += GetSecondPlayer;
+        playerInputManager.onPlayerJoined += GetSecondPlayer;
         GameModeManager.Player1Win += SetWin;
         GameModeManager.Player2Win += SetWin;
-
-        player1 = GameObject.FindGameObjectWithTag("Player");
+        
         PauseGame(); // Pause Game at Start so Player is not available
     }
 
@@ -92,7 +91,7 @@ public class GameManager : MonoBehaviour
         }
         
         Debug.Log("Level Loaded!");
-        if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
+       // if(inGameUI == null) inGameUI = GameObject.Find("InGameUI").GetComponent<Canvas>();
          }
 
     // ------ Game State Setters ------ necessary for Event Delegates and Buttons
