@@ -96,7 +96,8 @@ public class GameModeManager : MonoBehaviour
     private void CountPoints(GameObject enemy, GameObject player)
     {
         int points = 0;
-        
+
+        // Check if Enemy was killed by Player or by another Enemy, important for friendly fire and respawning
         if (enemy.gameObject.tag == "Player" || enemy.gameObject.tag == "Player2")
         {
             points = 3;
@@ -124,6 +125,7 @@ public class GameModeManager : MonoBehaviour
         if (player.tag == "Player")
         {
             points1 += points;
+            Debug.Log("points1:" + points1);
         }
         else if (player.tag == "Player2")
         {
