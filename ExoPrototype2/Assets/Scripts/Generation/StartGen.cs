@@ -13,11 +13,11 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class StartGen : MonoBehaviour
 {
+    // possible states of the generation process
     public bool raceMode = false;
     public bool genPathOnly = false;
     public bool startGen = false;
     private PerlinNoiseGen _perlinNoiseGen;
-
     
     private void Awake()
     {

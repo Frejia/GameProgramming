@@ -185,23 +185,7 @@ public class GameModeManager : MonoBehaviour
         // Set player 1 to first respawn point
         GameObject player1 = GameObject.FindGameObjectWithTag("Player");
         player1.transform.position = respawnPoints[0].transform.position;
-        
-        Generate();
-    }
-    
-    // Generate Terrain
-    private void Generate()
-    { 
-        noiseGen = PerlinNoiseGen.Instance;
-             for (int i = 0; i < noiseGen.waypoints.Count - 1; i++){
-                 //Get Direction to previous point
-                Vector3 dir = (noiseGen.waypoints[i].transform.position - noiseGen.waypoints[i+1].transform.position).normalized;
-                Quaternion rotation = Quaternion.LookRotation(dir, Vector3.up);
-                
-                Instantiate(portal, noiseGen.waypoints[i].transform.position * 5, rotation);
-            }
-            Instantiate(portal, noiseGen.waypoints[noiseGen.waypoints.Count-1].transform.position * 5, Quaternion.identity);
-            if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
+        if(points1Text == null) points1Text = GameObject.Find("Points1Text").GetComponent<TextMeshProUGUI>();
     }
     
     // -------- RACE MODE INIT ------------
@@ -231,25 +215,12 @@ public class GameModeManager : MonoBehaviour
         // Spawn players at Start of Race
         GameManager.Instance.player1.transform.position = start.position;
     }
-    
-    // Generate Terrain
-    private void GenerateRace()
-    {
-        noiseGen.raceMode = true;
-        noiseGen.withCurve = true;
-       // noiseGen.Generate();
-        //if(noiseGen.isDone)world.InitializeGrid();
-    }
 
+    // Place Player at Start of the Race 
     private void PlacePlayer(PlayerInput player)
     {
         player.gameObject.transform.position = new Vector3(GameManager.Instance.player1.transform.position.x + 10, GameManager.Instance.player1.transform.position.y + 10, start.position.z + 10);
         if(points2Text == null) points2Text = GameObject.Find("Points2Text").GetComponent<TextMeshProUGUI>();
-    }
-
-    private void StartRace()
-    {
-       
     }
 
     // Check which player has won and send Win Event to change GameState

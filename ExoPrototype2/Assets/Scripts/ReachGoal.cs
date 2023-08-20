@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Racer Mode
+/// Used on Prefab for Goal
+/// </summary>
 public class ReachGoal : MonoBehaviour
 {
     private int checkPoints;
@@ -18,6 +21,7 @@ public class ReachGoal : MonoBehaviour
         checkPoints = PerlinNoiseGen.Instance.waypoints.Count - 2;
     }
 
+    // If Player gets into goal, check if he has enough points
     private void OnTriggerEnter(Collider other)
     {
         if (!reachedGoal)

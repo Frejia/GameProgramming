@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
+/// <summary>
+/// Used to change the models on the player when using Customization in Main Menu
+/// </summary>
 public class ModelManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _playerModelHolderTransform;
+    [FormerlySerializedAs("_playerModelHolderTransform")] [SerializeField] private GameObject playerModelHolderTransform;
     
     public void SetModel(GameObject model)
     {
         // Delete old model
-        foreach (Transform child in _playerModelHolderTransform.transform)
+        foreach (Transform child in playerModelHolderTransform.transform)
         {
             Destroy(child.gameObject);
         }
-    
         
-
         // Instantiate the model
-        GameObject newModelInstance = Instantiate(model, _playerModelHolderTransform.transform.position, _playerModelHolderTransform.transform.rotation, _playerModelHolderTransform.transform);
+        GameObject newModelInstance = Instantiate(model, playerModelHolderTransform.transform.position, playerModelHolderTransform.transform.rotation, playerModelHolderTransform.transform);
 
         // set correct scale
         newModelInstance.transform.localScale = new Vector3(100, 100, 100);

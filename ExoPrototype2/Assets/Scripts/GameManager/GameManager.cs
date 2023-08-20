@@ -25,15 +25,19 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-   //Game Manager Vairables
+    //Game Manager Variables
+    
     public static GameManager Instance { get; private set; }
-    [SerializeField] private GameState gameState;
+    private GameState gameState;
     private GameState previousGameState;
     [SerializeField] private StartGen startGen;
     private bool newGame = false; // Needed to determine whether to load scene or continue ongoing game
     
+    // Game Allow Variables
     private bool allowSecondPlayer; // Allow Multiplayer or not
     private bool allowFriendlyFire; // Allow Friendly Fire or not
+   
+    // Player Variables
     public GameObject player1 { get; set; }
     public GameObject player2 { get; set; }
 
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas loseCanvas;
     [SerializeField] private Canvas pauseCanvas;
     
+    // Start Game and correct Events
     void Awake()
     {
         if (Instance == null)
@@ -62,22 +67,21 @@ public class GameManager : MonoBehaviour
         GameModeManager.Player2Win += SetWin;
 
         player1 = GameObject.FindGameObjectWithTag("Player");
-        PauseGame();
+        PauseGame(); // Pause Game at Start so Player is not available
     }
 
+    // Load Level when called
     private void Update()
     {
         if (loadLevel)
         {
             loadLevel = false;
             StartCoroutine(LoadLevelAsync());
-            
-           // AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Single);
-           // asyncLoad.completed += (op) => { Debug.Log("Level Loading Done"); };
         }
 
     }
     
+    // ------ Load Level ------
     private IEnumerator LoadLevelAsync()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Single);
@@ -144,8 +148,7 @@ public class GameManager : MonoBehaviour
                   levelToLoad = 1;
                   loadLevel = true;
                   startGen.raceMode = false;
-                  //  GameModeManager.Instance.InitShooter();
-                 ShowCanvas(inGameUI);
+                  ShowCanvas(inGameUI);
                   newGame = false;
               }
               else
@@ -160,8 +163,6 @@ public class GameManager : MonoBehaviour
                   levelToLoad = 2;
                   loadLevel = true;
                   startGen.raceMode = true;
-                 // SceneManager.LoadScene(2);
-                // GameModeManager.Instance.InitRace();
                   ShowCanvas(inGameUI);
                   newGame = false;
               }
@@ -193,7 +194,6 @@ public class GameManager : MonoBehaviour
   }
   
     // ------ GameState Methods ------
-    
     
   private void PauseGame()
   {

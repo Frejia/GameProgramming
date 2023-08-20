@@ -37,6 +37,7 @@ public class CameraInitalizer : MonoBehaviour
             cam.gameObject.transform.parent.gameObject.tag = "Player2";
         }
         
+        // Set correct Culling Masks
         virtualPlayerCam.layer = layer;
         var bitMask = (1 << layer)
                       | (1 << 0)

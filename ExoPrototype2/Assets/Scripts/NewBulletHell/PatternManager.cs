@@ -5,15 +5,22 @@ using BulletHell;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Handles the firing of bullets in different patterns
+/// Does not touch the behaviour of it, only direction and speed
+///
+/// Used for both players and enemies
+/// </summary>
 public class PatternManager : MonoBehaviour
 {
-
+    // Bullet pattern configurations
     public BulletPatternEnum.BulletPatternsEnum activebulletPattern;
     private BulletHell.BulletBehaviour.BulletBehaviours activebulletBehaviour;
+   
+    //Pattern Settings
     public float fireRate;
     public bool isAiming = false;
     public int bulletsAmount;
-
     private float patternDuration;
     private Vector3 bulletMoveDirection;
     private float cooldown;
@@ -21,11 +28,13 @@ public class PatternManager : MonoBehaviour
     public float bulletSpeed;
     public float startAngle, endAngle;
 
+    //References
     private Aim AimInstance;
     [SerializeField] private NewEnemyInView _newEnemyInView;
+    
+    private float passedTimeSinceLastSpecialShoot; // For Cooldown
 
-    private float _passedTimeSinceLastSpecialShoot;
-
+    // Get the Aim Instance of either Enemy or Player
     void Start()
     {
         //AimInstance = Aim.Instance;
@@ -42,12 +51,13 @@ public class PatternManager : MonoBehaviour
             AimInstance.user = gameObject;
         }
     }
-
+    
     void Update()
     {
-        _passedTimeSinceLastSpecialShoot += Time.deltaTime;
+        passedTimeSinceLastSpecialShoot += Time.deltaTime; // To Check Cooldown time
     }
 
+    // Setter for Bullet Pattern, to call from other scripts or Scriptable Objects
     public void SetBulletPattern(BulletPatternEnum.BulletPatternsEnum bulletPattern, BulletHell.BulletBehaviour.BulletBehaviours bulletBehaviour, 
         float startAngle, float endAngle, float fireRate, bool isAiming, int bulletsAmount, float bulletSpeed)
     {
@@ -56,17 +66,17 @@ public class PatternManager : MonoBehaviour
         {
             // if the pattern is a cone or circle and time since last special shoot is less than 2 seconds, return
             // if the pattern is a cone or circle and time since last special shoot is more than 2 seconds, reset timer and continue
-            switch (_passedTimeSinceLastSpecialShoot)
+            switch (passedTimeSinceLastSpecialShoot)
             {
                 case < 2.0f:
                     return;
                 default:
-                    _passedTimeSinceLastSpecialShoot = 0.0f;
+                    passedTimeSinceLastSpecialShoot = 0.0f;
                     break;
             }
         }
         
-        
+        // Set Settings
         this.activebulletPattern = bulletPattern;
         this.activebulletBehaviour = bulletBehaviour;
         this.fireRate = fireRate;
@@ -77,7 +87,7 @@ public class PatternManager : MonoBehaviour
         this.startAngle = startAngle;
         this.endAngle = endAngle;
 
-        //PatternSwitchRepeating();
+       // Enemy Shoots Patterns repeatedly and player once per button press
         
         if (this.gameObject.tag == "Enemy")
         {
@@ -89,6 +99,7 @@ public class PatternManager : MonoBehaviour
         }
     }
     
+    // To avoid overlapping of patterns, cancel invoke of previous pattern
     public void SetBulletPatternNone()
     {
         CancelInvoke("ConeCircle");
@@ -101,6 +112,7 @@ public class PatternManager : MonoBehaviour
         activebulletPattern = BulletPatternEnum.BulletPatternsEnum.None;
     }
     
+    // Invoke Patterns once
     public void PatternSwitchInvoke()
     {
         switch (activebulletPattern)
@@ -123,6 +135,7 @@ public class PatternManager : MonoBehaviour
         }
     }
 
+    // Invoke Patterns repeatedly
     public void PatternSwitchRepeating()
     {
         switch (activebulletPattern)
@@ -140,7 +153,6 @@ public class PatternManager : MonoBehaviour
                 break;
             case BulletPatternEnum.BulletPatternsEnum.Straight:
                 //Can Aim
-               
                 InvokeRepeating("Straight", 0f, fireRate);
                 break;
             case BulletPatternEnum.BulletPatternsEnum.Spiral:
@@ -169,6 +181,11 @@ public class PatternManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shoot Straight in facing direction
+    ///
+    /// Problem: Somehow the bullets of the enemy spawn on the player when using this pattern
+    /// </summary>
     private void Straight()
     {
         // direction for bullet is 
@@ -186,26 +203,17 @@ public class PatternManager : MonoBehaviour
         }
         else
         {
-            bulDir = -gameObject.transform.GetChild(0).transform.right;
-            
-            // create raycast
-            /*
-            Debug.DrawRay(new Vector3
-                (
-                    gameObject.transform.GetChild(0).transform.position.x, 
-                    gameObject.transform.GetChild(0).transform.position.y, 
-                    gameObject.transform.GetChild(0).transform.position.z
-                ), 
-                bulDir * 100000, Color.red);
-                */
+            bulDir = -gameObject.transform.GetChild(0).transform.right; 
 
         }
-
+        
+        // Area to Calculate Pattern
         float angle = (float)Math.Atan2(bulDir.y - transform.position.y,
             bulDir.x - transform.position.x);
+       
+        // Send Pattern to Bullet
         for (int i = 0; i <= bulletsAmount; i++)
         {
-            //bulDir = (bulMoveVector - transform.position).normalized;
             GameObject bul = GetCorrectBullet();
             bul.transform.position = transform.position;
             
@@ -225,9 +233,12 @@ public class PatternManager : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Group of Bullets send in an area of angles for a cone or circle Pattern
+    /// </summary>
     private void ConeCircle()
     {
-        Debug.Log("Cone Pattern");
+        // Get the angle between the start and end angle for angle steps between shots
         float angleStep = (endAngle - startAngle) / bulletsAmount;
         float angle = startAngle;
 
@@ -250,6 +261,7 @@ public class PatternManager : MonoBehaviour
             // Create a new vector with the rotated direction
             // bulDir.Normalize();
 
+            // Send Pattern to Bullet
             // Spawn and set direction for the bullet
             GameObject bul = GetCorrectBullet();
             bul.transform.position = this.gameObject.transform.position;
@@ -265,9 +277,13 @@ public class PatternManager : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Pyramid Shaped Pattern shoots group of Bullets in Pyramid shape
+    ///
+    /// Problem: does not work in 3D Space properly
+    /// </summary>
      private float pyramidSize = 2f;
-
-    // Pyramid Pattern
+    
     public void Pyramid()
     {
         int numRows = Mathf.CeilToInt(Mathf.Sqrt(bulletsAmount));
@@ -302,8 +318,8 @@ public class PatternManager : MonoBehaviour
                 float yPosition = yOffset;
 
                 Vector3 position = rotation * new Vector3(xPosition, yPosition, 0f) + transform.position;
-                ;
 
+                // Send Pattern to Bullet
                 GameObject bul = GetCorrectBullet();
                 bul.transform.position = position;
                 bul.transform.rotation = transform.rotation;
@@ -324,9 +340,12 @@ public class PatternManager : MonoBehaviour
         }
     }
 
-    // Way all Range Pattern
-        private void WayAllRange()
+    /// <summary>
+    /// Shoots in all directions, with 45 degree angle between the lines
+    /// </summary>
+    private void WayAllRange()
         {
+            //Calculate pattern
             float angle = 0;
             while (angle > -2 * Mathf.PI)
             {
@@ -335,6 +354,7 @@ public class PatternManager : MonoBehaviour
                 Vector3 bulMoveVector = new Vector3(bulDirX, bulDirZ, 0f);
                 bulDir = (bulMoveVector - transform.position).normalized;
 
+                // Send Pattern to Bullet
                 GameObject bul = GetCorrectBullet();
                 bul.transform.position = transform.position;
                 bul.SetActive(true);
@@ -346,11 +366,17 @@ public class PatternManager : MonoBehaviour
             }
         }
 
+    /// <summary>
+    /// Shoots in Spirals
+    ///
+    /// Problem: not fully visible in 3D Space
+    /// </summary>
     private float angle1;
 
     //Single Spiral Pattern
     private void SpiralFire()
     {
+        // Calculate spiral direction 
         Vector3 bulDir = isAiming ? (AimInstance.Aiming()) : AimInstance.RandomAim();
         
         float bulDirX = bulDir.x + transform.position.x + Mathf.Sin((angle1 * Mathf.PI) / 180f);
@@ -359,6 +385,7 @@ public class PatternManager : MonoBehaviour
         Vector3 bulMoveVector = new Vector3(bulDirX, bulDir.y, bulDirZ);
         bulDir = (bulMoveVector - transform.position).normalized;
 
+        // Send Pattern to Bullet
         GameObject bul = GetCorrectBullet();
         bul.transform.position = transform.position;
         bul.transform.rotation = transform.rotation;
@@ -367,9 +394,13 @@ public class PatternManager : MonoBehaviour
         bul.GetComponent<Bullet>().SetUser(this.gameObject);
         bul.GetComponent<Bullet>().SetDirection(bulDir);
 
+        // Set angle of next bullet
         angle1 += 10f;
     }
     
+    /// <summary>
+    /// Shoots two spirals in opposite directions
+    /// </summary>
     //Double Spiral Pattern
     private void DoubleSpiralFire()
     {
@@ -383,6 +414,7 @@ public class PatternManager : MonoBehaviour
             Vector3 bulMoveVector = new Vector3(bulDirX, bulDir.y, bulDirZ);
             bulDir = (bulMoveVector - transform.position).normalized;
 
+            // Send Pattern to Bullet
             GameObject bul = GetCorrectBullet();
             bul.transform.position = transform.position;
             bul.SetActive(true);
@@ -396,6 +428,9 @@ public class PatternManager : MonoBehaviour
         if (angle1 >= 360f) angle1 = 0f;
     }
     
+    /// <summary>
+    /// Shoots in a pretty Way All Range and circle pattern
+    /// </summary>
     private void PwettyPattern()
     {
         float angleStep = (endAngle - startAngle) / bulletsAmount;
@@ -418,6 +453,7 @@ public class PatternManager : MonoBehaviour
             // Create a new vector with the rotated direction
             bulDir = new Vector3(rotatedX, bulDir.y, rotatedZ);
 
+            // Send Pattern to Bullet
             // Spawn and set direction for the bullet
             GameObject bul = GetCorrectBullet();
             bul.transform.position = transform.position;
@@ -431,6 +467,9 @@ public class PatternManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get the correct Bullet from the Bullet Pool depending on the user of the Manager
+    /// </summary>
     private GameObject GetCorrectBullet()
     {
         GameObject bul = null;

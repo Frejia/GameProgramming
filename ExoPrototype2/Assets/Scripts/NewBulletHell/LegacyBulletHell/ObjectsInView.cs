@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Checks if an enemy is within the Camera of the Player --> being rendered
+///
+/// LEGACY
+/// heavily lagging and unreliable
+/// </summary>
 public class ObjectsInView : MonoBehaviour
 {
     private Camera camera;

@@ -18,7 +18,7 @@ using UnityEditor;
 public class MeshCreator : MonoBehaviour
 {
     public static MeshCreator Instance;
-    [SerializeField] private ScriptableInvalidLevel savedLevels;
+    [SerializeField] private ScriptableInvalidLevel savedLevels; // uses the same Scriptable Object as the InvalidLevel as it uses the same data
     private PerlinNoiseGen perlin;
 
     private void Awake()
@@ -26,14 +26,12 @@ public class MeshCreator : MonoBehaviour
         Instance = this;
     }
 
+    // Edit the existing Scriptable Object to add a new level
     public void EditLevelSave()
     {
         perlin = PerlinNoiseGen.Instance;
         
-        // Create a new Instance of the Scriptable Object
-        //ScriptableInvalidLevel invalidLevel = ScriptableObject.CreateInstance<ScriptableInvalidLevel>();
-
-        // Set the values of the Scriptable Object
+        // Set the values of the Scriptable Object by getting the current perlin noise generator values
         savedLevels.chunkSize.Add(perlin.chunkSize);
         savedLevels.chunkSizeZ.Add(perlin.chunkSizeZ);
         savedLevels.offset.Add(perlin.offset);
@@ -45,8 +43,6 @@ public class MeshCreator : MonoBehaviour
         foreach(GameObject point in perlin.waypoints)
         {
             points.Add(point);
-            
-            
         }
       //  savedLevels.wayPoints.Add(points);
         
@@ -54,12 +50,14 @@ public class MeshCreator : MonoBehaviour
         SaveScriptableObject(savedLevels, filePath);
     }
 
+    // Save changed Scriptable Object
     private void SaveScriptableObject(ScriptableInvalidLevel level, string filePath)
     {
         string json = JsonUtility.ToJson(level);
         File.WriteAllText(filePath, json);
     }
     
+    // Given to a Button to load the saved level by index in the Scriptable Object's list
     public void LoadSavedLevel(int levelIndex)
     {
         perlin = PerlinNoiseGen.Instance;

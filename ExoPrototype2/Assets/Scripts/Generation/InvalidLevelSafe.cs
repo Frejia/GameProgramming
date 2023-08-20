@@ -5,29 +5,35 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// If a level is not playable due to the generation, the data of the level is saved in a Scriptable Object
+/// Level is then checked during PerlinNoiseGeneration so it is not generated again
+///
+/// Originally made with UnityEditor intern methods, which only worked in the Editor, changed later to work in Build
+/// </summary>
 public class InvalidLevelSafe : MonoBehaviour
 {
-     public static InvalidLevelSafe Instance;
-
      [SerializeField] private List<InvalidLevelSafe> invalidLevels;
+     public static InvalidLevelSafe Instance;
+     [SerializeField] private ScriptableInvalidLevel invalidLevel; // Reference to the Scriptable Object template
+     
+     // Path to the folder where the Scriptable Objects are saved
    private string ScriptableObjectspath = "Assets/Prefabs/Levels/InvalidLevels";
    private int chunkSize, chunkSizeZ, seed;
 
+   // Debug Variables
    public bool clearInvalidLevels;
    public bool createInvalidLevels;
    
-   [SerializeField] private ScriptableInvalidLevel invalidLevel; // Reference to the Scriptable Object template
-
+   
    private void Awake()
    {
-            Instance = this;
+        Instance = this;
    }
 
+   // Edit the Scriptable Object to add a new Invalid Level
    public void EditInvalidLevelSave()
    {
-        // Create a new Instance of the Scriptable Object
-        //ScriptableInvalidLevel invalidLevel = ScriptableObject.CreateInstance<ScriptableInvalidLevel>();
-
         // Set the values of the Scriptable Object
         invalidLevel.chunkSize.Add(GetComponent<PerlinNoiseGen>().chunkSize);
         invalidLevel.chunkSizeZ.Add(GetComponent<PerlinNoiseGen>().chunkSizeZ);
@@ -37,6 +43,7 @@ public class InvalidLevelSafe : MonoBehaviour
         SaveScriptableObject(invalidLevel, filePath);
    }
 
+   // Save the changed Scriptable Object
    private void SaveScriptableObject(ScriptableInvalidLevel level, string filePath)
    {
         string json = JsonUtility.ToJson(level);
@@ -90,11 +97,10 @@ public class InvalidLevelSafe : MonoBehaviour
    /// ----- LEGACY: Loads the Scriptable Objects from the folder and read the Invalid Levels --> Only worked in Unity Editor
    /// </summary>
 #if UNITY_EDITOR
-   // Former Awake Method
+   // Former Awake Method, loaded all Invalid Level Objects
    private void GetInvalidLevels()
    {
-       
-       // int assetCount = CountAssetsInFolder(ScriptableObjectspath);
+        // int assetCount = CountAssetsInFolder(ScriptableObjectspath);
         //Debug.Log("Number of assets in folder: " + assetCount);
         
         invalidLevels = new List<InvalidLevelSafe>();
@@ -107,6 +113,8 @@ public class InvalidLevelSafe : MonoBehaviour
         }
    }
 
+   // Count the number of Scriptable Objects in the folder LEGACY: Only worked in Unity Editor, not in Build
+   // Each invalid level used to be own object
    private int CountAssetsInFolder(string path)
    {
         int count = 0;
@@ -132,6 +140,7 @@ public class InvalidLevelSafe : MonoBehaviour
         this.seed = seed;
    }
 
+   // Create a new Scriptable Object for the Invalid Level
    public void CreateInvalidLevelObj()
    {
         //Create new Scriptable Object of ScriptableInvalidLevel
@@ -149,7 +158,7 @@ public class InvalidLevelSafe : MonoBehaviour
         invalidLevels.Add(new InvalidLevelSafe(GetComponent<PerlinNoiseGen>().chunkSize, GetComponent<PerlinNoiseGen>().chunkSizeZ, GetComponent<PerlinNoiseGen>().offset));
    }
    
-   //Check if Data equals an Invalid Level
+   //Check if Data equals an Invalid Level, called in PerlinNoiseGen
     public bool Equals(int chunkSizeGen, int chunkSizeZGen, int seedGen)
     {
          //Check if given data is equal any of the invalid levels in the list
@@ -164,7 +173,7 @@ public class InvalidLevelSafe : MonoBehaviour
            return false;
     }
 
-    private void Update()
+    /*private void Update()
     {
          if (clearInvalidLevels)
          {
@@ -175,6 +184,6 @@ public class InvalidLevelSafe : MonoBehaviour
          {
               CreateInvalidLevelObj();
          }
-    }
+    }*/
 #endif
 }

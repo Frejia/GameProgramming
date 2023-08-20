@@ -3,18 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Formerly PlayerAim
+///
+/// Handles all events of when an enemy is in view of the player
+/// Allows Aim to get the closest enemy
+/// </summary>
 public class NewEnemyInView : Aim
 {
+    // Events
     public delegate void EnemyInScreen(GameObject enemy);
-
     public delegate void EnemySeenSound(int index);
     public static event EnemyInScreen OnEnemyInScreen;
     public static event EnemyInScreen OnEnemyNotInScreen;
     public static event EnemySeenSound OnEnemySeenSound;
 
-    [SerializeField] private List<GameObject> targets;
-    [SerializeField] private GameObject target;
+    [Header("Target Variables")]
+    [SerializeField] private List<GameObject> targets; // All currently visible enemies
+    [SerializeField] private GameObject target; // Current closest enemy
     
+    // Player has a view area that detects enemies
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
@@ -57,6 +65,11 @@ public class NewEnemyInView : Aim
         }
     }
     
+    /// <summary>
+    /// Gets the currently closest enemy to player as the target
+    ///
+    /// Can be expanded to be the one the player actually aims at
+    /// </summary>
     public GameObject GetClosestEnemy()
     {
         GameObject closestObject = null;

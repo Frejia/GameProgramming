@@ -53,10 +53,9 @@ public class SetControls : MonoBehaviour
     {
         player1.GetComponent<ShipMovement>().yawTorque = player1Sensitivity.value;
         player1.GetComponent<ShipMovement>().pitchTorque = player1Sensitivity.value;
-       // player2Prefab.GetComponent<ShipMovement>().yawTorque = sensitivity;
-       // player2Prefab.GetComponent<ShipMovement>().pitchTorque = sensitivity;
     }
 
+    // Set Color of Player Ship Model 1
     public void SetModeColor1(Material newMat)
     {
         Renderer[] renderers = playerModelHolderTransform.GetComponentsInChildren<Renderer>();
@@ -81,12 +80,14 @@ public class SetControls : MonoBehaviour
     }
     
 
+    // Set Color of Player Ship Model 2
     public void SetModeColor2(Material newMat)
     {
         //mat2 = newMat;
         SetModeColor1(newMat);
     }
 
+    // Change between different models on the player
     public void SetPlayerModel(GameObject model)
     {
         player1.transform.GetChild(0).GetComponent<MeshFilter>().mesh = model.GetComponent<MeshFilter>().mesh;

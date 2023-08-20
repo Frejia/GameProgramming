@@ -12,6 +12,7 @@ using UnityEngine;
 /// </summary>
 public class Health : MonoBehaviour
 {
+    [Header("Health Stats")]
     [SerializeField] public int maxHealth = 100;
     [SerializeField] public float currentHealth;
     [SerializeField] public bool isImmune;
@@ -19,10 +20,11 @@ public class Health : MonoBehaviour
     [SerializeField] public bool isDead = false;
     [SerializeField] private GameObject attacker;
     
-    public delegate void Hit(GameObject enemy, GameObject attacker);
-    public delegate void HitDamage(int damage);
+    // Hit Events
+    public delegate void Hit(GameObject enemy, GameObject attacker); // For GameManager
+    public delegate void HitDamage(int damage); // To Update Healthbar
 
-    public delegate void HitSound(int index);
+    public delegate void HitSound(int index); // For Playing Sounds in the SoundLibrary
     public static event Hit EnemyKilledBy;
     public static event Hit PlayerKilledBy;
     public static event HitDamage Player1GotHit;
@@ -38,6 +40,10 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    /// <summary>
+    /// Gets activated when a bullet encounters an object that has health
+    /// Handles all hit operations
+    /// </summary>
     public void GetsHit(int damage, GameObject attacker){
        
         this.attacker = attacker;
@@ -48,6 +54,7 @@ public class Health : MonoBehaviour
         // Time of immunity after getting hit
         StartCoroutine(Immunity());
 
+        // Add any audio feedback for getting hit
         if (currentHealth > 0)
         {
             if (this.gameObject.CompareTag("Enemy"))
@@ -67,13 +74,18 @@ public class Health : MonoBehaviour
                 }
             }
         }
-
+        
+        // Make sure object cannot go infinitely below 0 health
         if (currentHealth < 0) currentHealth = -1;
     }
     CheckDeath();
 }
 
-private IEnumerator Immunity()
+    /// <summary>
+    ///  Set immunity flag and wait for duration
+    /// Immunity is required to not overload player with damage when he is hit by multiple enemies
+    /// </summary>
+    private IEnumerator Immunity()
 {
     isImmune = true; // Set immunity flag
     // Add any visual or audio feedback for immunity
@@ -83,6 +95,9 @@ private IEnumerator Immunity()
     isImmune = false; // Reset immunity flag
 }
 
+/// <summary>
+/// Check if Player dies or Enemy dies and send event in that case
+/// </summary>
     private void CheckDeath()
     {
         if(currentHealth <= 0)
@@ -115,7 +130,10 @@ private IEnumerator Immunity()
         }
     }
 
-    public void ResetHealth(GameObject player)
+/// <summary>
+/// When player respawns, he needs his full health back
+/// </summary>
+public void ResetHealth(GameObject player)
     {
         currentHealth = maxHealth;
         isDead = false;

@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// LEGACY ROTATOR SCRIPT
+///
+/// Only used for LookAt Method on Enemy and Enemy Aim Point
+/// </summary>
 public enum RotationDirection
 {
     Left,

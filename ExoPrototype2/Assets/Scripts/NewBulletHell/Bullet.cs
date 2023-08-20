@@ -5,30 +5,33 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+/// <summary>
+/// Handles all movement and stats of a bullet
+///
+/// used in Bullet Pool
+/// </summary>
 public class Bullet : MonoBehaviour
 {
-    private Vector3 direction;
+    [Header("Bullet Stats")]
     [SerializeField] public float speed = 30f;
-    private float savedSpeed;
     [SerializeField] private float _bulletLifeTime = 4f;
-
     [SerializeField] private ParticleSystem impactEffect;
-
     [SerializeField, Range(10, 20)] private int _damage = 10;
+   
+    // Bullet Type Variables
     public bool isEnemyBullet = false;
     public bool friendlyFire = false;
+    
+    // Other variables
+    private Vector3 direction;
+    private float savedSpeed;
     private GameObject attacker;
-
-    public void SetUser(GameObject user)
-    {
-        attacker = user;
-    }
 
     private void Awake()
     {
         savedSpeed = speed;
     }
-
+    
     private void OnEnable()
     {
         speed = savedSpeed;
@@ -36,7 +39,14 @@ public class Bullet : MonoBehaviour
         impactEffect.Stop();
     }
     
-    // Update is called once per frame
+    // Who is using the Bullet? --> Ensures that bullet has correct collision and points are counted
+    public void SetUser(GameObject user)
+    {
+        attacker = user;
+    }
+
+    // ----- Life Cycle -----
+    // Moves the bullet when it is enabled
     void Update()
     {
         transform.Translate(direction * speed * Time.deltaTime);
@@ -46,30 +56,10 @@ public class Bullet : MonoBehaviour
     {
         this.direction = direction;
     }
-
-    /*public void SetFriendlyFire()
+    public void SetSpeed(float newSpeed)
     {
-        int playerLayer = LayerMask.NameToLayer("Player");
-        int player2Layer = LayerMask.NameToLayer("Player2");
-        
-        // renderer.enabled = true;
-        if (friendlyFire && attacker.CompareTag("Player"))
-        {
-            foreach (Collider col in colliders)
-            {
-                // Set the layer collision settings for the triggerCollider
-                Physics.IgnoreLayerCollision(playerLayer, player2Layer, true);
-            }
-        }
-        else
-        {
-            foreach (Collider col in colliders)
-            {
-                // Set the layer collision settings for the triggerCollider
-                Physics.IgnoreLayerCollision(player2Layer, playerLayer, true);
-            }
-        }
-    }*/
+        this.speed = newSpeed;
+    }
 
     private void Destroy()
     {
@@ -82,17 +72,13 @@ public class Bullet : MonoBehaviour
         attacker = null;
         CancelInvoke();
     }
-
-    /*private void OnCollisionEnter(Collision other)
-    {
-        impactEffect.Play();
-        StartCoroutine(WaitForParticleSystem());
-    } */
-
+    
+    // ----- Collision -----
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);
         
+        // If it is a player bullet, it can also hit an enemy
         if (!isEnemyBullet)
         {
             if (other.gameObject.layer == 7)
@@ -108,6 +94,7 @@ public class Bullet : MonoBehaviour
             }
         }
 
+        // Handle Player vs Player and Enemy vs Player Collision
         if (other.gameObject.layer == 13)
                     {
                         if (friendlyFire && attacker.gameObject.tag == "Player")
@@ -163,11 +150,8 @@ public class Bullet : MonoBehaviour
                     }
     }
 
-    public void SetSpeed(float newSpeed)
-    {
-        this.speed = newSpeed;
-    }
-
+  
+// Play particle System
     private IEnumerator WaitForParticleSystem()
     {
         //renderer.enabled = false;

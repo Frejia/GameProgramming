@@ -2,12 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the health UI of the players when getting hit
+/// </summary>
 public class HealthUI : MonoBehaviour
 {
+    [Header("Health Bars")]
     [SerializeField] private List<GameObject> healthBarsPlayer1;
     [SerializeField] private List<GameObject> healthBarsPlayer2;
+    
+    public int damageThreshold = 10;
+
+    private int currentDamagePlayer1 = 0;
+    private int currentDamagePlayer2 = 0;
+    public int damage;
     private int health;
     
+    // Events
     private void OnEnable()
     {
         Health.Player1GotHit += ApplyDamagePlayer1;
@@ -20,13 +31,7 @@ public class HealthUI : MonoBehaviour
         Health.Player2GotHit -= ApplyDamagePlayer2;
     }
     
-    public int damageThreshold = 10;
-
-    private int currentDamagePlayer1 = 0;
-    private int currentDamagePlayer2 = 0;
-    public int damage;
-
-    // Call this method to apply damage to the player
+    // Call this method to apply damage to the player1 
     public void ApplyDamagePlayer1(int damage)
     {
         this.damage = damage;
@@ -49,6 +54,7 @@ public class HealthUI : MonoBehaviour
         }
     }
     
+    // Call this method to apply damage to the player2 
     public void ApplyDamagePlayer2(int damage)
     {
         currentDamagePlayer2 += damage;

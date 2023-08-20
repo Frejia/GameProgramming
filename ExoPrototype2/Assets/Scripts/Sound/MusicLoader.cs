@@ -7,11 +7,20 @@ using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/// <summary>
+/// Loads all music files from the Music folder into the MusicList
+///
+/// Originally worked with only Unity Editor, changed to work in build Runtime
+///
+/// Folder: Build\Data\StreamingAssets\Music
+/// </summary>
 public class MusicLoader : MonoBehaviour
 {
+    [Header("Prefabs")]
     [SerializeField] private GameObject ButtonPrefab;
     [SerializeField] private GameObject ScrollList;
 
+    // Load all music files from the Music folder
     private void Start()
     {
         string musicFolderPath = Path.Combine(Application.streamingAssetsPath, "Music");
@@ -26,6 +35,7 @@ public class MusicLoader : MonoBehaviour
         }
     }
 
+    // Load specific Audio Clip
     private IEnumerator LoadAudioClip(string fileName)
     {
         string audioFilePath = Path.Combine(Application.streamingAssetsPath, "Music", fileName);
@@ -46,11 +56,11 @@ public class MusicLoader : MonoBehaviour
                 AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
                 LoadIntoList(clip);
                 Debug.Log("Loaded clip: " + clip.name);
-                // Use the AudioClip in your game
             }
         }
     }
 
+    //Create a Button for given Clip
     private void LoadIntoList(AudioClip clip)
     {
         int i = 0;
