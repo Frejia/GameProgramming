@@ -161,6 +161,11 @@ public class PatternManager : MonoBehaviour
             case BulletPatternEnum.BulletPatternsEnum.WayAllRange:
                 InvokeRepeating("WayAllRange", 0f, fireRate);
                 break;
+            case BulletPatternEnum.BulletPatternsEnum.Burst:
+                break;
+            default:
+                //cooldown
+                break;
         }
     }
 
